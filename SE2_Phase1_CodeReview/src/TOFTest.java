@@ -39,13 +39,19 @@ public class TOFTest {
 		}
 	}
 
-
-	@Test
-	public void WriteGameTest() {
+	@DataProvider(name = "input")
+	public Object[][] dp(){
+		return new Object[][]{
+			{ new String[]{ "4+19", "6*7", "54/6", "65-7", "Arthmetic" }, new String[]{ "23", "42", "9", "58" } , true} ,
+			{ new String[]{ "4+19", "6*7", "54/6", "65-7", "" }, new String[]{ "23", "42", "9", "58" } , false }
+		};
+	}
+	
+	
+	@Test(dataProvider = "input")
+	public void WriteGameTest(String questions[], String answers[], boolean expected) {
 		boolean found = false;
-		String title = "Arthmetic";
-		String questions[] = new String[] { "4+19", "6*7", "54/6", "65-7", title };
-		String answers[] = new String[] { "23", "42", "9", "58" };
+		String title = questions[4];
 		
 		tofObject.WriteGame(questions, answers);
 		
@@ -65,7 +71,7 @@ public class TOFTest {
 				}
 			}
 			
-			Assert.assertTrue(found);
+			Assert.assertEquals(found, expected);
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		}
