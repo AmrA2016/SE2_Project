@@ -1,0 +1,7 @@
+package com.se_project.controllers.repos;
+
+import com.se_project.models.Course;
+
+public interface CourseRepoAPI {
+	public void saveCourse(Course c);
+}

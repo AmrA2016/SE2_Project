@@ -1,0 +1,28 @@
+package com.se_project.controllers.repos;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.se_project.controllers.StorageService;
+import com.se_project.models.Course;
+
+public interface CourseRepoSql extends CrudRepository<Course,String> {
+//
+//	@Override
+//	public boolean save(Object o) {
+//		Course c = (Course)o;
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean delete(String id) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public Object retrieveObject() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+}

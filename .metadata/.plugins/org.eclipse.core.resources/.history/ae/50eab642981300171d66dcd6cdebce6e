@@ -1,0 +1,7 @@
+package com.se_project.controllers;
+
+public interface StorageService {
+	public boolean save(Object o);
+	public boolean delete(String id);
+	public Object retrieveObject();
+}
