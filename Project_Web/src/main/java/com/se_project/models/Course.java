@@ -2,33 +2,40 @@ package com.se_project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Course {
+	@NotEmpty
+	@Size(min = 2, max = 40)
 	@Id
-	private String id;
-	private String name;
+	private  String name;
+	@NotEmpty
+	@Size(min = 10, max = 10000)
 	private String description;
-	private int ageRestriction;
+	
+	@NotNull
+	private Integer age;
+	@NotEmpty
+	@Size(min = 3, max = 30)
+	private String category;
+	
+    private String image;
 
 	public Course() {
 
 	}
 
-	public Course(String id, String name, String description, int ageRestriction) {
+	public Course( String name, String description, int age, String category,String image) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.ageRestriction = ageRestriction;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		this.age = age;
+		this.category = category;
+		this.image = image;
 	}
 
 	public String getName() {
@@ -48,11 +55,27 @@ public class Course {
 	}
 
 	public int getAgeRestriction() {
-		return ageRestriction;
+		return age;
 	}
 
 	public void setAgeRestriction(int ageRestriction) {
-		this.ageRestriction = ageRestriction;
+		this.age = ageRestriction;
 	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 
 }

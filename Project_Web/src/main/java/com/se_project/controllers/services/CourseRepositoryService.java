@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.se_project.models.Course;
 import com.se_project.repositories.CourseRepository;
@@ -29,7 +32,17 @@ public class CourseRepositoryService {
 		courseRepo.findAll().forEach(courses::add);
 		return courses;
 	}
+
+	public boolean ValidateName(String name) {
 	
+		if(courseRepo.findOne(name)!=null)
+			return false;
+		else
+			return true;
+			
+			
+		
+	}
 
 
 }
