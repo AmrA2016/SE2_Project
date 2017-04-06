@@ -6,23 +6,19 @@
     <style>
     	.error{
     		color:red;
-    		background-color:#eee;
-    		width:300px;
+    		font-weight:bold;
+    		font-size: 0.8em;
     	}
     </style>
 </head>
 <body>
-    <form action="#" th:action="@{/student_signup_form}" th:object="${user}"  method="post">
+    <form action="#" th:action="@{/student_signup_form}" th:object="${student}"  method="post">
     <fieldset>
     	<legend>Student sign up</legend>
     	
-    	<p th:if="${#fields.hasErrors('username')}" class="error">*username isn't correct*</p>
-		<p th:if="${#fields.hasErrors('firstname')}" class="error">*firstname isn't correct*</p>
-		<p th:if="${#fields.hasErrors('lastname')}" class="error">*lastname isn't correct*</p>
-		<p th:if="${#fields.hasErrors('email')}" class="error">*email isn't correct*</p>
-		<p th:if="${#fields.hasErrors('password')}" class="error">*password isn't correct*</p>
-		
     	<p><b>Username:</b> <input type="text" id="username" th:field="*{username}"/></p>
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></p>
+        <p th:if="${Wrongusername}" class="error">Username already exists</p>
         <p><b>First Name:</b> <input type="text" id="fname" th:field="*{firstname}"/></p>
         <p><b>Last Name:</b> <input type="text" id="lname" th:field="*{lastname}"/></p>
         <p><b>Email:</b> <input type="text" id="email" th:field="*{email}"/></p>

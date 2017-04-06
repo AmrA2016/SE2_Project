@@ -33,16 +33,5 @@ public class CourseRepositoryService {
 		return courses;
 	}
 
-	public boolean ValidateName(String name) {
-	
-		if(courseRepo.findOne(name)!=null)
-			return false;
-		else
-			return true;
-			
-			
-		
-	}
-
 
 }

@@ -2,23 +2,27 @@ package com.se_project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.se_project.validationAnnotations.UniqueCourse;
+
 @Entity
 public class Course {
+	@Id
 	@NotEmpty
 	@Size(min = 2, max = 40)
-	@Id
+	@UniqueCourse
 	private  String name;
 	@NotEmpty
 	@Size(min = 10, max = 10000)
 	private String description;
 	
-	@NotNull
-	private Integer age;
+	@Min(5)
+	private int age;
 	@NotEmpty
 	@Size(min = 3, max = 30)
 	private String category;
@@ -54,11 +58,11 @@ public class Course {
 		this.description = description;
 	}
 
-	public int getAgeRestriction() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAgeRestriction(int ageRestriction) {
+	public void setAge(int ageRestriction) {
 		this.age = ageRestriction;
 	}
 
