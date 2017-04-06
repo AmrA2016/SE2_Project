@@ -8,14 +8,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.se_project.validationAnnotations.UniqueCourse;
 
 @Entity
 public class Course {
 	@Id
 	@NotEmpty
 	@Size(min = 2, max = 40)
-	@UniqueCourse
 	private  String name;
 	@NotEmpty
 	@Size(min = 10, max = 10000)
