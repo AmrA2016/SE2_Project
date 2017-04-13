@@ -1,7 +1,9 @@
 package com.se_project.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,23 +11,27 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
-@Entity
+@Entity(name="courses")
 public class Course {
 	@Id
 	@NotEmpty
-	@Size(min = 2, max = 40)
+	@Size(min = 2, max = 50)
 	private  String name;
+	
 	@NotEmpty
-	@Size(min = 10, max = 10000)
+	@Size(min = 10, max = 1000)
 	private String description;
 	
 	@Min(5)
 	private int age;
 	@NotEmpty
-	@Size(min = 3, max = 30)
+	@Size(min = 3, max = 45)
 	private String category;
 	
     private String image;
+    
+    @ManyToOne
+    private Teacher teacher;
 
 	public Course() {
 
@@ -77,6 +83,14 @@ public class Course {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 
