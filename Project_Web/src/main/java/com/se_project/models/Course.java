@@ -2,6 +2,8 @@ package com.se_project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
@@ -10,10 +12,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 @Entity(name="courses")
 public class Course {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	long cid;
 	@NotEmpty
 	@Size(min = 2, max = 50)
 	private  String name;
@@ -44,6 +47,14 @@ public class Course {
 		this.age = age;
 		this.category = category;
 		this.image = image;
+	}
+
+	public long getCid() {
+		return cid;
+	}
+
+	public void setCid(long cid) {
+		this.cid = cid;
 	}
 
 	public String getName() {

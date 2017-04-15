@@ -24,12 +24,18 @@ public class CourseRepositoryService {
 	public void CreateCourse(Course course){
 		courseRepo.save(course);
 	}
-	public Course getCourse(String id){
+	public Course getCourse(long id){
 		return courseRepo.findOne(id);
 	}
-	public List<Course> ShowCourses() {
+	public List<Course> getAllCourses() {
 		List<Course>courses =new ArrayList<>();
 		courseRepo.findAll().forEach(courses::add);
+		return courses;
+	}
+	
+	public List<Course> getCoursesByTeacher(String teacher_id){
+		List<Course>courses =new ArrayList<>();
+		courseRepo.findByTeacherUsername(teacher_id).forEach(courses::add);
 		return courses;
 	}
 

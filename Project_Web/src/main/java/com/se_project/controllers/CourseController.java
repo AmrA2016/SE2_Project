@@ -31,29 +31,34 @@ public class CourseController {
 	
 	@RequestMapping(value = "/{teacher_id}/create_course_form",method = RequestMethod.GET)
 	public String CourseForm(Model model,@PathVariable String teacher_id,Course course){
-		model.addAttribute("teacher",teacherRepoService.getTeacher(teacher_id));
-		return "create_course_form";
+		model.addAttribute("teacher_id",teacher_id);
+		return "Teacher/createCourse";
 	}
 	
 	@RequestMapping("/ShowCourses")
 	public String ShowCourses(Model model){
-//	    ModelAndView mav = new ModelAndView("ShowCourses");
-	    List<Course> Courses = courseRepoService.ShowCourses();
-//	    mav.addObject("Courses",Courses);
+	    List<Course> Courses = courseRepoService.getAllCourses();
 	    model.addAttribute("Courses", Courses);
-	    return  "ShowCourses";
+	    return  "Teacher/myCourses";
 	}
-
+	
+	@RequestMapping(value = "/{teacher_id}/ShowMyCourses", method = RequestMethod.GET)
+	public String ShowMyCourses(@PathVariable String teacher_id, Model model){
+	    List<Course> Courses = courseRepoService.getCoursesByTeacher(teacher_id);
+	    model.addAttribute("Courses", Courses);
+		model.addAttribute("teacher_id",teacher_id);
+	    return  "Teacher/myCourses";
+	}
+	
 
 	@RequestMapping(value = "/{teacher_id}/create_course_form", method = RequestMethod.POST)
 	public String CreateCourse(@PathVariable String teacher_id,@Valid Course course, BindingResult bindingResult, Model model) {
-		
 		if (bindingResult.hasErrors() ) {
-			return "create_course_form";
+			return "Teacher/createCourse";
 		}
-		else if(!Validate(course.getName())){
+		else if(!Validate(course.getCid())){
 			model.addAttribute("Wrongname",true);
-			return "create_course_form";
+			return "Teacher/createCourse";
 		}
 		Teacher teacher = new Teacher();
 		teacher.setUsername(teacher_id);
@@ -64,14 +69,31 @@ public class CourseController {
 		return "/result";
 	}
 
-	@RequestMapping(value = "/Course/{id}", method = RequestMethod.GET)
-	public Course getCourse(@PathVariable String id) {
-		return courseRepoService.getCourse(id);
+	@RequestMapping("/{user_id}/Course/{id}")
+	public String getTeacherCourse(@PathVariable String user_id,@PathVariable long id, Model model) {
+		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
+		
+		if(courses.size() > 0){
+			model.addAttribute("teacher_id", user_id);
+			model.addAttribute("course",courseRepoService.getCourse(id));
+			return "Teacher/myCoursePage";
+		}
+		else if(teacherRepoService.getTeacher(user_id) != null){
+			model.addAttribute("user_id",user_id);
+			model.addAttribute("course",courseRepoService.getCourse(id));
+			model.addAttribute("t_user",true);
+			return "GlobalItems/coursePage";
+		}
+		else{
+			model.addAttribute("user_id",user_id);
+			model.addAttribute("course",courseRepoService.getCourse(id));
+			return "GlobalItems/coursePage";
+		}
 	}
 	
-	public boolean Validate(String name) {
+	public boolean Validate(long id) {
 		
-		if(courseRepoService.getCourse(name)!=null)
+		if(courseRepoService.getCourse(id)!=null)
 			return false;
 		else
 			return true;

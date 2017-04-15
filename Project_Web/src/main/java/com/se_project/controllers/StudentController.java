@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +26,7 @@ public class StudentController {
 	
 	@RequestMapping(value = "/student_signup_form",method = RequestMethod.GET)
 	public String get_signup_form(Student student){
-		return "student_sign_up_form";
+		return "Authentication/student_sign_up_form";
 	}
 	
 
@@ -33,16 +34,21 @@ public class StudentController {
 	public String sign_up(Student student,BindingResult bindingResult,Model model){
 		
 		if(bindingResult.hasErrors())
-			return "student_sign_up_form";
+			return "Authentication/student_sign_up_form";
 		else if(!Validate(student.getUsername()))
 		{
 			model.addAttribute("Wrongusername",true);
-			return "student_sign_up_form";
+			return "Authentication/student_sign_up_form";
+		}
+		else if(!student.getPassword().equals(student.getConfirmPassword()))
+		{
+			model.addAttribute("MismatchPassword",true);
+			return "Authentication/student_sign_up_form";
 		}
 		
 		studentRepoService.addStudent(student);
 		model.addAttribute("Student",student);
-		return "S_Homepage";
+		return "Student/S_Homepage";
 	}
 	
 	public boolean Validate(String username){
