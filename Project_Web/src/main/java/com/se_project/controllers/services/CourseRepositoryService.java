@@ -42,6 +42,10 @@ public class CourseRepositoryService {
 		courseRepo.findByTeacherUsername(teacher_id).forEach(courses::add);
 		return courses;
 	}
+	
+	public void deleteCourse(long cid){
+		courseRepo.delete(cid);
+	}
 
 
 }

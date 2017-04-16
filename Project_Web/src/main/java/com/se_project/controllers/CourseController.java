@@ -63,7 +63,6 @@ public class CourseController {
 	    return  "Teacher/myCourses";
 	}
 	
-
 	@RequestMapping(value = "/{teacher_id}/create_course_form", method = RequestMethod.POST)
 	public String CreateCourse(@PathVariable String teacher_id,@Valid Course course, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors() ) {
@@ -79,7 +78,8 @@ public class CourseController {
 		
 		courseRepoService.CreateCourse(course);
 		model.addAttribute("Course", course);
-		return "/result";
+		model.addAttribute("teacher_id",teacher_id);
+		return "Teacher/myCoursePage";
 	}
 
 	@RequestMapping("/{user_id}/Course/{id}")
@@ -114,6 +114,17 @@ public class CourseController {
 			model.addAttribute("course",courseRepoService.getCourse(id));
 			return "GlobalItems/coursePage";
 		}
+	}
+	
+	@RequestMapping("/{teacher_id}/DeleteCourse/{cid}")
+	public String deleteCourse(@PathVariable String teacher_id,
+			@PathVariable long cid, Model model){
+		
+		courseRepoService.deleteCourse(cid);
+		List<Course> Courses = courseRepoService.getCoursesByTeacher(teacher_id);
+	    model.addAttribute("Courses", Courses);
+		model.addAttribute("teacher_id",teacher_id);
+	    return  "Teacher/myCourses";
 	}
 	
 	public boolean Validate(String course_name) {
