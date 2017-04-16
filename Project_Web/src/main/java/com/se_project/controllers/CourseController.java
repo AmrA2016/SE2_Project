@@ -2,6 +2,8 @@ package com.se_project.controllers;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.MCQGameRepositoryService;
+import com.se_project.controllers.services.TFGameRepositoryService;
 import com.se_project.controllers.services.TeacherRepositoryService;
 import com.se_project.models.Course;
+import com.se_project.models.Game;
+import com.se_project.models.MCQGame;
+import com.se_project.models.TFGame;
 import com.se_project.models.Teacher;
 
 @Controller
@@ -28,6 +35,12 @@ public class CourseController {
 	
 	@Autowired
 	private CourseRepositoryService courseRepoService;
+	
+	@Autowired
+	private TFGameRepositoryService tfGameRepoService;
+	
+	@Autowired
+	private MCQGameRepositoryService mcqGameRepoService;
 	
 	@RequestMapping(value = "/{teacher_id}/create_course_form",method = RequestMethod.GET)
 	public String CourseForm(Model model,@PathVariable String teacher_id,Course course){
@@ -72,7 +85,19 @@ public class CourseController {
 	@RequestMapping("/{user_id}/Course/{id}")
 	public String getTeacherCourse(@PathVariable String user_id,@PathVariable long id, Model model) {
 		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
-		
+		List<Game> games = new ArrayList<Game>();
+		List<MCQGame> gameMCQ = mcqGameRepoService.getGameByCourseId(id);
+		List<TFGame> gameTF = tfGameRepoService.getGameByCourseId(id);
+		for(int i = 0 ; i < gameMCQ.size(); i++)
+		{
+			games.add(gameMCQ.get(i));
+		}
+		for(int i = 0 ; i < gameTF.size(); i++)
+		{
+			games.add(gameTF.get(i));
+		}
+		Collections.sort(games);
+		model.addAttribute("Games", games);
 		if(courses.size() > 0){
 			model.addAttribute("teacher_id", user_id);
 			model.addAttribute("course",courseRepoService.getCourse(id));
