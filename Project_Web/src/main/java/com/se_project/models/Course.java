@@ -1,7 +1,6 @@
 package com.se_project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +15,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Course {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	long cid;
+	private long cid;
 	@NotEmpty
 	@Size(min = 2, max = 50)
 	private  String name;

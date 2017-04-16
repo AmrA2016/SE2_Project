@@ -56,7 +56,7 @@ public class CourseController {
 		if (bindingResult.hasErrors() ) {
 			return "Teacher/createCourse";
 		}
-		else if(!Validate(course.getCid())){
+		else if(!Validate(course.getName())){
 			model.addAttribute("Wrongname",true);
 			return "Teacher/createCourse";
 		}
@@ -91,9 +91,9 @@ public class CourseController {
 		}
 	}
 	
-	public boolean Validate(long id) {
+	public boolean Validate(String course_name) {
 		
-		if(courseRepoService.getCourse(id)!=null)
+		if(courseRepoService.getCourseByName(course_name)!=null)
 			return false;
 		else
 			return true;

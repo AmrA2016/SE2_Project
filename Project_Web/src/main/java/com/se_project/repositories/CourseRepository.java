@@ -9,4 +9,5 @@ import com.se_project.models.Course;
 
 public interface CourseRepository extends CrudRepository<Course,Long>{
 	public List<Course> findByTeacherUsername (String name);
+	public Course findByName(String name);
 }

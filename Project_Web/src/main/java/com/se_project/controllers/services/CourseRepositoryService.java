@@ -27,6 +27,10 @@ public class CourseRepositoryService {
 	public Course getCourse(long id){
 		return courseRepo.findOne(id);
 	}
+	
+	public Course getCourseByName (String name){
+		return courseRepo.findByName(name);
+	}
 	public List<Course> getAllCourses() {
 		List<Course>courses =new ArrayList<>();
 		courseRepo.findAll().forEach(courses::add);
