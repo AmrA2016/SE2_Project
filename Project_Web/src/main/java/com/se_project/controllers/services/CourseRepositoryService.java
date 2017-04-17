@@ -21,6 +21,9 @@ public class CourseRepositoryService {
 	@Autowired
 	private CourseRepository courseRepo;
 	
+	@Autowired
+	private ImageService imageService;
+	
 	public void CreateCourse(Course course){
 		courseRepo.save(course);
 	}
@@ -44,7 +47,9 @@ public class CourseRepositoryService {
 	}
 	
 	public void deleteCourse(long cid){
+		String imageName = courseRepo.findOne(cid).getImage();
 		courseRepo.delete(cid);
+		imageService.deleteImage(imageName);
 	}
 
 

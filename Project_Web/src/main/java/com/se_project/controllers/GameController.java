@@ -88,8 +88,8 @@ public class GameController {
 		}
 		
 		mcqGame.setCourse(courseRepoService.getCourse(cid));
-		imageService.storeImage(imagefile);
-		mcqGame.setImage(imagefile.getOriginalFilename());
+		
+		mcqGame.setImage(imageService.storeImage(imagefile));
 		
 		mcqGameRepoService.saveGame(mcqGame);
 		
@@ -147,8 +147,8 @@ public class GameController {
 		}
 
 		tfGame.setCourse(courseRepoService.getCourse(cid));
-		imageService.storeImage(imagefile);
-		tfGame.setImage(imagefile.getOriginalFilename());
+		
+		tfGame.setImage(imageService.storeImage(imagefile));
 		
 		tfGameRepoService.saveGame(tfGame);
 		

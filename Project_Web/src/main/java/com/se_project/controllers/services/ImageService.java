@@ -13,7 +13,7 @@ public class ImageService {
 	
 	private Path imagePath = Paths.get("src\\main\\resources\\static\\uploaded-images");
 	
-	public void storeImage(MultipartFile image ){
+	public String storeImage(MultipartFile image ){
 		try {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String originalFile = image.getOriginalFilename();
@@ -23,8 +23,17 @@ public class ImageService {
 			String editedFileName = imagename + "_" + timestamp.getTime() + imagetype;
 			
             Files.copy(image.getInputStream(), this.imagePath.resolve(editedFileName));
+            return editedFileName;
         } catch (Exception e) {
         	throw new RuntimeException("FAIL!");
         }
+	}
+	
+	public void deleteImage(String imageName){
+		try{
+			Files.delete(imagePath.resolve(imageName));
+		}catch (Exception e){
+        	throw new RuntimeException("FAIL!");
+		}
 	}
 }

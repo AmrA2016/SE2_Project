@@ -87,8 +87,7 @@ public class CourseController {
 		teacher.setUsername(teacher_id);
 		course.setTeacher(teacher);
 		
-		imageService.storeImage(imagefile);
-		course.setImage(imagefile.getOriginalFilename());
+		course.setImage(imageService.storeImage(imagefile));
 		
 		courseRepoService.CreateCourse(course);
 		model.addAttribute("Course", course);

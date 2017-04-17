@@ -118,6 +118,7 @@
                <label>Name</label>
          		<input type="text" name="name" id="name" class="form-control" th:field="*{name}" onkeyup="writeData(this.id,'CourseName')"/>
 				<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label> 
+				<label th:if="${Wrongname}" class="alert alert-danger">This course name already exists</label>
              </div>
 
               <div class="form-group">
@@ -134,7 +135,7 @@
 
                <div class="form-group">
                <label>Category</label>
-               <select id="category" class="form-control" th:field="*{category}">
+               <select id="category" class="form-control" th:field="*{category}" onchange="writeData(this.id,'courseCategory')">
                  <option value="Programming">Programming</option>
                  <option value="Math">Math</option>
                </select>
@@ -167,7 +168,7 @@
             </div>
              <div class="form-group">
               <label>Category</label>
-              <p id="name"></p>
+              <p id="courseCategory">Programming</p>
             </div>
         </div>
 
