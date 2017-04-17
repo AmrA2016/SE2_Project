@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package com.se_project.controllers.services;
+
+import org.springframework.stereotype.Service;
+
+/**
+ * @author Amr
+ *
+ */
+@Service
+public class TFGameRepositoryService {
+	
+	@Autowired
+	TFGameRepository tfGameRepo;
+	
+}

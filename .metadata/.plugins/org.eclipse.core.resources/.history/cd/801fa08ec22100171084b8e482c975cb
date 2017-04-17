@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.se_project.repositories;
+
+/**
+ * @author Amr
+ *
+ */
+public interface MCQGameRepository {
+
+}

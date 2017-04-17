@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package com.se_project.models;
+
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * @author Amr
+ *
+ */
+@Entity
+@MappedSuperclass
+public class Question {
+	
+	protected String question;
+	protected String correctAnswer;
+	
+}

@@ -1,0 +1,42 @@
+/**
+ * 
+ */
+package com.se_project.controllers.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.se_project.models.MCQGame;
+import com.se_project.repositories.MCQGameRepository;
+
+/**
+ * @author Amr
+ *
+ */
+public class MCQGameRepositoryService {
+
+	@Autowired
+	TFGameRepository tfGameRepo;
+	
+	public TFGame getGame(long gid){
+		return tfGameRepo.findOne(gid);
+	}
+	
+	public List<TFGame> getGamesByName(String name){
+		return tfGameRepo.findByName(name);
+	}
+	
+	public TFGame getGameByCourseAndName (int cid, String name){
+		List<TFGame> games = tfGameRepo.findByCourseCid(cid);
+		
+		for(int i =0;i < games.size();i++)
+			if(games.get(i).equals(name))
+				return games.get(i);
+		return null;
+	}
+	
+	public void saveGame(TFGame game){
+		tfGameRepo.save(game);
+	}
+}

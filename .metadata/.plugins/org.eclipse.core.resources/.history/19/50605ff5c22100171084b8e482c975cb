@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package com.se_project.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+
+/**
+ * @author Amr
+ *
+ */
+public interface MCQQuestionRepository extends CrudRepository<MCQQuestion, Long> {
+
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Course</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <form action="#" th:action="@{/create_course_form}" th:object="${course}" method="post">
+            <table>
+            	<tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+                    <td th:if="${Wrongname}">This name already exists</td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input type="text" th:field="*{description}" /></td>
+                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+                </tr>
+                 <tr>
+                    <td>Age:</td>
+                    <td><input type="number" th:field="*{age}" /></td>
+                    <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></td>
+                </tr>
+                <tr>
+                    <td>category:</td>
+                    <td><input type="text" th:field="*{category}" /></td>
+                    <td th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></td>
+                </tr>
+                 <tr>
+                    <td>image:</td>
+                    <td><input type="text" th:field="*{image}" /></td>
+                    <td th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></td>
+                </tr>
+                
+                <tr>
+                    <td><button type="submit">Submit</button></td> 
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

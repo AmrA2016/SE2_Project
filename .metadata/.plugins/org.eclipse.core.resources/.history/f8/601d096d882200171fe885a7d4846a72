@@ -1,0 +1,13 @@
+package com.example;
+
+import org.junit.runner.RunWith;
+import org.springframework.boot.SpringBootConfiguration;
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootConfiguration(classes = ProjectWebApplication.class)
+//@WebIntegrationTest(value = "server.port=9000")
+//@SeleniumTest(driver = ChromeDriver.class, baseUrl = "http://localhost:9000")
+public class LoginTest {
+
+	
+}

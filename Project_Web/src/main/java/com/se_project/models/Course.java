@@ -5,11 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name="courses")
 public class Course {
@@ -21,7 +23,7 @@ public class Course {
 	private  String name;
 	
 	@NotEmpty
-	@Size(min = 10, max = 1000)
+	@Size(max = 1000)
 	private String description;
 	
 	@Min(5)
@@ -31,7 +33,8 @@ public class Course {
 	private String category;
 	
     private String image;
-    
+
+	
     @ManyToOne
     private Teacher teacher;
 
@@ -94,6 +97,7 @@ public class Course {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
 
 	public Teacher getTeacher() {
 		return teacher;

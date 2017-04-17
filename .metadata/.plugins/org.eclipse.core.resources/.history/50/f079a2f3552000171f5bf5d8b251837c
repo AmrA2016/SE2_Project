@@ -1,0 +1,109 @@
+package com.se_project.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+public class Game {
+
+	@Id
+	@NotEmpty
+	@Size(min = 2, max = 40)
+	private  String name;
+	@NotEmpty
+	@Size(min = 10, max = 10000)
+	private String description;
+
+	@NotEmpty
+	@Size(min = 3, max = 30)
+	private String Type;
+	@Size(min = 3, max = 300)
+    private String image;
+	
+	@NotEmpty
+	@Size(min=1 , max=5)
+	private int numberOFQuestions;
+	@NotEmpty
+	private String questions[numberOFQuestions];
+	@NotEmpty
+	@Size(min=2 , max=4)
+	private String[] choices = new String[4];
+    private boolean answer;
+
+
+
+	public Game() {
+	
+	}
+
+	public Game(String name, String description, String type, String image, int numberOFQuestions, String[] questions,
+			String[] choices, boolean answer) {
+		this.name = name;
+		this.description = description;
+		Type = type;
+		this.image = image;
+		this.numberOFQuestions = numberOFQuestions;
+		this.questions = questions;
+		this.choices = choices;
+		this.answer = answer;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getType() {
+		return Type;
+	}
+	public void setType(String Type) {
+		this.Type = Type;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public int getNumberOFQuestions() {
+		return numberOFQuestions;
+	}
+
+	public void setNumberOFQuestions(int numberOFQuestions) {
+		this.numberOFQuestions = numberOFQuestions;
+	}
+
+	public String[] getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(String[] questions) {
+		this.questions = questions;
+	}
+	public String[] getChoices() {
+		return choices;
+	}
+
+	public void setChoices(String[] choices) {
+		this.choices = choices;
+	}
+	public boolean isAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(boolean answer) {
+		this.answer = answer;
+	}
+}

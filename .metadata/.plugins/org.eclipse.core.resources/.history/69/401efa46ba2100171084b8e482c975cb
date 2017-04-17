@@ -1,0 +1,16 @@
+
+package com.se_project.models;
+
+import javax.persistence.Entity;
+
+/**
+ * @author Amr
+ * 
+ */
+
+@Entity(name = "mcqgames")
+public class MCQGame extends Game {
+	
+	private String[][] choices = new String[5][4];
+	
+}

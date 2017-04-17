@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package com.se_project.models;
+
+/**
+ * @author Amr
+ *
+ */
+public class MCQQuestion extends Question {
+	
+	String choice1;
+	String choice2;
+	String choice3;
+	String choice4;
+	
+	public MCQQuestion() {
+	}
+
+	/**
+	 * @param question
+	 * @param correctAnswer
+	 */
+	public MCQQuestion(String question, String correctAnswer) {
+		super(question, correctAnswer);
+		// TODO Auto-generated constructor stub
+	}
+
+}

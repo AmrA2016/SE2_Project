@@ -1,0 +1,28 @@
+/**
+ * 
+ */
+package com.se_project.models;
+
+/**
+ * @author Amr
+ *
+ */
+public class TFQuestion extends Question {
+
+	/**
+	 * 
+	 */
+	public TFQuestion() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param question
+	 * @param correctAnswer
+	 */
+	public TFQuestion(String question, String correctAnswer) {
+		super(question, correctAnswer);
+		// TODO Auto-generated constructor stub
+	}
+
+}

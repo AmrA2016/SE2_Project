@@ -1,0 +1,51 @@
+package com.se_project.models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+public class Game {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	long id;
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private  String name;
+	@NotEmpty
+	@Size(min = 10, max = 1000)
+	private String description;
+
+	@Size(min = 3, max = 300)
+    private String image;
+	
+	@Min(1)
+	@Max(5)
+	private int numberOFQuestions;
+	
+	private String[] questions = new String[5];
+	private String[] correctAnswers = new String[5];
+	
+	public Game() {
+	
+	}
+
+	public Game(String name, String description, String image, int numberOFQuestions, String[] questions,
+			String[] correctAnswers) {
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.numberOFQuestions = numberOFQuestions;
+		this.questions = questions;
+		this.correctAnswers = correctAnswers;
+	}
+	
+	
+}

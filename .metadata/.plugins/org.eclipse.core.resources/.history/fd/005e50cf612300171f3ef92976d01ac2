@@ -1,0 +1,46 @@
+body{
+	background-color: #e7e7e7;
+}
+a{
+	cursor: pointer;
+}
+.teachControl{
+	position: relative;
+	height: 180px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+
+   }
+.teachControl a{
+
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.teachHome{
+	height: 600px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+
+.gameResult{
+	height: 400px;
+	border: 1px solid #ccc;
+	background-color: rgb(88,188,142)
+	
+}
+/* ---------------------------------- */
+.courseControle{
+	position: relative;
+	height: 600px;
+    background-color: #e7e7e7;
+}
+.coursePage {
+background-color: #ffffff;
+padding: 20px;
+}
+
+.Question {
+	display: none;
+}

@@ -1,0 +1,57 @@
+ <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <form action="#" th:action="@{/createTfGame}" th:object="${tfGame}" method="post">
+            <table>
+            	<tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+                    <td th:if="${Wrongname}">This name already exists</td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input type="text" th:field="*{description}" /></td>
+                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td><input type="text" th:field="*{Type}" /></td>
+                    <td th:if="${#fields.hasErrors('Type')}" th:errors="*{Type}"></td>
+                </tr>
+                 <tr>
+                    <td>image:</td>
+                    <td><input type="text" th:field="*{image}" /></td>
+                    <td th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></td>
+                </tr>
+                <tr>
+                   <td>Number OF Questions:</td>
+                    <td><input type="number"  min="1" max="5" step="1" th:field="*{numberOFQuestions}" /></td>
+                    <td th:if="${#fields.hasErrors('numberOFQuestions')}" th:errors="*{numberOFQuestions}"></td>
+                </tr>
+                <tr>
+                     <td>Questions:</td>
+                     <td><input type="text" th:field="${tfGame.questions[0]}"/></td>
+                     <td><input type="text" th:field="${tfGame.questions[1]}"/></td>
+                     <td><input type="text" th:field="${tfGame.questions[2]}"/></td>
+                     <td><input type="text" th:field="${tfGame.questions[3]}"/></td>
+                     <td><input type="text" th:field="${tfGame.questions[4]}"/></td>
+                </tr>
+       
+                <!-- <tr th:each="question : ${questions}">
+                <td> <input type="checkbox" th:checkbox="${game.answer} ? 'answer'"/></td>
+                 </tr> -->
+
+                <tr>
+                    <td><button type="submit">Submit</button></td> 
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+
+                

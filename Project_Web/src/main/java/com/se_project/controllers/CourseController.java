@@ -15,9 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.ImageService;
 import com.se_project.controllers.services.MCQGameRepositoryService;
 import com.se_project.controllers.services.TFGameRepositoryService;
 import com.se_project.controllers.services.TeacherRepositoryService;
@@ -42,6 +45,9 @@ public class CourseController {
 	@Autowired
 	private MCQGameRepositoryService mcqGameRepoService;
 	
+	@Autowired
+	private ImageService imageService;
+	
 	@RequestMapping(value = "/{teacher_id}/create_course_form",method = RequestMethod.GET)
 	public String CourseForm(Model model,@PathVariable String teacher_id,Course course){
 		model.addAttribute("teacher_id",teacher_id);
@@ -64,7 +70,8 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value = "/{teacher_id}/create_course_form", method = RequestMethod.POST)
-	public String CreateCourse(@PathVariable String teacher_id,@Valid Course course, BindingResult bindingResult, Model model) {
+	public String CreateCourse(@RequestParam("imagefile") MultipartFile imagefile,@PathVariable String teacher_id,@Valid Course course,
+			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors() ) {
 			return "Teacher/createCourse";
 		}
@@ -72,9 +79,16 @@ public class CourseController {
 			model.addAttribute("Wrongname",true);
 			return "Teacher/createCourse";
 		}
+		else if(imagefile.isEmpty()){
+			model.addAttribute("image_empty",true);
+			return "Teacher/createCourse";
+		}
 		Teacher teacher = new Teacher();
 		teacher.setUsername(teacher_id);
 		course.setTeacher(teacher);
+		
+		imageService.storeImage(imagefile);
+		course.setImage(imagefile.getOriginalFilename());
 		
 		courseRepoService.CreateCourse(course);
 		model.addAttribute("Course", course);

@@ -1,0 +1,67 @@
+package com.se_project.models;
+
+public class Answers {
+	
+	private String[] answers = new String[5];
+	/**
+	 * @return the answer1
+	 */
+	public String getAnswer1() {
+		return answer1;
+	}
+	/**
+	 * @param answer1 the answer1 to set
+	 */
+	public void setAnswer1(String answer1) {
+		this.answer1 = answer1;
+	}
+	/**
+	 * @return the answer2
+	 */
+	public String getAnswer2() {
+		return answer2;
+	}
+	/**
+	 * @param answer2 the answer2 to set
+	 */
+	public void setAnswer2(String answer2) {
+		this.answer2 = answer2;
+	}
+	/**
+	 * @return the answer3
+	 */
+	public String getAnswer3() {
+		return answer3;
+	}
+	/**
+	 * @param answer3 the answer3 to set
+	 */
+	public void setAnswer3(String answer3) {
+		this.answer3 = answer3;
+	}
+	/**
+	 * @return the answer4
+	 */
+	public String getAnswer4() {
+		return answer4;
+	}
+	/**
+	 * @param answer4 the answer4 to set
+	 */
+	public void setAnswer4(String answer4) {
+		this.answer4 = answer4;
+	}
+	/**
+	 * @return the answer5
+	 */
+	public String getAnswer5() {
+		return answer5;
+	}
+	/**
+	 * @param answer5 the answer5 to set
+	 */
+	public void setAnswer5(String answer5) {
+		this.answer5 = answer5;
+	}
+
+}

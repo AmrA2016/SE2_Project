@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Childhood Arena</title>
+    
+<!-- -------------------------------------------------------------------------------------------------------- -->
+
+    <!-- Start Global Links -->
+        <!-- loading Bootstrap -->
+            <link rel="stylesheet" href="../GlobalItems/css/bootstrap.min.css"/>
+        <!-- End loading Bootstrap -->
+       
+        <!-- Loading FontAwesome -->
+            <link rel="stylesheet" href="../GlobalItems/css/font-awesome.min.css"/>
+        <!-- End Loading FontAwesome -->
+        
+        <!-- Loading FlatUI -->
+            <link rel="stylesheet" href="../GlobalItems/css/flat-ui.min.css"/>
+        <!-- End loading FlatUI -->
+    
+        <!--[if lt IE 9]>
+          <script src="dist/js/vendor/html5shiv.js"></script>
+          <script src="dist/js/vendor/respond.min.js"></script>
+        <![endif]-->
+        
+    
+    <!-- End Global Links -->
+<!-- -------------------------------------------------------------------------------------------------------- -->
+    
+    <!-- Home Page Links -->
+    <link rel="stylesheet" href="css/HomeStyle.css"/>
+
+    <!-- End Home Page Links -->
+
+</head>
+
+<body>
+
+    <!-- Start Navigation Bar -->
+    
+    <nav class="navbar navbar-default myNav">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header myBrand">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-ex>
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+          
+      </button>
+        
+      <a class="navbar-brand " href="#"> <span class="mainColor">ChildHood.</span> Arena</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+      <ul class="nav navbar-nav navbar-right myLinks">
+       <li> <a href="../Authentication/signin.html">  LOG IN </a></li>
+        <li> <a href="#" onclick="viewButton()">  SIGN UP </a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+    
+    <!-- End Navigation Bar -->
+
+    <!-- -------------------------------------------------------------------------------------------------------- -->
+
+    
+    <!-- Start Home section -->
+        <section class="HomePage">
+                            <div id="particles-js"></div>
+
+            <div class="overLay">
+                <div class="describtion">
+                    <p> <span class="tweak"> Learn </span> Play and Have fun<span class="mainColor"> With</span> <br> <span class="mainColor"> Childhood Arena</span><span class="mainColor">.</span> </p>
+                </div>
+                <div class="signUp">
+                    <div class="btn btn-success">
+                        <a class="myBtn" style="color: #fff;" onclick="viewButton()"> SIGN UP NOW </a>
+                         <div class="signupBTN">
+                        <a class="btn btn-success" href="../Authentication/teachersignup.html" style="color: #fff; float: left; "> Teacher Sign up </a>
+                        <a class="btn btn-success" href="../Authentication/studentsignup.html" style="color: #fff; float: left;"> Student Sign up </a>
+                         </div>
+                    </div>
+                   
+                </div>
+            
+            </div>
+        </section>
+    
+    <!-- End Home Section -->
+    
+  <!-- -------------------------------------------------------------------------------------------------------- -->
+  
+
+    
+    <!-- Start Loading Scriptes -->
+        <!-- Start Global Scriptes -->
+            <script src="../GlobalItems/js/jquery.min.js"></script>
+            <script src="../GlobalItems/js/flat-ui.min.js"></script>
+            <script src="../GlobalItems/js/html5shiv.js"></script>
+            <script src="../GlobalItems/js/respond.min.js"></script>
+        <!-- End Global Scriptes -->
+    
+    
+        <!-- Start HomePage Scriptes -->
+            <script src="js/HomeJs.js"></script>
+     <script type="text/javascript">
+        function viewButton(){
+            $(".signupBTN").fadeIn();
+        }
+    </script>
+        <!-- End HomePage Scriptes -->
+    <!-- End loading Scriptes -->
+    
+
+</body>
+
+</html>
