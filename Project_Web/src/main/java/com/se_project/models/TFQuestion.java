@@ -1,15 +1,17 @@
-/**
- * 
- */
+
 package com.se_project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+
 /**
- * @author Amr
- *
+ * The multiple choice question entity
+ * and it holds all the attributes of T/F question 
+ * <p>
+ * It has a relation ManyToOne with tf_game
  */
+
 @Entity(name="tfquestions")
 public class TFQuestion extends Question {
 	

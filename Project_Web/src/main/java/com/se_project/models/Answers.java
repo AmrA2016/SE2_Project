@@ -1,5 +1,9 @@
 package com.se_project.models;
 
+/**
+ * This class is temporary and
+ * It holds the answers that user submits in the game
+ */
 public class Answers {
 	
 	private String[] user_answers = new String[5];

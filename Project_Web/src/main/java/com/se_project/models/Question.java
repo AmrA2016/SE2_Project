@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * @author Amr
- *
+ * This represents the question entity 
+ * and it holds the generic attributes of the question
+ * <p>
+ * This entity doens't stored in the database but its children are stored
+ *	
  */
 @MappedSuperclass
 public class Question {

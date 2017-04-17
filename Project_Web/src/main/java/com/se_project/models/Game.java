@@ -14,10 +14,19 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * This represents the game entity 
+ * and It holds the generic attributes 
+ * <p>
+ * This entity doesn't stored in the database but its children are stored
+ */
 @MappedSuperclass
 public class Game implements Comparable<Game>{
 	
-
+	
+	/**
+	 * game_id 
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected long gid;
@@ -28,19 +37,37 @@ public class Game implements Comparable<Game>{
 	@NotEmpty
 	@Size(max = 1000)
 	protected String description;
-
+	
+	/**
+	 * Image file name
+	 */
 	protected String image;
 	
+	/**
+	 * This holds the number of questions in the game
+	 * It doesn't stored in the database used only for validation
+	 */
 	@Transient
 	@Min(value = 1, message="There should at least 1 question" )
 	@Max(5)
 	protected int numberOfQuestions;
 	
+	/**
+	 * This holds or receives the questions of the game that teacher enters
+	 * It's temporary and doesn't stored in database
+	 */
 	@Transient
 	protected String[] questions = new String[5];
+	/**
+	 * This holds or receives the answers of the questions that teacher enters
+	 * It's temporary and doesn't stored in database
+	 */
 	@Transient
 	protected String[] correctAnswers = new String[5];
 	
+	/**
+	 * Course object that link this game to a certain course
+	 */
 	@ManyToOne
 	protected Course course;
 	
@@ -81,14 +108,14 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @return the id
+	 * @return the game id
 	 */
 	public long getGid() {
 		return gid;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id the game id to set
 	 */
 	public void setGid(long id) {
 		this.gid = id;
@@ -177,7 +204,7 @@ public class Game implements Comparable<Game>{
 	public void setCorrectAnswers(String[] correctAnswers) {
 		this.correctAnswers = correctAnswers;
 	}
-
+	
 	@Override
 	public int compareTo(Game other) {
 		return this.name.compareTo(other.name);

@@ -12,6 +12,11 @@ public class StudentRepositoryService {
 	@Autowired
 	StudentRepository studentRepo;
 	
+	/**
+	 * Stores a student object in the database
+	 * @param s the student object to be saved
+	 * @return the result of saving operation
+	 */
 	public boolean addStudent(Student s){
 		if(studentRepo.save(s) != null)
 			return true;
@@ -19,6 +24,13 @@ public class StudentRepositoryService {
 			return false;
 	}
 	
+	/**
+	 * Get a student object from database given its name
+	 * <p>
+	 * Note: username is the primary key of the student
+	 * @param username the username of the student to be retrieved
+	 * @return student object from database
+	 */
 	public Student getStudent(String username){
 		return studentRepo.findOne(username);
 	}

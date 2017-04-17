@@ -4,9 +4,10 @@
 package com.se_project.models;
 
 import javax.persistence.Entity;
+
 /**
- * @author Amr
- *
+ * This represents the True/False taxonomy of the game entity
+ * 
  */
 @Entity(name="tfgames")
 public class TFGame extends Game {

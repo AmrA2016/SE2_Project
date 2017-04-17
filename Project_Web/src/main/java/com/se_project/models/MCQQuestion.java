@@ -7,17 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
- * @author Amr
- *
+ * The multiple choice question entity
+ * and it holds all the attributes of mcq question 
+ * <p>
+ * It has a relation ManyToOne with mcqgame
  */
 @Entity(name="mcqquestions")
 public class MCQQuestion extends Question {
 	
-	String choice1;
-	String choice2;
-	String choice3;
-	String choice4;
+	private String choice1;
+	private String choice2;
+	private String choice3;
+	private String choice4;
 	
+	
+	/**
+	 * MCQ game object that contains this question
+	 */
 	@ManyToOne
 	private MCQGame mcqgame;
 	

@@ -8,6 +8,12 @@ import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * This represents the teacher entity in the system
+ * <p>
+ * It holds all the attributes related to the teacher only
+ */
+
 @Entity(name="teachers")
 public class Teacher extends User{
 	

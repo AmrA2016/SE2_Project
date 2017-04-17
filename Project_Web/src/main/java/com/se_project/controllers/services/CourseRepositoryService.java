@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.se_project.models.Course;
 import com.se_project.repositories.CourseRepository;
 
+/**
+ * The class implements the needed operations for handling the Course repository 
+ * as saving them in database or retrieving them
+ */
 @Service
 public class CourseRepositoryService {
 
