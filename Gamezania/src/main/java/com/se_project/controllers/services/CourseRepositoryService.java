@@ -28,13 +28,27 @@ public class CourseRepositoryService {
 	@Autowired
 	private ImageService imageService;
 	
+	/**
+	 * Save a course object in database
+	 * @param course the course object to be saved
+	 */
 	public void CreateCourse(Course course){
 		courseRepo.save(course);
 	}
+	
+	/**
+	 * Get course object by id
+	 * @param id the id of the course to be retrieved
+	 * @return course object
+	 */
 	public Course getCourse(long id){
 		return courseRepo.findOne(id);
 	}
 	
+	/**
+	 * @param name
+	 * @return
+	 */
 	public Course getCourseByName (String name){
 		return courseRepo.findByName(name);
 	}

@@ -92,10 +92,18 @@ public class MCQGameRepositoryService {
 	
 
 	/**
-	 * Delete T/F game from database
+	 * Delete MCQ game from database by id
 	 * @param gid the id of the game to be deleted
 	 */
 	public void deleteGame(long gid){
 		mcqGameRepo.delete(gid);
+	}
+	
+	/**
+	 * Delete MCQ game from database by object
+	 * @param game the game object to be deleted
+	 */
+	public void deleteGame(MCQGame game){
+		mcqGameRepo.delete(game);
 	}
 }

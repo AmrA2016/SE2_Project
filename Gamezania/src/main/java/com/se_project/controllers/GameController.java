@@ -105,15 +105,15 @@ public class GameController {
 	 *            identifies a course through the system
 	 * @param imagefile
 	 *            path of the course image added by a teacher
-	 * @return HTML page of a teacher courses page that show all his courses 
-         * or returns HTML page of the create "Multiple choice questions" game if the data entered is wrong
+	 * @return HTML page of the teacher's course page updated with the new game
+	 * or returns HTML page of the create "MCQ" game if the data entered is wrong
 	 */
 	@RequestMapping(value = "/{teacher_id}/Course/{cid}/createMCQGame", method = RequestMethod.POST)
 	public String CreateMCQGame(@Valid @ModelAttribute("mcqGame") MCQGame mcqGame, BindingResult bindingResult,
 			Model model, @PathVariable String teacher_id, @PathVariable long cid,
 			@RequestParam("imagefile") MultipartFile imagefile) {
 
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || mcqGame.getName().contains("/")) {
 			return "Teacher/createMCQGame";
 		} else if (!Validate(cid, mcqGame.getName())) {
 			model.addAttribute("Wrongname", true);
@@ -143,7 +143,7 @@ public class GameController {
 			mcqQuestionRepoService.saveQuestion(question);
 		}
 
-		return "redirect:/" + teacher_id + "/ShowMyCourses";
+		return "redirect:/" + teacher_id + "/Course/" + cid ;
 
 	}
 
@@ -159,15 +159,15 @@ public class GameController {
 	 *            identifies a course through the system
 	 * @param imagefile
 	 *            path of the course image added by a teacher
-	 * @return HTML page of a teacher courses page that show all his courses
-         * or returns HTML page of the create "true or false" game if the data entered is wrong
+	 * @return HTML page of the teacher's course page updated with the new game
+     * or returns HTML page of the create "true or false" game if the data entered is wrong
 	 */
 	@RequestMapping(value = "/{teacher_id}/Course/{cid}/createTfGame", method = RequestMethod.POST)
 	public String CreateTOrFGame(@Valid @ModelAttribute("tfGame") TFGame tfGame, BindingResult bindingResult,
 			Model model, @PathVariable String teacher_id, @PathVariable long cid,
 			@RequestParam("imagefile") MultipartFile imagefile) {
 
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || tfGame.getName().contains("/")) {
 			return "Teacher/createTfGame";
 		} else if (!Validate(cid, tfGame.getName())) {
 			model.addAttribute("Wrongname", true);
@@ -191,7 +191,7 @@ public class GameController {
 			tfQuestionRepoService.saveQuestion(question);
 		}
 
-		return "redirect:/" + teacher_id + "/ShowMyCourses";
+		return "redirect:/" + teacher_id + "/Course/" + cid ;
 
 	}
 
@@ -210,15 +210,15 @@ public class GameController {
 	 * @return HTML page of "true or false" game or HTML page of " Multiple
 	 *         choice questions" game (depends on the type of the game)
 	 */
-	@RequestMapping(value = "/{user_id}/Course/{cid}/Game/{gid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{user_id}/Course/{cid}/Game/{gameName}", method = RequestMethod.GET)
 	public String getGame(@ModelAttribute("answers") Answers user_answers, Model model, @PathVariable String user_id,
-			@PathVariable long cid, @PathVariable long gid) {
+			@PathVariable long cid, @PathVariable String gameName) {
 
-		MCQGame mcqgame = isMCQ(cid, gid);
-		TFGame tfgame = isTF(cid, gid);
+		MCQGame mcqgame = isMCQ(cid, gameName);
+		TFGame tfgame = isTF(cid, gameName);
 
 		if (mcqgame != null) {
-			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(gid);
+			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(mcqgame.getGid());
 			mcqgame.setNumberOfQuestions(questions.size());
 			model.addAttribute("user_id", user_id);
 			model.addAttribute("cid", cid);
@@ -236,7 +236,7 @@ public class GameController {
 			return "GlobalItems/MCQGamePage";
 
 		} else if (tfgame != null) {
-			List<TFQuestion> questions = tfQuestionRepoService.getQuestionsOfGame(gid);
+			List<TFQuestion> questions = tfQuestionRepoService.getQuestionsOfGame(tfgame.getGid());
 			tfgame.setNumberOfQuestions(questions.size());
 			model.addAttribute("user_id", user_id);
 			model.addAttribute("cid", cid);
@@ -267,14 +267,14 @@ public class GameController {
 	 *            identifies the game through the system
 	 * @return HTML page of the game result
 	 */
-	@RequestMapping(value = "/{user_id}/Course/{cid}/Game/{gid}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{user_id}/Course/{cid}/Game/{gameName}", method = RequestMethod.POST)
 	public String submitAnswers(@ModelAttribute("answers") Answers user_answers, Model model,
-			@PathVariable String user_id, @PathVariable long cid, @PathVariable long gid) {
+			@PathVariable String user_id, @PathVariable long cid, @PathVariable String gameName) {
 
-		MCQGame mcqgame = isMCQ(cid, gid);
+		MCQGame mcqgame = isMCQ(cid, gameName);
 		int counter = 0;
 		if (mcqgame != null) {
-			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(gid);
+			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(mcqgame.getGid());
 
 			for (int i = 0; i < questions.size(); i++)
 				if (questions.get(i).getCorrect_answer().equals(user_answers.getUser_answers()[i]))
@@ -285,7 +285,8 @@ public class GameController {
 			if (counter == questions.size())
 				model.addAttribute("winner", true);
 		} else {
-			List<TFQuestion> questions = tfQuestionRepoService.getQuestionsOfGame(gid);
+			TFGame tfgame = isTF(cid, gameName);
+			List<TFQuestion> questions = tfQuestionRepoService.getQuestionsOfGame(tfgame.getGid());
 
 			for (int i = 0; i < questions.size(); i++)
 				if (questions.get(i).getCorrect_answer().equals(user_answers.getUser_answers()[i]))
@@ -299,7 +300,7 @@ public class GameController {
 
 		model.addAttribute("user_id", user_id);
 		model.addAttribute("cid", cid);
-		model.addAttribute("gid", gid);
+		model.addAttribute("gameName", gameName);
 		if (teacherRepoService.getTeacher(user_id) != null)
 			model.addAttribute("t_user", true);
 
@@ -313,17 +314,20 @@ public class GameController {
 	 *            identifies the user through the system
 	 * @param cid
 	 *            identifies the course through the system
-	 * @param gid
-	 *            identifies the game through the system
+	 * @param gameName
+	 *            identifies the game in the course
 	 * @return HTML page of a teacher courses page that show all his courses
 	 */
-	@RequestMapping("/{teacher_id}/Course/{cid}/DeleteGame/{gid}")
-	public String deleteGame(@PathVariable String teacher_id, @PathVariable long cid, @PathVariable long gid) {
-
-		if (isMCQ(cid, gid) != null)
-			mcqGameRepoService.deleteGame(gid);
-		else
-			tfGameRepoService.deleteGame(gid);
+	@RequestMapping("/{teacher_id}/Course/{cid}/DeleteGame/{gameName}")
+	public String deleteGame(@PathVariable String teacher_id, @PathVariable long cid, @PathVariable String gameName) {
+			
+		MCQGame mcqgame = isMCQ(cid, gameName);
+		if (mcqgame != null)
+			mcqGameRepoService.deleteGame(mcqgame);
+		else{
+			TFGame tfgame = isTF(cid, gameName);
+			tfGameRepoService.deleteGame(tfgame);
+		}
 
 		return "redirect:/" + teacher_id + "/ShowMyCourses";
 	}
@@ -349,20 +353,20 @@ public class GameController {
 
 	/**
 	 * @param cid identifies a course through the system
-	 * @param gid identifies a course through the system
+	 * @param gameName identifies a game in course
 	 * @return a specific "Multiple choice questions" game in a specific course
 	 */
-	public MCQGame isMCQ(long cid, long gid) {
-		return mcqGameRepoService.getGameInCourse(cid, gid);
+	public MCQGame isMCQ(long cid, String gameName) {
+		return mcqGameRepoService.getGameByCourseAndName(cid, gameName);
 	}
 
 	/**
 	 * @param cid identifies a course through the system
-	 * @param gid identifies a course through the system
+	 * @param gameName identifies a game in course
 	 * @return a specific "true or false" game in a specific course
 	 */
-	public TFGame isTF(long cid, long gid) {
-		return tfGameRepoService.getGameInCourse(cid, gid);
+	public TFGame isTF(long cid, String gameName) {
+		return tfGameRepoService.getGameByCourseAndName(cid, gameName);
 	}
 
 }

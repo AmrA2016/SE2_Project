@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `arenadb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `arenadb`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: arenadb
@@ -34,7 +36,7 @@ CREATE TABLE `courses` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `teacher_id_idx` (`teacher_username`),
   CONSTRAINT `teacher_id` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +97,7 @@ CREATE TABLE `mcqquestions` (
   PRIMARY KEY (`id`),
   KEY `mcqgame_id_idx` (`mcqgame_gid`),
   CONSTRAINT `mcqgame_id` FOREIGN KEY (`mcqgame_gid`) REFERENCES `mcqgames` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +188,7 @@ CREATE TABLE `tfgames` (
   PRIMARY KEY (`gid`),
   KEY `course_cid_idx` (`course_cid`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_cid`) REFERENCES `courses` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +197,7 @@ CREATE TABLE `tfgames` (
 
 LOCK TABLES `tfgames` WRITE;
 /*!40000 ALTER TABLE `tfgames` DISABLE KEYS */;
-INSERT INTO `tfgames` VALUES (8,'MyFirstGame','badaf','1.png',1),(9,'Game2','fsafasf','sin.png',1),(10,'Basic Operation','Practice about addition and division','sin.png',2);
+INSERT INTO `tfgames` VALUES (8,'MyFirstGame','badaf','1.png',1),(10,'Basic Operation','Practice about addition and division','sin.png',2);
 /*!40000 ALTER TABLE `tfgames` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +216,7 @@ CREATE TABLE `tfquestions` (
   PRIMARY KEY (`id`),
   KEY `tf_game_id_idx` (`tfgame_gid`),
   CONSTRAINT `tfgame_id` FOREIGN KEY (`tfgame_gid`) REFERENCES `tfgames` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +225,7 @@ CREATE TABLE `tfquestions` (
 
 LOCK TABLES `tfquestions` WRITE;
 /*!40000 ALTER TABLE `tfquestions` DISABLE KEYS */;
-INSERT INTO `tfquestions` VALUES (1,'Test1','true',8),(2,'Test2','false',8),(3,'Question11','true',9),(4,'Question2','false',9),(5,'5 + 16 = 21','true',10),(6,'80 / 5 = 14','false',10),(7,'64 + 23 = 87','true',10);
+INSERT INTO `tfquestions` VALUES (1,'Test1','true',8),(2,'Test2','false',8),(5,'5 + 16 = 21','true',10),(6,'80 / 5 = 14','false',10),(7,'64 + 23 = 87','true',10);
 /*!40000 ALTER TABLE `tfquestions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -236,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 13:44:11
+-- Dump completed on 2017-04-21 18:39:35

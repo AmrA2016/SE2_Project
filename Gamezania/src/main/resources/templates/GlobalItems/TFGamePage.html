@@ -117,7 +117,7 @@
 					</div>
 
 					<form
-						th:action="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${game.gid}}" method="post">
+						th:action="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${game.name}}" method="post">
 						<div class="col-md-8">
 							<div class="panel panel-default">
 								<div class="panel-heading">Questions</div>
@@ -131,8 +131,8 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer1" value="true" th:field="${answers.user_answers[0]}"/>true<br />
-														<input type="radio" name="answer1" value="false" th:field="${answers.user_answers[0]}"/>false<br />
+														<input type="radio" name="answer1" id="answer1T" value="true" th:field="${answers.user_answers[0]}"/>true<br />
+														<input type="radio" name="answer1" id="answer1F" value="false" th:field="${answers.user_answers[0]}"/>false<br />
 													</div>
 												</div>
 											</div>
@@ -148,8 +148,8 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer2" value="true" th:field="${answers.user_answers[1]}"/>true<br />
-														<input type="radio" name="answer2" value="false" th:field="${answers.user_answers[1]}"/>false<br />
+														<input type="radio" name="answer2" id="answer2T" value="true" th:field="${answers.user_answers[1]}"/>true<br />
+														<input type="radio" name="answer2" id="answer2F" value="false" th:field="${answers.user_answers[1]}"/>false<br />
 													</div>
 												</div>
 											</div>
@@ -165,8 +165,8 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer3" value="true" th:field="${answers.user_answers[2]}"/>true<br />
-														<input type="radio" name="answer3" value="false" th:field="${answers.user_answers[2]}"/>false<br />
+														<input type="radio" name="answer3" id="answer3T" value="true" th:field="${answers.user_answers[2]}"/>true<br />
+														<input type="radio" name="answer3" id="answer3F" value="false" th:field="${answers.user_answers[2]}"/>false<br />
 													</div>
 												</div>
 											</div>
@@ -182,8 +182,8 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer4" value="true" th:field="${answers.user_answers[3]}"/>true<br />
-														<input type="radio" name="answer4" value="false" th:field="${answers.user_answers[3]}"/>false<br />
+														<input type="radio" name="answer4" id="answer4T" value="true" th:field="${answers.user_answers[3]}"/>true<br />
+														<input type="radio" name="answer4" id="answer4F" value="false" th:field="${answers.user_answers[3]}"/>false<br />
 													</div>
 												</div>
 											</div>
@@ -199,8 +199,8 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer5" value="true" th:field="${answers.user_answers[4]}"/>true<br />
-														<input type="radio" name="answer5" value="false" th:field="${answers.user_answers[4]}"/>false<br />
+														<input type="radio" name="answer5" id="answer5T" value="true" th:field="${answers.user_answers[4]}"/>true<br />
+														<input type="radio" name="answer5" id="answer5F" value="false" th:field="${answers.user_answers[4]}"/>false<br />
 													</div>
 												</div>
 											</div>
@@ -208,7 +208,7 @@
 									</div>
 									
 									<div class="form-group pull-right">
-										<input type="submit" class="btn btn-success"/>
+										<input type="submit" name="submit" class="btn btn-success"/>
 									</div>
 									
 								</div>

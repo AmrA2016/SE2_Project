@@ -94,10 +94,18 @@ public class TFGameRepositoryService {
 	}
 	
 	/**
-	 * Delete T/F game from database
+	 * Delete T/F game from database by id
 	 * @param gid the id of the game to be deleted
 	 */
 	public void deleteGame(long gid){
 		tfGameRepo.delete(gid);
+	}
+	
+	/**
+	 * Delete T/F game from database by object
+	 * @param game the game object to be deleted
+	 */
+	public void deleteGame(TFGame game){
+		tfGameRepo.delete(game);
 	}
 }

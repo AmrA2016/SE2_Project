@@ -1,8 +1,0 @@
-package com.se_project.models;
-
-public class Answers {
-	
-	private String[] answers = new String[5];
-	
-
-}

@@ -117,7 +117,7 @@
 					</div>
 
 					<form
-						th:action="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${game.gid}}" method="post">
+						th:action="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${game.name}}" method="post">
 						<div class="col-md-8">
 							<div class="panel panel-default">
 								<div class="panel-heading">Questions</div>
@@ -131,10 +131,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer1" th:value="${question1Choice1}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice1}"></label><br/>
-														<input type="radio" name="answer1" th:value="${question1Choice2}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice2}"></label><br/>
-														<input type="radio" name="answer1" th:value="${question1Choice3}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice3}"></label><br/>
-														<input type="radio" name="answer1" th:value="${question1Choice4}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice4}"></label><br/>
+														<input type="radio" name="answer1" id="answer1Choice1" th:value="${question1Choice1}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice1}"></label><br/>
+														<input type="radio" name="answer1" id="answer1Choice2" th:value="${question1Choice2}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice2}"></label><br/>
+														<input type="radio" name="answer1" id="answer1Choice3" th:value="${question1Choice3}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice3}"></label><br/>
+														<input type="radio" name="answer1" id="answer1Choice4" th:value="${question1Choice4}" th:field="${answers.user_answers[0]}"/><label th:text="${question1Choice4}"></label><br/>
 													</div>
 												</div>
 											</div>
@@ -150,10 +150,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer2" th:value="${question2Choice1}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice1}"></label><br/>
-														<input type="radio" name="answer2" th:value="${question2Choice2}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice2}"></label><br/>
-														<input type="radio" name="answer2" th:value="${question2Choice3}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice3}"></label><br/>
-														<input type="radio" name="answer2" th:value="${question2Choice4}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice4}"></label><br/>
+														<input type="radio" name="answer2" id="answer2Choice1" th:value="${question2Choice1}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice1}"></label><br/>
+														<input type="radio" name="answer2" id="answer2Choice2" th:value="${question2Choice2}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice2}"></label><br/>
+														<input type="radio" name="answer2" id="answer2Choice3" th:value="${question2Choice3}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice3}"></label><br/>
+														<input type="radio" name="answer2" id="answer2Choice4" th:value="${question2Choice4}" th:field="${answers.user_answers[1]}"/><label th:text="${question2Choice4}"></label><br/>
 													</div>
 												</div>
 											</div>
@@ -169,10 +169,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer3" th:value="${question3Choice1}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice1}"></label><br/>
-														<input type="radio" name="answer3" th:value="${question3Choice2}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice2}"></label><br/>
-														<input type="radio" name="answer3" th:value="${question3Choice3}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice3}"></label><br/>
-														<input type="radio" name="answer3" th:value="${question3Choice4}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice4}"></label><br/>
+														<input type="radio" name="answer3" id="answer3Choice1" th:value="${question3Choice1}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice1}"></label><br/>
+														<input type="radio" name="answer3" id="answer3Choice2" th:value="${question3Choice2}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice2}"></label><br/>
+														<input type="radio" name="answer3" id="answer3Choice3" th:value="${question3Choice3}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice3}"></label><br/>
+														<input type="radio" name="answer3" id="answer3Choice4" th:value="${question3Choice4}" th:field="${answers.user_answers[2]}"/><label th:text="${question3Choice4}"></label><br/>
 													</div>
 												</div>
 											</div>
@@ -188,10 +188,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer4" th:value="${question4Choice1}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice1}"></label><br/>
-														<input type="radio" name="answer4" th:value="${question4Choice2}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice2}"></label><br/>
-														<input type="radio" name="answer4" th:value="${question4Choice3}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice3}"></label><br/>
-														<input type="radio" name="answer4" th:value="${question4Choice4}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice4}"></label><br/>
+														<input type="radio" name="answer4" id="answer4Choice1" th:value="${question4Choice1}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice1}"></label><br/>
+														<input type="radio" name="answer4" id="answer4Choice2" th:value="${question4Choice2}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice2}"></label><br/>
+														<input type="radio" name="answer4" id="answer4Choice3" th:value="${question4Choice3}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice3}"></label><br/>
+														<input type="radio" name="answer4" id="answer4Choice4" th:value="${question4Choice4}" th:field="${answers.user_answers[3]}"/><label th:text="${question4Choice4}"></label><br/>
 													</div>
 												</div>
 											</div>
@@ -207,10 +207,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="col-md-6">
-														<input type="radio" name="answer5" th:value="${question5Choice1}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice1}"></label><br/>
-														<input type="radio" name="answer5" th:value="${question5Choice2}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice2}"></label><br/>
-														<input type="radio" name="answer5" th:value="${question5Choice3}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice3}"></label><br/>
-														<input type="radio" name="answer5" th:value="${question5Choice4}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice4}"></label><br/>
+														<input type="radio" name="answer5" id="answer5Choice1" th:value="${question5Choice1}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice1}"></label><br/>
+														<input type="radio" name="answer5" id="answer5Choice2" th:value="${question5Choice2}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice2}"></label><br/>
+														<input type="radio" name="answer5" id="answer5Choice3" th:value="${question5Choice3}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice3}"></label><br/>
+														<input type="radio" name="answer5" id="answer5Choice4" th:value="${question5Choice4}" th:field="${answers.user_answers[4]}"/><label th:text="${question5Choice4}"></label><br/>
 													</div>
 												</div>
 											</div>
@@ -218,7 +218,7 @@
 									</div>
 									
 									<div class="form-group pull-right">
-										<input type="submit" class="btn btn-success"/>
+										<input type="submit" name="submit" class="btn btn-success"/>
 									</div>
 								</div>
 
