@@ -153,20 +153,7 @@ public class CourseController {
 	@RequestMapping("/user/{user_id}/{category}")
 	public String showCoursesByCategory(@PathVariable String category, @PathVariable String user_id, Model model) {
 		if (category.equals("All_Categories")) {
-			List<Course> mathCourses = courseRepoService.getCoursesByCategory("Math");
-			List<Course> programmingCourses = courseRepoService.getCoursesByCategory("Programming");
-			List<Course> allCourses = new ArrayList<Course>();
-
-			for (int i = 0; i < mathCourses.size(); i++) {
-				allCourses.add(mathCourses.get(i));
-			}
-			for (int i = 0; i < programmingCourses.size(); i++) {
-				allCourses.add(programmingCourses.get(i));
-			}
-
-			model.addAttribute("Student", studentRepoService.getStudent(user_id));
-			model.addAttribute("courses", allCourses);
-			return "Student/S_Homepage";
+			return "redirect:/user/"+user_id;
 		} else {
 			List<Course> courses = courseRepoService.getCoursesByCategory(category);
 

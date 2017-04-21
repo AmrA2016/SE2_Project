@@ -96,24 +96,31 @@
 			<div class="col-md-10">
 				<div class="teachHome">
 					<h3 class="text-center">Home</h3>
-					<hr/>
-					
-					<div class="col-sm-6 col-md-4"  th:each="course: ${courses}">
-						<div class="thumbnail">
-							<img th:src="@{'/uploaded-images/' + ${course.image} }" alt="..." class="img-thumbnail" style="max-width:90%; height: 200px"/>
-							<div class="caption">
-								<h5 th:text="${course.name}"></h5>
-								<p th:text="${course.description}" style= "word-wrap : break-word"></p>
-								<p>
-									<a th:href="@{'/' + ${Student.username} + '/Course/' + ${course.cid} }" class="btn btn-primary" role="button">View Course</a>
-								</p>
+					<div class="container" style="max-width: 90%">
+						<div class="row">
+							<div class="col-sm-4 col-md-6 " th:each="course: ${courses}" style="height:400px">
+								<div class="thumbnail">
+									<img th:src="@{'/uploaded-images/' + ${course.image} }"
+										alt="..." class="img-thumbnail"
+										style="max-width: 90%; height: 200px" />
+									<div class="caption">
+										<h5 th:text="${course.name}"></h5>
+										<p th:text="${course.description}"
+											style="word-wrap: break-word"></p>
+										<p>
+											<a
+												th:href="@{'/' + ${Student.username} + '/Course/' + ${course.cid} }"
+												class="btn btn-primary" role="button">View Course</a>
+										</p>
 
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
+			
 		</div>
 	</div>
 
