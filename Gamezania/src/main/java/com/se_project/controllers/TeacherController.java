@@ -62,7 +62,8 @@ public class TeacherController {
 			model.addAttribute("MismatchPassword",true);
 			return "Authentication/teacher_sign_up_form";
 		}
-		
+		teacherRepoService.addTeacher(teacher);
+		UserController.current_user = teacher.getUsername();
 		return "redirect:/user/" + teacher.getUsername();
 
 	}

@@ -25,7 +25,7 @@ import com.se_project.models.User;
  */
 @Controller
 public class UserController {
-
+	public static String current_user = "";
 	@Autowired
 	StudentRepositoryService studentRepoService;
 
@@ -54,6 +54,9 @@ public class UserController {
 	 */
 	@RequestMapping("/user/{user_id}")
 	public String get_homepage(@PathVariable String user_id, Model model) {
+		if(!current_user.equals(user_id))
+			return "redirect:/";
+		
 		List<Course> courses = new ArrayList<Course>(courseRepoService.getAllCourses());
 		Teacher teacher = isTeacher(user_id);
 
@@ -77,6 +80,12 @@ public class UserController {
 	public String get_Signin_form(User user) {
 		return "Authentication/sign_in_form";
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(){
+		current_user = "";
+		return "redirect:/";
+	}
 
 	/**
 	 * this function takes the user-name and password from a user to open his
@@ -93,8 +102,10 @@ public class UserController {
 		Student student = isStudent(user.getUsername());
 		Teacher teacher = isTeacher(user.getUsername());
 		if (student != null && student.getPassword().equals(user.getPassword())) {
+			current_user = user.getUsername();
 			return "redirect:/user/" + student.getUsername();
 		} else if (teacher != null && teacher.getPassword().equals(user.getPassword())) {
+			current_user = user.getUsername();
 			return "redirect:/user/" + teacher.getUsername();
 		} else {
 			model.addAttribute("Wrongdata", true);

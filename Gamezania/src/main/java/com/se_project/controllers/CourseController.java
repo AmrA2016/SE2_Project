@@ -71,6 +71,8 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/{teacher_id}/create_course_form", method = RequestMethod.GET)
 	public String CourseForm(Model model, @PathVariable String teacher_id, Course course) {
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
 		model.addAttribute("teacher_id", teacher_id);
 		return "Teacher/createCourse";
 	}
@@ -89,6 +91,8 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/{teacher_id}/ShowMyCourses", method = RequestMethod.GET)
 	public String ShowMyCourses(@PathVariable String teacher_id, Model model) {
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
 		List<Course> Courses = courseRepoService.getCoursesByTeacher(teacher_id);
 		model.addAttribute("Courses", Courses);
 		model.addAttribute("teacher_id", teacher_id);
@@ -152,6 +156,9 @@ public class CourseController {
 	 */
 	@RequestMapping("/user/{user_id}/{category}")
 	public String showCoursesByCategory(@PathVariable String category, @PathVariable String user_id, Model model) {
+		if(!UserController.current_user.equals(user_id))
+			return "redirect:/";
+		
 		if (category.equals("All_Categories")) {
 			return "redirect:/user/"+user_id;
 		} else {
@@ -181,6 +188,9 @@ public class CourseController {
 	 */
 	@RequestMapping("/{user_id}/Course/{id}")
 	public String getCourse(@PathVariable String user_id, @PathVariable long id, Model model) {
+		if(!UserController.current_user.equals(user_id))
+			return "redirect:/";
+		
 		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
 		List<Game> games = new ArrayList<Game>();
 		List<MCQGame> gameMCQ = mcqGameRepoService.getGameByCourseId(id);
@@ -227,7 +237,9 @@ public class CourseController {
 	 */
 	@RequestMapping("/{teacher_id}/DeleteCourse/{cid}")
 	public String deleteCourse(@PathVariable String teacher_id, @PathVariable long cid, Model model) {
-
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
 		courseRepoService.deleteCourse(cid);
 		return "redirect:/" + teacher_id + "/ShowMyCourses";
 	}

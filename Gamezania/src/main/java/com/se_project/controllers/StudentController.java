@@ -60,7 +60,8 @@ public class StudentController {
 			model.addAttribute("MismatchPassword", true);
 			return "Authentication/student_sign_up_form";
 		}
-
+		studentRepoService.addStudent(student);
+		UserController.current_user = student.getUsername();
 		return "redirect:/user/" + student.getUsername();
 	}
 

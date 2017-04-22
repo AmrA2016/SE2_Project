@@ -71,7 +71,10 @@ public class GameController {
 	 */
 	@RequestMapping(value = "/{teacher_id}/Course/{cid}/createMCQGame", method = RequestMethod.GET)
 	public String CreateMCQGameForm(Model model, @ModelAttribute("mcqGame") MCQGame mcqGame,
-			@PathVariable String teacher_id, @PathVariable long cid) {
+			@PathVariable String teacher_id, @PathVariable long cid) 
+	{
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
 		model.addAttribute("teacher_id", teacher_id);
 		model.addAttribute("cid", cid);
 
@@ -89,7 +92,10 @@ public class GameController {
 	 */
 	@RequestMapping(value = "/{teacher_id}/Course/{cid}/createTfGame", method = RequestMethod.GET)
 	public String CreateTFGameForm(Model model, @ModelAttribute("tfGame") TFGame tfGame,
-			@PathVariable String teacher_id, @PathVariable long cid) {
+			@PathVariable String teacher_id, @PathVariable long cid) 
+	{	
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
 		model.addAttribute("teacher_id", teacher_id);
 		model.addAttribute("cid", cid);
 		return "Teacher/createTfGame";
@@ -213,7 +219,10 @@ public class GameController {
 	@RequestMapping(value = "/{user_id}/Course/{cid}/Game/{gameName}", method = RequestMethod.GET)
 	public String getGame(@ModelAttribute("answers") Answers user_answers, Model model, @PathVariable String user_id,
 			@PathVariable long cid, @PathVariable String gameName) {
-
+		
+		if(!UserController.current_user.equals(user_id))
+			return "redirect:/";
+		
 		MCQGame mcqgame = isMCQ(cid, gameName);
 		TFGame tfgame = isTF(cid, gameName);
 
@@ -320,7 +329,9 @@ public class GameController {
 	 */
 	@RequestMapping("/{teacher_id}/Course/{cid}/DeleteGame/{gameName}")
 	public String deleteGame(@PathVariable String teacher_id, @PathVariable long cid, @PathVariable String gameName) {
-			
+		if(!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
 		MCQGame mcqgame = isMCQ(cid, gameName);
 		if (mcqgame != null)
 			mcqGameRepoService.deleteGame(mcqgame);
