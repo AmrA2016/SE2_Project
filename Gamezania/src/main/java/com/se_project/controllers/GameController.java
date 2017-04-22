@@ -340,7 +340,7 @@ public class GameController {
 			tfGameRepoService.deleteGame(tfgame);
 		}
 
-		return "redirect:/" + teacher_id + "/ShowMyCourses";
+		return "redirect:/" + teacher_id + "/Course/" + cid ;
 	}
 
 	/**
