@@ -245,13 +245,11 @@ public class CourseController {
 	}
 
 	/**
-	 * this function validates the course name in the form input while creating
-	 * a course if is set with a value or not
+	 * this function checks the course name if it's already exists or not
 	 * 
 	 * @param course_name
 	 *            holds the course name
-	 * @return boolean true if the course name has value and false if it is
-	 *         empty
+	 * @return boolean true if the course name is already in the system
 	 */
 	public boolean Validate(String course_name) {
 

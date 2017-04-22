@@ -25,9 +25,9 @@
 		<item value="false" key="FinalModifier"/>
 	</section>
 	<section name="javadoc">
-		<item value="protected" key="access"/>
+		<item value="public" key="access"/>
 		<item value="false" key="noindex"/>
-		<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Web\javadoc.xml" key="antpath"/>
+		<item value="C:\Users\Amr\Documents\SE2_Repo\Gamezania\javadoc.xml" key="antpath"/>
 		<item value="false" key="nodeprecatedlist"/>
 		<item value="true" key="use"/>
 		<item value="true" key="author"/>
@@ -41,14 +41,9 @@
 		<item value="true" key="splitindex"/>
 		<item value="true" key="fromStandard"/>
 		<item value="false" key="notree"/>
-		<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Web\doc" key="destdir"/>
+		<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Classes Documentation" key="destdir"/>
 		<item value="false" key="openinbrowser"/>
 		<section name="projects">
-			<section name="Project_Web">
-				<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Web\javadoc.xml" key="antpath"/>
-				<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Web\doc" key="destdir"/>
-				<item value="" key="href"/>
-			</section>
 			<section name="Servers">
 				<item value="C:\Users\Amr\Documents\SE2_Repo\Servers\javadoc.xml" key="antpath"/>
 				<item value="C:\Users\Amr\Documents\SE2_Repo\Servers\doc" key="destdir"/>
@@ -57,6 +52,11 @@
 			<section name="RemoteSystemsTempFiles">
 				<item value="C:\Users\Amr\Documents\SE2_Repo\RemoteSystemsTempFiles\javadoc.xml" key="antpath"/>
 				<item value="C:\Users\Amr\Documents\SE2_Repo\RemoteSystemsTempFiles\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Gamezania">
+				<item value="C:\Users\Amr\Documents\SE2_Repo\Gamezania\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Amr\Documents\SE2_Repo\Project_Classes Documentation" key="destdir"/>
 				<item value="" key="href"/>
 			</section>
 		</section>

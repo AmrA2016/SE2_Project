@@ -344,8 +344,7 @@ public class GameController {
 	}
 
 	/**
-	 * this function validate the game by checking if it is exists or the user
-	 * left its attributes empty
+	 * this function validate the game by checking if it is exists 
 	 * 
 	 * @param cid
 	 *            identifies a course through the system
