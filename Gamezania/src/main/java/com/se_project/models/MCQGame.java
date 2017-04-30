@@ -1,7 +1,6 @@
 
 package com.se_project.models;
 
-import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 /**
@@ -9,8 +8,9 @@ import javax.persistence.Transient;
  * 
  */
 
-@Entity(name = "mcqgames")
 public class MCQGame extends Game {
+	
+	MCQQuestion[] mcqquestions = new MCQQuestion[5];
 	
 	
 	/**
@@ -22,6 +22,7 @@ public class MCQGame extends Game {
 
 	public MCQGame() {
 		super();
+		setGame_type("MCQ");
 	}
 
 	/**
@@ -35,6 +36,7 @@ public class MCQGame extends Game {
 	public MCQGame(String name, String description, String image, int numberOFQuestions, String[] questions,
 			String[] correctAnswers) {
 		super(name, description, image, numberOFQuestions, questions, correctAnswers);
+		setGame_type("MCQ");
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.se_project.models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
  * <p>
  * This entity doesn't stored in the database but its children are stored
  */
-@MappedSuperclass
+@Entity(name="games")
 public class Game implements Comparable<Game>{
 	
 	
@@ -37,6 +38,8 @@ public class Game implements Comparable<Game>{
 	@NotEmpty
 	@Size(max = 1000)
 	protected String description;
+	
+	private String game_type;
 	
 	/**
 	 * Image file name
@@ -147,6 +150,20 @@ public class Game implements Comparable<Game>{
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the game_type
+	 */
+	public String getGame_type() {
+		return game_type;
+	}
+
+	/**
+	 * @param game_type the game_type to set
+	 */
+	public void setGame_type(String game_type) {
+		this.game_type = game_type;
 	}
 
 	/**

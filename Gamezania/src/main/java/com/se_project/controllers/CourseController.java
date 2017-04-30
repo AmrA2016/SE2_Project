@@ -20,10 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.GameRepositoryService;
 import com.se_project.controllers.services.ImageService;
-import com.se_project.controllers.services.MCQGameRepositoryService;
 import com.se_project.controllers.services.StudentRepositoryService;
-import com.se_project.controllers.services.TFGameRepositoryService;
 import com.se_project.controllers.services.TeacherRepositoryService;
 import com.se_project.models.Course;
 import com.se_project.models.Game;
@@ -49,10 +48,8 @@ public class CourseController {
 	private CourseRepositoryService courseRepoService;
 
 	@Autowired
-	private TFGameRepositoryService tfGameRepoService;
+	private GameRepositoryService gameRepoService;
 
-	@Autowired
-	private MCQGameRepositoryService mcqGameRepoService;
 
 	@Autowired
 	private ImageService imageService;
@@ -192,15 +189,8 @@ public class CourseController {
 			return "redirect:/";
 		
 		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
-		List<Game> games = new ArrayList<Game>();
-		List<MCQGame> gameMCQ = mcqGameRepoService.getGameByCourseId(id);
-		List<TFGame> gameTF = tfGameRepoService.getGameByCourseId(id);
-		for (int i = 0; i < gameMCQ.size(); i++) {
-			games.add(gameMCQ.get(i));
-		}
-		for (int i = 0; i < gameTF.size(); i++) {
-			games.add(gameTF.get(i));
-		}
+		List<Game> games = gameRepoService.getGameByCourseId(id);
+
 		Collections.sort(games);
 		model.addAttribute("Games", games);
 		boolean myCourse = false;

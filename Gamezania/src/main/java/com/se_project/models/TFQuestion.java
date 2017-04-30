@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 public class TFQuestion extends Question {
 	
 	@ManyToOne
-	private TFGame tfgame;
+	Game tfgame;
 	
 	public TFQuestion() {
 	}
@@ -31,17 +31,17 @@ public class TFQuestion extends Question {
 	}
 
 	/**
-	 * @return the tfGame
+	 * @return the tfgame
 	 */
-	public TFGame getTfGame() {
+	public Game getTfgame() {
 		return tfgame;
 	}
 
 	/**
-	 * @param tfGame the tfGame to set
+	 * @param tfgame the tfgame to set
 	 */
-	public void setTfGame(TFGame tfGame) {
-		this.tfgame = tfGame;
+	public void setTfgame(Game tfgame) {
+		this.tfgame = tfgame;
 	}
 
 }

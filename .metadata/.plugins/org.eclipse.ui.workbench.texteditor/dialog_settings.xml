@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="game_name" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value="gameRepoService" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="mcqGameRepoService"/>
+			<item value="tfGameRepoService"/>
+			<item value="MCQ"/>
+			<item value="MCQGameRepositoryService"/>
+			<item value="MCQGame"/>
+			<item value="TF"/>
 			<item value="game_name"/>
 			<item value="gid"/>
-			<item value="image"/>
-			<item value="gameName"/>
-			<item value="isTF"/>
-			<item value="T/F"/>
-			<item value="Teacher"/>
-			<item value="disc"/>
 		</list>
 		<list key="replacehistory">
+			<item value="gameRepoService"/>
+			<item value=""/>
+			<item value="GameRepositoryService"/>
+			<item value="Game"/>
+			<item value=" "/>
 			<item value="MCQ"/>
 			<item value="Student"/>
 			<item value="user_id"/>
-			<item value="tf"/>
-			<item value="TF"/>
-			<item value="long"/>
-			<item value="mcq"/>
-			<item value="String"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -20,13 +20,8 @@ public class MCQQuestion extends Question {
 	private String choice3;
 	private String choice4;
 	
-	
-	/**
-	 * MCQ game object that contains this question
-	 */
 	@ManyToOne
-	private MCQGame mcqgame;
-	
+	Game mcqgame;
 	
 
 	public MCQQuestion() {
@@ -46,6 +41,20 @@ public class MCQQuestion extends Question {
 		this.choice2 = choice2;
 		this.choice3 = choice3;
 		this.choice4 = choice4;
+	}
+
+	/**
+	 * @return the mcqgame
+	 */
+	public Game getMcqgame() {
+		return mcqgame;
+	}
+
+	/**
+	 * @param mcqgame the mcqgame to set
+	 */
+	public void setMcqgame(Game mcqgame) {
+		this.mcqgame = mcqgame;
 	}
 
 	/**
@@ -104,18 +113,5 @@ public class MCQQuestion extends Question {
 		this.choice4 = choice4;
 	}
 	
-	/**
-	 * @return the mcqGame
-	 */
-	public MCQGame getMcqGame() {
-		return mcqgame;
-	}
-
-	/**
-	 * @param mcqGame the mcqGame to set
-	 */
-	public void setMcqGame(MCQGame mcqGame) {
-		this.mcqgame = mcqGame;
-	}
 
 }

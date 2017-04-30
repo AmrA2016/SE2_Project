@@ -91,7 +91,7 @@
 					<h4 style="color:#000" class="text-center" th:text="${numberOfQuestions}"></h4>
 					<h4 style="color:#000" class="text-center">Correctly</h4>
 					<a class="btn btn-success" style="margin-left:20px" id="BackToCourse" th:href="@{'/' + ${user_id} + '/Course/' + ${cid} }">Back To The Course</a>
-					<a th:unless="${winner}" class="btn btn-success pull-right" id="TryAgain" style="margin-right:20px"  th:href="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${gameName} }">Try Again!</a>
+					<a th:unless="${winner}" class="btn btn-success pull-right" id="TryAgain" style="margin-right:20px"  th:href="@{'/' + ${user_id} + '/Course/' + ${cid} + '/Game/' + ${gameID} }">Try Again!</a>
 				</div>
 			</div>
 

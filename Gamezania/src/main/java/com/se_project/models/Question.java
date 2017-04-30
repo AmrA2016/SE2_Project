@@ -6,6 +6,7 @@ package com.se_project.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -24,6 +25,7 @@ public class Question {
 	
 	protected String question;
 	protected String correct_answer;
+	
 	
 	public Question(){
 		
@@ -66,5 +68,7 @@ public class Question {
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correct_answer = correctAnswer;
 	}
+
+	
 	
 }
