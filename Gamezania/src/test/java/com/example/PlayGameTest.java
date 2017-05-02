@@ -93,7 +93,7 @@ public class PlayGameTest {
 	@Test
 	public void TestPlayTFGame(){
 		createTFGame();
-		webDriver.findElement(By.linkText("Play Game")).click();
+		webDriver.findElement(By.className("play-game")).click();
 		webDriver.findElement(By.id("answer1T")).click();
 		webDriver.findElement(By.id("answer2F")).click();
 		webDriver.findElement(By.id("answer3T")).click();
@@ -107,7 +107,7 @@ public class PlayGameTest {
 	@Test
 	public void TestPlayMCQGame(){
 		createMCQGame();
-		webDriver.findElement(By.linkText("Play Game")).click();
+		webDriver.findElement(By.className("play-game")).click();
 		webDriver.findElement(By.id("answer1Choice2")).click();
 		webDriver.findElement(By.id("answer2Choice3")).click();
 		

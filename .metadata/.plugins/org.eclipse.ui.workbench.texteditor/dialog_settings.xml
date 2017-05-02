@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="copy"/>
 			<item value="mcqGameRepoService"/>
 			<item value="tfGameRepoService"/>
 			<item value="MCQ"/>
@@ -15,7 +16,6 @@
 			<item value="MCQGame"/>
 			<item value="TF"/>
 			<item value="game_name"/>
-			<item value="gid"/>
 		</list>
 		<list key="replacehistory">
 			<item value="gameRepoService"/>

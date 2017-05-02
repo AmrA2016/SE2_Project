@@ -3,6 +3,8 @@
  */
 package com.se_project.models;
 
+import java.util.ArrayList;
+
 import javax.persistence.Transient;
 
 /**
@@ -11,7 +13,7 @@ import javax.persistence.Transient;
  */
 public class TFGame extends Game {
 	
-	TFQuestion[] tfquestions = new TFQuestion[5];
+	TFQuestion[] tfquestions;
 	
 	public TFGame() {
 		super();
@@ -31,6 +33,25 @@ public class TFGame extends Game {
 		super(name, description, image, numberOFQuestions, questions, correctAnswers);
 		setGame_type("TF");
 	}
+
+	public TFGame(TFGame other){
+		super(other);
+	}
+	
+	/**
+	 * @return the tfquestions
+	 */
+	public TFQuestion[] getTfquestions() {
+		return tfquestions;
+	}
+
+	/**
+	 * @param tfquestions the tfquestions to set
+	 */
+	public void setTfquestions(TFQuestion[] tfquestions) {
+		this.tfquestions = tfquestions;
+	}
+
 	
 	
 

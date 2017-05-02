@@ -74,19 +74,6 @@ public class Game implements Comparable<Game>{
 	@ManyToOne
 	protected Course course;
 	
-	/**
-	 * @return the course
-	 */
-	public Course getCourse() {
-		return course;
-	}
-
-	/**
-	 * @param course the course to set
-	 */
-	public void setCourse(Course course) {
-		this.course = course;
-	}
 
 	public Game() {
 	
@@ -110,6 +97,15 @@ public class Game implements Comparable<Game>{
 		this.correctAnswers = correctAnswers;
 	}
 
+	public Game(Game other){
+		this.name = other.name;
+		this.gid = other.gid;
+		this.description = other.description;
+		this.image = other.image;
+		this.numberOfQuestions = other.numberOfQuestions;
+		this.game_type = other.game_type;
+	}
+	
 	/**
 	 * @return the game id
 	 */
@@ -220,6 +216,20 @@ public class Game implements Comparable<Game>{
 	 */
 	public void setCorrectAnswers(String[] correctAnswers) {
 		this.correctAnswers = correctAnswers;
+	}
+	
+	/**
+	 * @return the course
+	 */
+	public Course getCourse() {
+		return course;
+	}
+
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
 	@Override

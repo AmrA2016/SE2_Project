@@ -132,7 +132,7 @@ public class GameController {
 
 		mcqGame.setImage(imageService.storeImage(imagefile));
        
-		Game game = copyGame(mcqGame);
+		Game game = new Game(mcqGame);
 		gameRepoService.saveGame(game);
 		for (int i = 0; i < mcqGame.getNumberOfQuestions(); i++) {
 			MCQQuestion question = new MCQQuestion();
@@ -187,7 +187,7 @@ public class GameController {
 
 		tfGame.setImage(imageService.storeImage(imagefile));
 
-		Game game = copyGame(tfGame);
+		Game game = new Game(tfGame);
 		gameRepoService.saveGame(game);
 		for (int i = 0; i < tfGame.getNumberOfQuestions(); i++) {
 			TFQuestion question = new TFQuestion();
@@ -314,6 +314,62 @@ public class GameController {
 		return "GlobalItems/GameResult";
 	}
 
+	@RequestMapping(value = "/{teacher_id}/Course/{cid}/editTfGame/{gameId}", method=RequestMethod.GET)
+	public String editGame(@ModelAttribute TFGame tfGame, Model model, @PathVariable String teacher_id,@PathVariable long cid, @PathVariable long gameId){
+		model.addAttribute("teacher_id",teacher_id);
+		model.addAttribute("cid",cid);
+		Game temp = gameRepoService.getGame(gameId);
+		TFGame oldTFGame = new TFGame();
+		
+		oldTFGame.setName(temp.getName());
+		oldTFGame.setGid(temp.getGid());
+		oldTFGame.setDescription(temp.getDescription());
+		oldTFGame.setImage(temp.getImage());
+		oldTFGame.setCourse(temp.getCourse());
+		oldTFGame.setGame_type(temp.getGame_type());
+		
+		List<TFQuestion> tfQuestions = tfQuestionRepoService.getQuestionsOfGame(gameId);
+		TFQuestion[] tfquestions = new TFQuestion[tfQuestions.size()];
+		tfQuestions.toArray(tfquestions);
+		oldTFGame.setTfquestions(tfquestions);
+		oldTFGame.setNumberOfQuestions(tfQuestions.size());
+		model.addAttribute("oldTFGame",oldTFGame);
+		return "Teacher/editTfGame";
+	}
+	
+	@RequestMapping(value = "/{teacher_id}/Course/{cid}/editTfGame/{gameId}", method=RequestMethod.POST)
+	public String editGame(@ModelAttribute TFGame tfGame,Model model, BindingResult bindingResult, @PathVariable String teacher_id,
+			@PathVariable long cid, @PathVariable long gameId, @RequestParam("imagefile") MultipartFile imagefile){
+		
+		if (bindingResult.hasErrors() || tfGame.getName().contains("/")) {
+			return "Teacher/editTfGame";
+		} else if (!Validate(cid, tfGame.getName())) {
+			model.addAttribute("Wrongname", true);
+			return "Teacher/editTfGame";
+		} else if (imagefile.isEmpty()) {
+			model.addAttribute("image_empty", true);
+			return "Teacher/editTfGame";
+		}
+		
+		tfGame.setCourse(courseRepoService.getCourse(cid));
+
+		tfGame.setImage(imageService.storeImage(imagefile));
+
+		Game game = new Game(tfGame);
+		gameRepoService.saveGame(game);
+		
+		for (int i = 0; i < tfGame.getNumberOfQuestions(); i++) {
+			TFQuestion question = new TFQuestion();
+			question.setQuestion(tfGame.getQuestions()[i]);
+			question.setCorrectAnswer(tfGame.getCorrectAnswers()[i]);
+			question.setTfgame(game);
+			tfQuestionRepoService.saveQuestion(question);
+		}
+		
+		//TODO: Redirect to myGames page is the teacher is collaborator not owner
+		return "redirect:/" + teacher_id + "/Course/" + cid;
+	}
+	
 	/**
 	 * this function delete a specific game from a specific course
 	 * 
@@ -353,17 +409,5 @@ public class GameController {
 			return true;
 	}
 
-	
-	public Game copyGame(Game game){
-		Game gameCopy = new Game();
-		gameCopy.setName(game.getName());
-		gameCopy.setGid(game.getGid());
-		gameCopy.setDescription(game.getDescription());
-		gameCopy.setImage(game.getImage());
-		gameCopy.setCourse(game.getCourse());
-		gameCopy.setGame_type(game.getGame_type());
-		gameCopy.setNumberOfQuestions(game.getNumberOfQuestions());
-		return gameCopy;
-	}
 
 }

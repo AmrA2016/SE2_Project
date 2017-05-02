@@ -13,10 +13,25 @@ $(function(){
 			$("#numOfQuestions").val(QuestionNumber);
 		}
 		else{
-			alert("Sorry You can't add more than 5 Question")
+			alert("Sorry You can't add more than 5 questions")
 		}
 	});
-
+	
+	$(".delQ").click(function(){
+		if(QuestionNumber>0){
+			
+			$("#question"+QuestionNumber).attr("class","hidden");
+			$("#question"+QuestionNumber+"Title").removeAttr("required");
+			for(i = 1;i <= 4;i++)
+				$("#question"+QuestionNumber+"Choice"+i).attr("required","");
+			QuestionNumber--;
+			$("#numOfQuestions").val(QuestionNumber);
+		}
+		else{
+			alert("Sorry You can't delete any more questions")
+		}
+	});
+	
 	$(".TfnewQ").click(function(){
 		if(QuestionNumber<5){
 			QuestionNumber++;
@@ -26,9 +41,23 @@ $(function(){
 			$("#numOfQuestions").val(QuestionNumber);
 		}
 		else{
-			alert("Sorry You can't add more than 5 Question")
+			alert("Sorry You can't add more than 5 questions")
 		}
 	});
+	
+	$(".TfdelQ").click(function(){
+		if(QuestionNumber>0){
+			
+			$("#question"+QuestionNumber).attr("class","hidden");
+			$("#question"+QuestionNumber+"Title").removeAttr("required");
+			QuestionNumber--;
+			$("#numOfQuestions").val(QuestionNumber);
+		}
+		else{
+			alert("Sorry You can't delete any more questions")
+		}
+	});
+	
 });
 
 function print(limit){

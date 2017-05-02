@@ -1,6 +1,8 @@
 
 package com.se_project.models;
 
+import java.util.ArrayList;
+
 import javax.persistence.Transient;
 
 /**
@@ -10,7 +12,7 @@ import javax.persistence.Transient;
 
 public class MCQGame extends Game {
 	
-	MCQQuestion[] mcqquestions = new MCQQuestion[5];
+	MCQQuestion[] mcqquestions ;
 	
 	
 	/**
@@ -38,6 +40,10 @@ public class MCQGame extends Game {
 		super(name, description, image, numberOFQuestions, questions, correctAnswers);
 		setGame_type("MCQ");
 	}
+	
+	public MCQGame(MCQGame other){
+		super(other);
+	}
 
 	/**
 	 * @return the choices
@@ -52,6 +58,23 @@ public class MCQGame extends Game {
 	public void setChoices(String[][] choices) {
 		this.choices = choices;
 	}
+
+	/**
+	 * @return the mcqquestions
+	 */
+	public MCQQuestion[] getMcqquestions() {
+		return mcqquestions;
+	}
+
+	/**
+	 * @param mcqquestions the mcqquestions to set
+	 */
+	public void setMcqquestions(MCQQuestion[] mcqquestions) {
+		this.mcqquestions = mcqquestions;
+	}
+
+	
+	
 
 	
 	

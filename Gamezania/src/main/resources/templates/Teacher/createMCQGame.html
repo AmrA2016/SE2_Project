@@ -113,9 +113,10 @@
 								<div class="panel-heading">Questions</div>
 								<div class="panel-body">
 									<label th:if="${#fields.hasErrors('numberOfQuestions')}" th:errors="*{numberOfQuestions}" class="alert alert-danger"></label>
-									<span class="newQuestion hidden"></span> <a
-										class="pull-right btn btn-primary btn-sm newQ"> Add new
-										Question </a>
+									<span class="newQuestion hidden"></span> 
+									<a class="pull-right btn btn-primary btn-sm newQ">Add new Question</a>
+									<a class="pull-right btn btn-danger btn-sm delQ" style="margin-right:5px">Delete last Question</a>
+									
 									<div class="hidden" id="question1">
 										<h4>Question 1</h4>
 										<div class="Question">
