@@ -104,6 +104,8 @@ public class Game implements Comparable<Game>{
 		this.image = other.image;
 		this.numberOfQuestions = other.numberOfQuestions;
 		this.game_type = other.game_type;
+		this.course = other.course;
+		
 	}
 	
 	/**

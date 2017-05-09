@@ -34,7 +34,7 @@ public class TFGame extends Game {
 		setGame_type("TF");
 	}
 
-	public TFGame(TFGame other){
+	public TFGame(Game other){
 		super(other);
 	}
 	

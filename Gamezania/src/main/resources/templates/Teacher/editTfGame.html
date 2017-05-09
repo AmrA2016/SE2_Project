@@ -108,7 +108,7 @@
 				<div class="courseControle">
 					<h1 class="text-center">Create Your New True/False Game</h1>
 					<hr/>
-					<form th:action="@{'/' + ${teacher_id} + '/Course/' + ${cid} + '/editTfGame/' + ${oldTFGame.gid}}" th:object="${tfGame}" enctype="multipart/form-data" method="post">
+					<form th:action="@{'/' + ${teacher_id} + '/Course/' + ${cid} + '/editTfGame/' + ${gameId}}" th:object="${tfGame}" enctype="multipart/form-data" method="post">
 						<div class="col-md-8">
 							<div class="panel panel-default">
 								<div class="panel-heading">Questions</div>
@@ -117,14 +117,15 @@
 									<span class="newQuestion hidden"></span> 
 									<a class="pull-right btn btn-primary btn-sm TfnewQ">Add new Question</a>
 									<a class="pull-right btn btn-danger btn-sm TfdelQ" style="margin-right:5px">Delete last Question</a>
+									
 									<div class="hidden" id="question1">
 										<h4>Question 1</h4>
 										<div class="Question"><div class="panel panel-default">
 										<div class="panel-heading">
-											<input type="text" name="title" id="question1Title" th:value="${oldTFGame.tfquestions[0].question}" th:field="${tfGame.questions[0]}" placeholder="title" class="form-control"/>
+											<input type="text" name="questions[0]" id="question1Title" th:value="${oldGame.tfquestions[0].question}" placeholder="title" class="form-control"/>
 										</div>
 										<div class="panel-body"> <div class="col-md-3">
-										<select class="form-control" id="question1Answer" th:value="${oldTFGame.tfquestions[0].correct_answer}" th:field="${tfGame.correctAnswers[0]}">
+										<select class="form-control" id="question1Answer" name="correctAnswers[0]" th:value="${oldGame.tfquestions[0].correct_answer}" >
 										    <option value="true">True</option>
 										    <option value="false">False</option>
 										</select>
@@ -135,10 +136,10 @@
 										<h4>Question 2</h4>
 										<div class="Question"><div class="panel panel-default">
 										<div class="panel-heading">
-											<input type="text" name="title" id="question2Title" th:value="${oldTFGame.tfquestions[1].question}" th:field="${tfGame.questions[1]}" placeholder="title" class="form-control"/>
+											<input type="text" name="questions[1]" id="question2Title" th:value="${oldGame.tfquestions[1].question}" placeholder="title" class="form-control"/>
 										</div>
 										<div class="panel-body"> <div class="col-md-3">
-										<select class="form-control" id="question2Answer" th:value="${oldTFGame.tfquestions[1].correct_answer}" th:field="${tfGame.correctAnswers[1]}">
+										<select class="form-control" id="question2Answer" name="correctAnswers[1]" th:value="${oldGame.tfquestions[1].correct_answer}">
 										    <option value="true">True</option>
 										    <option value="false">False</option>
 										</select>
@@ -149,10 +150,10 @@
 										<h4>Question 3</h4>
 										<div class="Question"><div class="panel panel-default">
 										<div class="panel-heading">
-											<input type="text" name="title" id="question3Title" th:value="${oldTFGame.tfquestions[2].question}" th:field="${tfGame.questions[2]}" placeholder="title" class="form-control"/>
+											<input type="text" name="questions[2]" id="question3Title" th:value="${oldGame.tfquestions[2].question}" placeholder="title" class="form-control"/>
 										</div>
 										<div class="panel-body"> <div class="col-md-3">
-										<select class="form-control" id="question3Answer" th:value="${oldTFGame.tfquestions[2].correct_answer}" th:field="${tfGame.correctAnswers[2]}">
+										<select class="form-control" id="question3Answer" name="correctAnswers[2]" th:value="${oldGame.tfquestions[2].correct_answer}" >
 										    <option value="true">True</option>
 										    <option value="false">False</option>
 										</select>
@@ -164,10 +165,10 @@
 										<h4>Question 4</h4>
 										<div class="Question"><div class="panel panel-default">
 										<div class="panel-heading">
-											<input type="text" name="title" id="question4Title"  th:value="${oldTFGame.tfquestions[3].question}" th:field="${tfGame.questions[3]}" placeholder="title" class="form-control"/>
+											<input type="text" name="questions[3]" id="question4Title"  th:value="${oldGame.tfquestions[3].question}" placeholder="title" class="form-control"/>
 										</div>
 										<div class="panel-body"> <div class="col-md-3">
-										<select class="form-control" id="question4Answer" th:value="${oldTFGame.tfquestions[3].correct_answer}" th:field="${tfGame.correctAnswers[3]}">
+										<select class="form-control" id="question4Answer" name="correctAnswers[3]" th:value="${oldGame.tfquestions[3].correct_answer}" >
 										    <option value="true">True</option>
 										    <option value="false">False</option>
 										</select>
@@ -178,10 +179,10 @@
 										<h4>Question 5</h4>
 										<div class="Question"><div class="panel panel-default">
 										<div class="panel-heading">
-											<input type="text" name="title" id="question5Title" th:value="${oldTFGame.tfquestions[4].question}" th:field="${tfGame.questions[4]}" placeholder="title" class="form-control"/>
+											<input type="text" name="questions[4]" id="question5Title" th:value="${oldGame.tfquestions[4].question}" placeholder="title" class="form-control"/>
 										</div>
 										<div class="panel-body"> <div class="col-md-3">
-										<select class="form-control" id="question5Answer" th:value="${oldTFGame.tfquestions[4].correct_answer}" th:field="${tfGame.correctAnswers[4]}">
+										<select class="form-control" id="question5Answer" name="correctAnswers[4]" th:value="${oldGame.tfquestions[4].correct_answer}" >
 										    <option value="true">True</option>
 										    <option value="false">False</option>
 										</select>
@@ -196,32 +197,30 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">Game Details</div>
 								<div class="panel-body">
-									<img src="" th:src="@{'uploaded-images/' + ${oldTFGame.image}" height="100" width="100%" id="courseImage"
+									<img src="" th:src="@{'/uploaded-images/' + ${oldGame.image}}" height="100" width="100%" id="courseImage"
 										style="margin-bottom: 20px;"/>
 									<div class="form-group">
 										<label>Image</label> 
-										<input type="FILE" name="imagefile" id="image" class="" onchange="readURL(this,'courseImage')"/>
+										<input type="FILE" name="imagefile" id="image" class="" th:value="${oldGame.image}" onchange="readURL(this,'courseImage')"/>
 										<label th:if="${image_empty}" class="alert alert-danger">You must enter an image</label>
 										
 									</div>
 
 									<div class="form-group">
 										<label>Name</label> 
-										<input type="text" name="name" id="name" class="form-control" th:value="${oldTFGame.name}"
-											 th:field="*{name}" onkeyup="writeData(this.name,'CourseName')"/>
+										<input type="text" name="name" id="name" class="form-control" th:value="${oldGame.name}"/>
 										<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
 										<label th:if="${Wrongname}" class="alert alert-danger">This name already exists</label>
 									</div>
 
 									<div class="form-group">
 										<label>Description</label>
-										<textarea class="form-control" name="disc" id="disc" th:value="${oldTFGame.description}"
-											th:field="*{description}" onkeyup="writeData(this.name,'courseDisc')"></textarea>
+										<textarea class="form-control" name="description" id="disc" th:text="${oldGame.description}" ></textarea>
 									</div>
 									
 									<div class="form-group hidden">
-										<input type="number" name="NumberOfQuestions" id="numOfQuestions"  th:value="${oldTFGame.numberOfQuestions}"
-										 value="1" th:field="*{numberOfQuestions}" class="form-control"/>
+										<input type="number" name="numberOfQuestions" id="numOfQuestions"  th:value="${oldGame.numberOfQuestions}"
+										 value="1"  class="form-control"/>
 									</div>
 									
 									<div class="form-group pull-center">
@@ -250,13 +249,13 @@
 			<script th:src="@{/js/plugins.js}"></script>
 	<!-- End Global Scriptes -->
 	
-	<script>
-		$(window).load(function(){
-			for(var i = 0;i < 5;i++)
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			for(i = 0;i &lt; 5;i++){
 				$("#question"+i).attr("class","");
+			}
 		});
 	</script>
-	
 	
 </body>
 </html>

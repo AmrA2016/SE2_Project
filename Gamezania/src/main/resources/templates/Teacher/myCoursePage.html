@@ -126,10 +126,10 @@
 													<p id="game_desc" th:text="${game.description}" style= "word-wrap : break-word"></p>
 													
 													<p>
-														<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${course.cid} + '/DeleteGame/' + ${game.gid}}" class="btn btn-danger btn-sm del-game" role="button">Delete Game</a>
-														<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${course.cid} + '/editTfGame/' + ${game.gid}}" class="btn btn-primary btn-sm edit-game" role="button">Edit Game</a>
-														<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${course.cid} + '/Game/' + ${game.gid}}" class="btn btn-primary btn-sm play-game" role="button">Play Game</a>
+														<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${course.cid} + '/ViewGame/' + ${game.gid}}" class="btn btn-primary btn-sm view-game" role="button">View Game</a>
+														<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${course.cid} + '/Game/' + ${game.gid}}" class="btn btn-primary btn-sm pull-right play-game" role="button">Play Game</a>
 													</p>
+													<div style="clear:both"></div>
 
 												</div>
 											</div>

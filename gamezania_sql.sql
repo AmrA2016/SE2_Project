@@ -18,6 +18,61 @@ USE `arenadb`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comment` (
+  `idcomment` int(11) NOT NULL,
+  `comment_text` varchar(1000) DEFAULT NULL,
+  `game_gid` int(11) DEFAULT NULL,
+  `student_username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idcomment`),
+  KEY `game_id_idx` (`game_gid`),
+  CONSTRAINT `game_id` FOREIGN KEY (`game_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_subscriber`
+--
+
+DROP TABLE IF EXISTS `course_subscriber`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course_subscriber` (
+  `idcourse_subscriber` int(11) NOT NULL,
+  `course_cid` int(11) DEFAULT NULL,
+  `student_username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idcourse_subscriber`),
+  KEY `course_id_idx` (`course_cid`),
+  KEY `student_id_idx` (`student_username`),
+  CONSTRAINT `course_id` FOREIGN KEY (`course_cid`) REFERENCES `courses` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `student_username` FOREIGN KEY (`student_username`) REFERENCES `students` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_subscriber`
+--
+
+LOCK TABLES `course_subscriber` WRITE;
+/*!40000 ALTER TABLE `course_subscriber` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_subscriber` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `courses`
 --
 
@@ -36,7 +91,7 @@ CREATE TABLE `courses` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `teacher_id_idx` (`teacher_username`),
   CONSTRAINT `teacher_id` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +102,35 @@ LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
 INSERT INTO `courses` VALUES (1,'Java','java course','Programming',10,'prog.jpg','teacher'),(2,'Matrix operation','Basics of Matrix Operations','Math',12,'disappointed.jpg','teacher'),(3,'Medhat','Medhat haynt7er khalas','Programming',19,'prog.jpg','teacher2');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `game_collaborator`
+--
+
+DROP TABLE IF EXISTS `game_collaborator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `game_collaborator` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `teacher_username` varchar(25) DEFAULT NULL,
+  `game_gid` int(11) DEFAULT NULL,
+  `owner` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `teacher_idx2` (`teacher_username`),
+  KEY `game_gid_idx2` (`game_gid`),
+  CONSTRAINT `game_id2` FOREIGN KEY (`game_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `teacher_id2` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `game_collaborator`
+--
+
+LOCK TABLES `game_collaborator` WRITE;
+/*!40000 ALTER TABLE `game_collaborator` DISABLE KEYS */;
+/*!40000 ALTER TABLE `game_collaborator` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -63,10 +147,11 @@ CREATE TABLE `games` (
   `image` varchar(1000) DEFAULT NULL,
   `course_cid` int(11) DEFAULT NULL,
   `game_type` varchar(10) NOT NULL,
+  `deleted` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`gid`),
   KEY `course_cid_idx` (`course_cid`),
   CONSTRAINT `course_cid` FOREIGN KEY (`course_cid`) REFERENCES `courses` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,6 +160,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
+INSERT INTO `games` VALUES (8,'MyFirstGame','Ay klam','53151079724f1_1493682405145.jpg',1,'TF',NULL),(13,'MyGame','Testing','edward-kenway-assassin-s-creed-iv-black-flag-20896-1366x768_1494268747554.jpg',1,'TF',NULL),(14,'testGame','Description','10390574_234516736738930_2077143325112731927_n1_1494325672634.jpg',1,'MCQ',NULL);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +183,7 @@ CREATE TABLE `mcqquestions` (
   PRIMARY KEY (`id`),
   KEY `mcqgame_id_idx` (`mcqgame_gid`),
   CONSTRAINT `mcqgame_id` FOREIGN KEY (`mcqgame_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +192,34 @@ CREATE TABLE `mcqquestions` (
 
 LOCK TABLES `mcqquestions` WRITE;
 /*!40000 ALTER TABLE `mcqquestions` DISABLE KEYS */;
+INSERT INTO `mcqquestions` VALUES (3,'Question11','c','c','a ','e','z',14);
 /*!40000 ALTER TABLE `mcqquestions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_notification`
+--
+
+DROP TABLE IF EXISTS `student_notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` varchar(1000) DEFAULT NULL,
+  `student_username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `student_usernname_idx` (`student_username`),
+  CONSTRAINT `student_usernname` FOREIGN KEY (`student_username`) REFERENCES `students` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_notification`
+--
+
+LOCK TABLES `student_notification` WRITE;
+/*!40000 ALTER TABLE `student_notification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student_notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -138,6 +251,32 @@ LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
 INSERT INTO `students` VALUES ('student','123456','manar@hotmail.com','Manar','A','1996-11-07','Female',NULL,0),('student2','123456','nourhan@hotmail.com','Nourhan','Essam','1996-07-10','Female',NULL,0);
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `teacher_notification`
+--
+
+DROP TABLE IF EXISTS `teacher_notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `teacher_notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` varchar(1000) DEFAULT NULL,
+  `teacher_username` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `teacher_username_idx` (`teacher_username`),
+  CONSTRAINT `teacher_username` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teacher_notification`
+--
+
+LOCK TABLES `teacher_notification` WRITE;
+/*!40000 ALTER TABLE `teacher_notification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teacher_notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,7 +325,7 @@ CREATE TABLE `tfquestions` (
   PRIMARY KEY (`id`),
   KEY `tfgame_id_idx` (`tfgame_gid`),
   CONSTRAINT `tfgame_id` FOREIGN KEY (`tfgame_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,6 +334,7 @@ CREATE TABLE `tfquestions` (
 
 LOCK TABLES `tfquestions` WRITE;
 /*!40000 ALTER TABLE `tfquestions` DISABLE KEYS */;
+INSERT INTO `tfquestions` VALUES (8,'Question1','true',8),(9,'Question2','false',8),(21,'Test1','true',13),(22,'Test2','false',13);
 /*!40000 ALTER TABLE `tfquestions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -207,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-30 19:07:48
+-- Dump completed on 2017-05-09 14:26:31

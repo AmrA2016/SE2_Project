@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.GameFactoryService;
 import com.se_project.controllers.services.ImageService;
 import com.se_project.controllers.services.GameRepositoryService;
 import com.se_project.controllers.services.MCQQuestionRepositoryService;
@@ -41,6 +42,9 @@ public class GameController {
 	
 	String mcq = "MCQ";
 	String tf = "TF";
+	
+	@Autowired
+	GameFactoryService gameFactoryService;
 	
 	@Autowired
 	GameRepositoryService gameRepoService;
@@ -127,7 +131,7 @@ public class GameController {
 			model.addAttribute("image_empty", true);
 			return "Teacher/createMCQGame";
 		}
-
+		
 		mcqGame.setCourse(courseRepoService.getCourse(cid));
 
 		mcqGame.setImage(imageService.storeImage(imagefile));
@@ -224,7 +228,6 @@ public class GameController {
 			return "redirect:/";
 		
 		Game game = gameRepoService.getGame(gameId);
-		
 		if (game.getGame_type().equals(mcq)) {
 			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(game.getGid());
 			game.setNumberOfQuestions(questions.size());
@@ -261,6 +264,62 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * this function gets the game
+	 * 
+	 * @param user_answers
+	 *            object of the user answers to the questions of a specific game
+	 * @param user_id
+	 *            identifies the user through the system
+	 * @param cid
+	 *            identifies the course through the system
+	 * @param gid
+	 *            identifies the game through the system
+	 * @return HTML page of "true or false" game or HTML page of " Multiple
+	 *         choice questions" game (depends on the type of the game)
+	 */
+	@RequestMapping(value = "/{user_id}/Course/{cid}/ViewGame/{gameId}", method = RequestMethod.GET)
+	public String viewGame(Model model, @PathVariable String user_id,
+			@PathVariable long cid, @PathVariable long gameId) {
+
+		if (!UserController.current_user.equals(user_id))
+			return "redirect:/";
+		
+		Game game = gameRepoService.getGame(gameId);
+		if (game.getGame_type().equals(mcq)) {
+			List<MCQQuestion> questions = mcqQuestionRepoService.getQuestionsOfGame(game.getGid());
+			game.setNumberOfQuestions(questions.size());
+			model.addAttribute("user_id", user_id);
+			model.addAttribute("cid", cid);
+			model.addAttribute("game", game);
+			if (teacherRepoService.getTeacher(user_id) != null)
+				model.addAttribute("t_user", true);
+			for (int i = 0; i < questions.size(); i++) {
+				model.addAttribute("question" + (i + 1) + "Title", questions.get(i).getQuestion());
+				model.addAttribute("question" + (i + 1) + "View", true);
+				model.addAttribute("question" + (i + 1) + "Answer", questions.get(i).getCorrect_answer());
+			}
+			return "GlobalItems/MCQGameView";
+
+		} else if (game.getGame_type().equals(tf)) {
+			List<TFQuestion> questions = tfQuestionRepoService.getQuestionsOfGame(game.getGid());
+			game.setNumberOfQuestions(questions.size());
+			model.addAttribute("user_id", user_id);
+			model.addAttribute("cid", cid);
+			model.addAttribute("game", game);
+			if (teacherRepoService.getTeacher(user_id) != null)
+				model.addAttribute("t_user", true);
+			for (int i = 0; i < questions.size(); i++) {
+				model.addAttribute("question" + (i + 1) + "Title", questions.get(i).getQuestion());
+				model.addAttribute("question" + (i + 1) + "View", true);
+				model.addAttribute("question" + (i + 1) + "Answer", questions.get(i).getCorrect_answer());
+			}
+			return "GlobalItems/TFGameView";
+		} else {
+			return "";
+		}
+	}
+	
 	/**
 	 * this function takes the user answers for a game questions and checks if
 	 * it is right or wrong
@@ -314,57 +373,60 @@ public class GameController {
 		return "GlobalItems/GameResult";
 	}
 
-	@RequestMapping(value = "/{teacher_id}/Course/{cid}/editTfGame/{gameId}", method=RequestMethod.GET)
-	public String editGame(@ModelAttribute TFGame tfGame, Model model, @PathVariable String teacher_id,@PathVariable long cid, @PathVariable long gameId){
+	@RequestMapping(value = "/{teacher_id}/Course/{cid}/editGame/{type}/{gameId}", method=RequestMethod.GET)
+	public String editGame(Model model, @PathVariable String teacher_id,
+			@PathVariable long cid,@PathVariable String type, @PathVariable long gameId){
+		
 		model.addAttribute("teacher_id",teacher_id);
 		model.addAttribute("cid",cid);
-		Game temp = gameRepoService.getGame(gameId);
-		TFGame oldTFGame = new TFGame();
 		
-		oldTFGame.setName(temp.getName());
-		oldTFGame.setGid(temp.getGid());
-		oldTFGame.setDescription(temp.getDescription());
-		oldTFGame.setImage(temp.getImage());
-		oldTFGame.setCourse(temp.getCourse());
-		oldTFGame.setGame_type(temp.getGame_type());
+		Game oldGame = gameFactoryService.getCopyOfGame(gameId, type);
+
+		model.addAttribute("oldGame",oldGame);
 		
-		List<TFQuestion> tfQuestions = tfQuestionRepoService.getQuestionsOfGame(gameId);
-		TFQuestion[] tfquestions = new TFQuestion[tfQuestions.size()];
-		tfQuestions.toArray(tfquestions);
-		oldTFGame.setTfquestions(tfquestions);
-		oldTFGame.setNumberOfQuestions(tfQuestions.size());
-		model.addAttribute("oldTFGame",oldTFGame);
-		return "Teacher/editTfGame";
-	}
+		if(type.equals(mcq)){
+			MCQGame mcqGame = new MCQGame();
+			model.addAttribute("mcqGame",mcqGame);
+			return "Teacher/editMCQGame";
+		}
+		else {
+			TFGame tfGame = new TFGame();
+			model.addAttribute("tfGame",tfGame);
+			return "Teacher/editTfGame";
+		}
+	}	
 	
 	@RequestMapping(value = "/{teacher_id}/Course/{cid}/editTfGame/{gameId}", method=RequestMethod.POST)
-	public String editGame(@ModelAttribute TFGame tfGame,Model model, BindingResult bindingResult, @PathVariable String teacher_id,
+	public String editGame(@ModelAttribute("tfGame") TFGame tfGame,Model model, BindingResult bindingResult, @PathVariable String teacher_id,
 			@PathVariable long cid, @PathVariable long gameId, @RequestParam("imagefile") MultipartFile imagefile){
 		
+		System.out.println(tfGame.getName());
+		System.out.println(tfGame.getDescription());
 		if (bindingResult.hasErrors() || tfGame.getName().contains("/")) {
 			return "Teacher/editTfGame";
 		} else if (!Validate(cid, tfGame.getName())) {
 			model.addAttribute("Wrongname", true);
 			return "Teacher/editTfGame";
-		} else if (imagefile.isEmpty()) {
+		} /*else if (imagefile.isEmpty()) {
 			model.addAttribute("image_empty", true);
 			return "Teacher/editTfGame";
-		}
+		}*/
 		
-		tfGame.setCourse(courseRepoService.getCourse(cid));
-
-		tfGame.setImage(imageService.storeImage(imagefile));
-
-		Game game = new Game(tfGame);
-		gameRepoService.saveGame(game);
 		
-		for (int i = 0; i < tfGame.getNumberOfQuestions(); i++) {
-			TFQuestion question = new TFQuestion();
-			question.setQuestion(tfGame.getQuestions()[i]);
-			question.setCorrectAnswer(tfGame.getCorrectAnswers()[i]);
-			question.setTfgame(game);
-			tfQuestionRepoService.saveQuestion(question);
-		}
+//		tfGame.setCourse(courseRepoService.getCourse(cid));
+//
+//		tfGame.setImage(imageService.storeImage(imagefile));
+//
+//		Game game = new Game(tfGame);
+//		gameRepoService.saveGame(game);
+//		
+//		for (int i = 0; i < tfGame.getNumberOfQuestions(); i++) {
+//			TFQuestion question = new TFQuestion();
+//			question.setQuestion(tfGame.getQuestions()[i]);
+//			question.setCorrectAnswer(tfGame.getCorrectAnswers()[i]);
+//			question.setTfgame(game);
+//			tfQuestionRepoService.saveQuestion(question);
+//		}
 		
 		//TODO: Redirect to myGames page is the teacher is collaborator not owner
 		return "redirect:/" + teacher_id + "/Course/" + cid;

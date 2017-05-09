@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
 <fullyQualifiedTypeName name="org.hibernate.validator.constraints.NotEmpty"/>
 <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
 <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
@@ -10,10 +9,8 @@
 <fullyQualifiedTypeName name="javax.validation.constraints.NotNull"/>
 <fullyQualifiedTypeName name="com.se_project.repositories.TFGameRepository"/>
 <fullyQualifiedTypeName name="com.se_project.repositories.MCQQuestionRepository"/>
-<fullyQualifiedTypeName name="com.se_project.models.TFQuestion"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.TFQuestionRepositoryService"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.MCQQuestionRepositoryService"/>
-<fullyQualifiedTypeName name="com.se_project.models.MCQQuestion"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.CourseRepositoryService"/>
 <fullyQualifiedTypeName name="org.junit.runner.RunWith"/>
 <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringRunner"/>
@@ -24,7 +21,6 @@
 <fullyQualifiedTypeName name="org.springframework.boot.test.context.SpringBootTest"/>
 <fullyQualifiedTypeName name="com.example.ProjectWebApplicationTests"/>
 <fullyQualifiedTypeName name="com.se_project.ProjectWebApplication"/>
-<fullyQualifiedTypeName name="com.se_project.models.MCQGame"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.TFGameRepositoryService"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.MCQGameRepositoryService"/>
@@ -35,7 +31,6 @@
 <fullyQualifiedTypeName name="org.openqa.selenium.support.ui.Select"/>
 <fullyQualifiedTypeName name="java.nio.file.Paths"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="java.nio.file.Files"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
 <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
@@ -46,12 +41,10 @@
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.ImageService"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
-<fullyQualifiedTypeName name="com.se_project.models.Game"/>
 <fullyQualifiedTypeName name="com.se_project.models.TFGame"/>
 <fullyQualifiedTypeName name="org.apache.xalan.xsltc.compiler.sym"/>
 <fullyQualifiedTypeName name="org.aspectj.lang.annotation.After"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.By"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.UserController"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
@@ -60,4 +53,11 @@
 <fullyQualifiedTypeName name="com.se_project.controllers.services.GameRepositoryService"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.se_project.models.TFQuestion"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.se_project.models.Game"/>
+<fullyQualifiedTypeName name="com.se_project.models.MCQQuestion"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.se_project.controllers.services.GameFactoryService"/>
+<fullyQualifiedTypeName name="com.se_project.models.MCQGame"/>
 </qualifiedTypeNameHistroy>

@@ -41,7 +41,7 @@ public class MCQGame extends Game {
 		setGame_type("MCQ");
 	}
 	
-	public MCQGame(MCQGame other){
+	public MCQGame(Game other){
 		super(other);
 	}
 
