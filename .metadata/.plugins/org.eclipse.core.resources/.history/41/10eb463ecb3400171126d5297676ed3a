@@ -1,0 +1,5 @@
+package com.se_project.repositories;
+
+public class NotificationsRepo {
+
+}

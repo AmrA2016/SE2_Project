@@ -1,0 +1,45 @@
+package com.se_project.controllers.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
+
+import com.se_project.models.Course;
+import com.se_project.models.CourseSubscriber;
+import com.se_project.models.StudentNotification;
+import com.se_project.repositories.CourseSubscriberRepository;
+
+
+@Service
+public class CourseSubscriberRepositoryService {
+	@Autowired
+	private CourseSubscriberRepository courseSubRepo;
+	NotificationsService notificationService;
+
+	public void Subscribe(CourseSubscriber subscriber){
+			courseSubRepo.save(subscriber);
+	}
+
+
+	public List<CourseSubscriber> getSubscribers(long courseID) {
+		List<CourseSubscriber> subscribers =new ArrayList<CourseSubscriber>();
+		courseSubRepo.findAll().forEach(subscribers::add);
+		return subscribers;
+}
+	public void Notify(long cid, String courseName) {
+	
+		List<CourseSubscriber> subscribers = courseSubRepo.findByCourseCid(cid);
+
+		for (int i = 0; i < subscribers.size(); i++) {
+			StudentNotification notification = new StudentNotification();
+			notification.getStudent().setUsername(subscribers.get(i).getStudent().getUsername());
+			notification.setMsg("A new game has been added to course " + courseName);
+			notificationService.createStudentNotification(notification);
+
+		}
+
+	}
+	}

@@ -1,0 +1,5 @@
+package com.se_project.controllers;
+
+public class CourseSubscriberController {
+
+}

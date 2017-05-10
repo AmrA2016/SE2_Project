@@ -1,0 +1,11 @@
+package com.se_project.controllers.services;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CourseSubscriberRepository extends CrudRepository<CourseSubscriber,Long> {
+
+	void save(CourseSubscriber subscriber);
+	
+	//FindAll
+
+}
