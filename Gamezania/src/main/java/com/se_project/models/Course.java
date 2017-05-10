@@ -1,5 +1,8 @@
 package com.se_project.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,11 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * It represents the course entity in the system and it holds all the courses data
@@ -43,9 +44,36 @@ public class Course {
 	
     @ManyToOne
     private Teacher teacher;
+    
+    @Transient
+    private List<CourseSubscriber> subscribers=new ArrayList<CourseSubscriber>();
+
 
 	public Course() {
 
+	}
+
+	/**
+	 * @param cid
+	 * @param name
+	 * @param description
+	 * @param age
+	 * @param category
+	 * @param image
+	 * @param teacher
+	 * @param subscribers
+	 */
+	public Course(long cid, String name, String description, int age, String category, String image, Teacher teacher,
+			List<CourseSubscriber> subscribers) {
+		super();
+		this.cid = cid;
+		this.name = name;
+		this.description = description;
+		this.age = age;
+		this.category = category;
+		this.image = image;
+		this.teacher = teacher;
+		this.subscribers = subscribers;
 	}
 
 	/**
@@ -55,14 +83,7 @@ public class Course {
 	 * @param category
 	 * @param image
 	 */
-	public Course( String name, String description, int age, String category,String image) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.age = age;
-		this.category = category;
-		this.image = image;
-	}
+
 
 	/**
 	 * @return course id
@@ -163,5 +184,17 @@ public class Course {
 		this.teacher = teacher;
 	}
 
+	/**
+	 * @return the subscribers
+	 */
+	public List<CourseSubscriber> getSubscribers() {
+		return subscribers;
+	}
 
+	/**
+	 * @param subscribers the subscribers to set
+	 */
+	public void setSubscribers(List<CourseSubscriber> subscribers) {
+		this.subscribers = subscribers;
+	}
 }

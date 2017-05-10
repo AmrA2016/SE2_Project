@@ -1,0 +1,20 @@
+package com.se_project.controllers.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.se_project.models.StudentNotification;
+
+@Service
+public class NotificationsService {
+    
+	List<StudentNotification>notification =new ArrayList<StudentNotification>();
+	
+	List<StudentNotification> getNotification(){
+	
+		return notification;
+	}
+	
+}

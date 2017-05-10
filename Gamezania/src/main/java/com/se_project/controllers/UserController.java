@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.NotificationsService;
 import com.se_project.controllers.services.StudentRepositoryService;
 import com.se_project.controllers.services.TeacherRepositoryService;
 import com.se_project.models.Course;
 import com.se_project.models.Student;
+import com.se_project.models.StudentNotification;
 import com.se_project.models.Teacher;
 import com.se_project.models.User;
 
@@ -34,7 +36,9 @@ public class UserController {
 
 	@Autowired
 	CourseRepositoryService courseRepoService;
-
+	
+	@Autowired
+	NotificationsService notificationService;
 	/**
 	 * @return HTML page of the main home-page of the web-site
 	 */
@@ -59,14 +63,20 @@ public class UserController {
 		
 		List<Course> courses = new ArrayList<Course>(courseRepoService.getAllCourses());
 		Teacher teacher = isTeacher(user_id);
+		
 
 		if (teacher != null) {
 			model.addAttribute("Teacher", teacher);
 			model.addAttribute("courses", courses);
 			return "Teacher/T_Homepage";
 		} else {
+			
+			List<StudentNotification> notifications = notificationService.getStudentNotification(user_id);
+			int size = notifications.size();
 			model.addAttribute("Student", studentRepoService.getStudent(user_id));
 			model.addAttribute("courses", courses);
+			model.addAttribute("notifications",notifications);
+			model.addAttribute("size", size);
 			return "Student/S_Homepage";
 		}
 	}

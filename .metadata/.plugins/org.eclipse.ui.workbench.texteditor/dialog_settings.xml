@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="oldGame" key="selection"/>
+		<item value="Comment" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Comment"/>
 			<item value="oldTFGame"/>
 			<item value="mcq"/>
 			<item value="copy"/>
@@ -15,7 +16,6 @@
 			<item value="tfGameRepoService"/>
 			<item value="MCQ"/>
 			<item value="MCQGameRepositoryService"/>
-			<item value="MCQGame"/>
 		</list>
 		<list key="replacehistory">
 			<item value="oldGame"/>

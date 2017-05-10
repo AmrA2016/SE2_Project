@@ -1,11 +1,13 @@
 package com.se_project.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -13,51 +15,66 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
- * This represents the game entity 
- * and It holds the generic attributes 
+ * This represents the game entity and It holds the generic attributes
  * <p>
  * This entity doesn't stored in the database but its children are stored
  */
-@Entity(name="games")
-public class Game implements Comparable<Game>{
-	
-	
+@Entity(name = "games")
+public class Game implements Comparable<Game> {
+
 	/**
-	 * game_id 
+	 * game_id
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected long gid;
-	
+
 	@NotNull
 	@Size(min = 2, max = 50)
-	protected  String name;
+	protected String name;
 	@NotEmpty
 	@Size(max = 1000)
 	protected String description;
-	
+
 	private String game_type;
 	
+	private boolean deleted;
+
+	/**
+	 * @return the deleted
+	 */
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	/**
+	 * @param deleted the deleted to set
+	 */
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	@Transient
+	List<Comment> comments = new ArrayList<Comment>();
 	/**
 	 * Image file name
 	 */
 	protected String image;
-	
+
 	/**
-	 * This holds the number of questions in the game
-	 * It doesn't stored in the database used only for validation
+	 * This holds the number of questions in the game It doesn't stored in the
+	 * database used only for validation
 	 */
 	@Transient
-	@Min(value = 1, message="There should at least 1 question" )
+	@Min(value = 1, message = "There should at least 1 question")
 	@Max(5)
 	protected int numberOfQuestions;
-	
+
 	/**
-	 * This holds or receives the questions of the game that teacher enters
-	 * It's temporary and doesn't stored in database
+	 * This holds or receives the questions of the game that teacher enters It's
+	 * temporary and doesn't stored in database
 	 */
 	@Transient
 	protected String[] questions = new String[5];
@@ -67,37 +84,70 @@ public class Game implements Comparable<Game>{
 	 */
 	@Transient
 	protected String[] correctAnswers = new String[5];
-	
+
 	/**
 	 * Course object that link this game to a certain course
 	 */
 	@ManyToOne
 	protected Course course;
+
 	
 
-	public Game() {
-	
+
+
+	public Game(){
+		
 	}
-	
+
 	/**
 	 * @param name
 	 * @param description
+	 * @param game_type
+	 * @param comments
 	 * @param image
-	 * @param numberOFQuestions
+	 * @param numberOfQuestions
 	 * @param questions
 	 * @param correctAnswers
+	 * @param course
 	 */
-	public Game(String name, String description, String image, int numberOFQuestions, String[] questions,
-			String[] correctAnswers) {
+	public Game(String name, String description, List<Comment> comments, String image, Course course) {
+		super();
 		this.name = name;
 		this.description = description;
+		this.comments = comments;
 		this.image = image;
-		this.numberOfQuestions = numberOFQuestions;
+		this.course = course;
+	}
+	
+	/**
+	 * @param gid
+	 * @param name
+	 * @param description
+	 * @param game_type
+	 * @param comments
+	 * @param image
+	 * @param numberOfQuestions
+	 * @param questions
+	 * @param correctAnswers
+	 * @param course
+	 */
+	public Game(long gid, String name, String description, String game_type, List<Comment> comments, String image,
+			int numberOfQuestions, String[] questions, String[] correctAnswers, Course course, boolean deleted) {
+		super();
+		this.gid = gid;
+		this.name = name;
+		this.description = description;
+		this.game_type = game_type;
+		this.comments = comments;
+		this.image = image;
+		this.numberOfQuestions = numberOfQuestions;
 		this.questions = questions;
 		this.correctAnswers = correctAnswers;
+		this.course = course;
+		this.deleted = deleted;
 	}
 
-	public Game(Game other){
+	public Game(Game other) {
 		this.name = other.name;
 		this.gid = other.gid;
 		this.description = other.description;
@@ -105,9 +155,15 @@ public class Game implements Comparable<Game>{
 		this.numberOfQuestions = other.numberOfQuestions;
 		this.game_type = other.game_type;
 		this.course = other.course;
-		
+		this.comments = other.comments;
+		this.deleted = other.deleted;
+
 	}
-	
+	public void AddToComments(Comment comment)
+	{
+		comments.add(comment);
+	}
+
 	/**
 	 * @return the game id
 	 */
@@ -116,7 +172,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param id the game id to set
+	 * @param id
+	 *            the game id to set
 	 */
 	public void setGid(long id) {
 		this.gid = id;
@@ -130,7 +187,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -144,7 +202,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -158,7 +217,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param game_type the game_type to set
+	 * @param game_type
+	 *            the game_type to set
 	 */
 	public void setGame_type(String game_type) {
 		this.game_type = game_type;
@@ -172,7 +232,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param image the image to set
+	 * @param image
+	 *            the image to set
 	 */
 	public void setImage(String image) {
 		this.image = image;
@@ -186,7 +247,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param numberOFQuestions the numberOFQuestions to set
+	 * @param numberOFQuestions
+	 *            the numberOFQuestions to set
 	 */
 	public void setNumberOfQuestions(int numberOFQuestions) {
 		this.numberOfQuestions = numberOFQuestions;
@@ -200,7 +262,8 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param questions the questions to set
+	 * @param questions
+	 *            the questions to set
 	 */
 	public void setQuestions(String[] questions) {
 		this.questions = questions;
@@ -214,12 +277,13 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param correctAnswers the correctAnswers to set
+	 * @param correctAnswers
+	 *            the correctAnswers to set
 	 */
 	public void setCorrectAnswers(String[] correctAnswers) {
 		this.correctAnswers = correctAnswers;
 	}
-	
+
 	/**
 	 * @return the course
 	 */
@@ -228,16 +292,30 @@ public class Game implements Comparable<Game>{
 	}
 
 	/**
-	 * @param course the course to set
+	 * @param course
+	 *            the course to set
 	 */
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
+
 	@Override
 	public int compareTo(Game other) {
 		return this.name.compareTo(other.name);
 	}
-	
-	
+
+	/**
+	 * @return the comments
+	 */
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 }

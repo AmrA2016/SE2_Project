@@ -4,6 +4,7 @@
 package com.se_project.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Transient;
 
@@ -28,9 +29,8 @@ public class TFGame extends Game {
 	 * @param questions
 	 * @param correctAnswers
 	 */
-	public TFGame(String name, String description, String image, int numberOFQuestions, String[] questions,
-			String[] correctAnswers) {
-		super(name, description, image, numberOFQuestions, questions, correctAnswers);
+	public TFGame(String name, String description,List<Comment> comments, String image, Course course, boolean deleted) {
+		super(name, description,comments, image,course);
 		setGame_type("TF");
 	}
 

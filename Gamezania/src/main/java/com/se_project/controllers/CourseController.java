@@ -191,6 +191,11 @@ public class CourseController {
 		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
 		List<Game> games = gameRepoService.getGameByCourseId(id);
 
+		for(int i = 0 ; i < games.size() ; i++)
+		{
+			if(games.get(i).isDeleted() == true)
+				games.remove(i);
+		}
 		Collections.sort(games);
 		model.addAttribute("Games", games);
 		boolean myCourse = false;
