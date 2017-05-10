@@ -48,6 +48,10 @@ public class Course {
 
 	}
 
+	public Course(long cid){
+		this.cid = cid;
+	}
+	
 	/**
 	 * @param name
 	 * @param description

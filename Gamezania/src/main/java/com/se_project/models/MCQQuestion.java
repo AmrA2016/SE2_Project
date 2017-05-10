@@ -43,6 +43,13 @@ public class MCQQuestion extends Question {
 		this.choice4 = choice4;
 	}
 
+	public MCQQuestion(MCQQuestion other){
+		super(other);
+		this.choice1 = other.choice1;
+		this.choice2 = other.choice2;
+		this.choice3 = other.choice3;
+		this.choice4 = other.choice4;
+	}
 	/**
 	 * @return the mcqgame
 	 */

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.se_project.models.Course;
 import com.se_project.models.Game;
 import com.se_project.models.MCQGame;
 import com.se_project.models.MCQQuestion;
@@ -13,6 +14,7 @@ import com.se_project.models.TFQuestion;
 
 @Service
 public class GameFactoryService {
+	
 	@Autowired
 	GameRepositoryService gameRepoService;
 
@@ -21,6 +23,34 @@ public class GameFactoryService {
 
 	@Autowired
 	MCQQuestionRepositoryService mcqQuestionRepoService;
+	
+	public void saveCopyOfGame(long gameId, long cid){
+		
+		Game game = new Game(gameRepoService.getGame(gameId));
+		game.setCourse(new Course(cid));
+		gameRepoService.saveGame(game);
+		
+		String type = game.getGame_type();
+		
+		if(type.equals("MCQ")){
+			
+			List<MCQQuestion> mcqQuestionsList = mcqQuestionRepoService.getQuestionsOfGame(gameId);
+			for(int i =0; i < mcqQuestionsList.size();i++){
+				MCQQuestion question = new MCQQuestion(mcqQuestionsList.get(i));
+				question.setMcqgame(game);
+				mcqQuestionRepoService.saveQuestion(question);
+			}
+		}
+		else if(type.equals("TF")){
+			List<TFQuestion> tfQuestionsList = tfQuestionRepoService.getQuestionsOfGame(gameId);
+			for(int i =0; i < tfQuestionsList.size();i++){
+				TFQuestion question = new TFQuestion(tfQuestionsList.get(i));
+				question.setTfgame(game);
+				tfQuestionRepoService.saveQuestion(question);
+			}
+		}
+		
+	}
 	
 	public Game getCopyOfGame(long gameId,String type){
 		

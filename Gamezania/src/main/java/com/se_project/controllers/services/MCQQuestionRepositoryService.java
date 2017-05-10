@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.se_project.repositories.MCQQuestionRepository;
 import com.se_project.models.MCQQuestion;
+import com.se_project.models.TFQuestion;
 
 /**
  * The class implements the needed operation for handling the MCQ_Question repository 
@@ -34,6 +35,10 @@ public class MCQQuestionRepositoryService {
 	 */
 	public void saveQuestion(MCQQuestion question){
 		mcqQuestionRepo.save(question);
+	}
+	
+	public void deleteQuestion(MCQQuestion question){
+		mcqQuestionRepo.delete(question);
 	}
 	
 }

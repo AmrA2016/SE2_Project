@@ -23,5 +23,5 @@ public interface TFQuestionRepository extends CrudRepository<TFQuestion, Long> {
 	 * @return list of "true or false" games
 	 */
 	public List<TFQuestion> findByTfgameGid (long gid);
-
+	
 }

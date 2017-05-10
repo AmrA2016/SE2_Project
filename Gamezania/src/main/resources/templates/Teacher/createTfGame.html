@@ -113,7 +113,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">Questions</div>
 								<div class="panel-body">
-									<label th:if="${#fields.hasErrors('numberOfQuestions')}" th:errors="*{numberOfQuestions}" class="alert alert-danger"></label>
+									<label th:if="${NumberViolation}" class="alert alert-danger">You must enter at least 1 question</label>
 									<span class="newQuestion hidden"></span> 
 									<a class="pull-right btn btn-primary btn-sm TfnewQ">Add new Question</a>
 									<a class="pull-right btn btn-danger btn-sm TfdelQ" style="margin-right:5px">Delete last Question</a>

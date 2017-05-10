@@ -29,6 +29,10 @@ public class TFQuestion extends Question {
 		super(question, correctAnswer);
 		
 	}
+	
+	public TFQuestion(TFQuestion other){
+		super(other);
+	}
 
 	/**
 	 * @return the tfgame

@@ -37,4 +37,9 @@ public class TFQuestionRepositoryService {
 		tfQuestionRepo.save(question);
 	}
 	
+
+	public void deleteQuestion(TFQuestion question){
+		tfQuestionRepo.delete(question);
+	}
+	
 }

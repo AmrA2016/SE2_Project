@@ -40,7 +40,12 @@ public class Question {
 		this.question = question;
 		this.correct_answer = correctAnswer;
 	}
-
+	
+	public Question(Question other){
+		this.question = other.question;
+		this.correct_answer = other.correct_answer;
+	}
+	
 	/**
 	 * @return the question
 	 */
