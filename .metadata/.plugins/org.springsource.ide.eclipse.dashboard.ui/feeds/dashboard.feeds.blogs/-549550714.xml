@@ -5,7 +5,79 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2017-05-09T10:32:00Z</updated>
+  <updated>2017-05-10T15:20:41Z</updated>
+  <entry>
+    <title>Spring Training and Certification</title>
+    <link rel="alternate" href="https://spring.io/blog/2017/05/10/spring-training-and-certification" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Paul Chapman</name>
+    </author>
+    <id>tag:spring.io,2017-04-19:2902</id>
+    <updated>2017-05-10T15:20:41Z</updated>
+    <content type="html">&lt;h1&gt;&lt;a href="#introduction" class="anchor" name="introduction"&gt;&lt;/a&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;It has been almost 10 years now since I taught my first Core Spring class. At that time almost everything was XML and configuring JPA or Spring Security, for example, could be a lot of hard work. Spring has matured a great deal in the meantime with component-scanning, Java Configuration and Spring Boot making it much more fun to use. And the number of &lt;a href="https://spring.io/projects"&gt;Spring Projects&lt;/a&gt; has increased considerably. &lt;/p&gt;
+&lt;p&gt;Pivotal Training continues to enhance our Spring curriculum and introduce new courses - including Spring Boot Developer and Spring Cloud Services. I have provided an overview of these courses and some of the newest features below.&lt;/p&gt;
+&lt;p&gt;We also recently announced an exciting change to our Spring Certification Program. &lt;strong&gt;Spring Certification Exams are now available for &lt;em&gt;individual&lt;/em&gt; purchase, without the enrolling in the course&lt;/strong&gt;. Yes, you read that right!. Experienced Java developers - with extensive Spring knowledge already - can purchase a Spring Certification Exam &lt;em&gt;directly&lt;/em&gt; from Pivotal.&lt;/p&gt;
+&lt;p&gt;That said, the best way to prepare for a Spring Certification Exam is to attend the corresponding Spring course. However, this change to our &lt;a href="https://pivotal.io/training/certification"&gt;Certification Program&lt;/a&gt; makes proving your Spring expertise even more accessible. &lt;/p&gt;
+&lt;img src="https://raw.githubusercontent.com/paulc4/spring-blog/master/images/badge.png" title="Click to enlarge" alt="Sample Certification Badge" style="width: 100px; float: right; margin: 0px 5px 5px 10px"/&gt;
+&lt;p&gt;In addition to your actual certificate, we have partnered with &lt;a href="https://bcert.me"&gt;Badge Cert&lt;/a&gt; so that you can add a validated certification badge to your LinkedIn or other profile, proving you have the certification for real. This is what a badge looks like.&lt;/p&gt;
+&lt;p&gt;And here is the link to my Core Spring Instructor &lt;a href="http://bcert.me/prskhcsx"&gt;certification&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Learn more about our curriculum below and visit &lt;a href="https://pivotal.io/training"&gt;Pivotal Training&lt;/a&gt; to enroll in your class and exam today.&lt;/p&gt;
+&lt;p&gt;&lt;blockquote style="color: purple;"&gt;&lt;br/&gt;BTW, don’t miss Spring Team members, and community speakers at the upcoming Spring Days &lt;a href="https://www.springdays.io/ehome/spring-days/chicago"&gt;Chicago&lt;/a&gt;, &lt;a href="https://www.springdays.io/ehome/spring-days/new-york"&gt;New York&lt;/a&gt; and &lt;a href="https://www.springdays.io/ehome/spring-days/atlanta"&gt;Atlanta&lt;/a&gt; 2 day community events!&lt;br/&gt;&lt;/blockquote&gt;&lt;/p&gt;&lt;h1&gt;&lt;a href="#topics" class="anchor" name="topics"&gt;&lt;/a&gt;Topics&lt;/h1&gt;
+&lt;p&gt;Pivotal Training offers an extensive portfolio of role-based courses across the latest Pivotal products. In this blog, I am going to focus on our Spring curriculum:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#spring-web"&gt;Spring Web&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#enterprise-spring"&gt;Enterprise Spring&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#spring-boot"&gt;Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#spring-cloud-services"&gt;Spring Cloud Services&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- &lt;p style="color: purple; text-align: center"&gt;&lt;b&gt;Figure 1: &lt;/b&gt; Spring learning-path showing courses and associated Certifications&lt;/p&gt; --&gt;
+&lt;a href="https://raw.githubusercontent.com/paulc4/spring-blog/master/images/PVDI-Pivotal-Training-and-Pluralsight-Blog-1f1-2000px.png"&gt;&lt;img src="https://raw.githubusercontent.com/paulc4/spring-blog/master/images/PVDI-Pivotal-Training-Blog-1f1-1000px-framed.png" title="Click to enlarge" alt="Spring Learning-Path" style="width: 800px; float: right; margin: 0px 5px 50px 10px"/&gt;&lt;/a&gt;&lt;h1&gt;&lt;a href="#spring-courses" class="anchor" name="spring-courses"&gt;&lt;/a&gt;Spring Courses&lt;/h1&gt;&lt;h2&gt;&lt;a href="#core-spring-a-name-core-spring-a" class="anchor" name="core-spring-a-name-core-spring-a"&gt;&lt;/a&gt;Core Spring &lt;a name="core-spring"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Designed for developers and architects, &lt;em&gt;Core Spring&lt;/em&gt; is a 4-day class that explores all the basics of using Spring. The content is broken down into three sections:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Container:&lt;/strong&gt; Configuration using Java Config, Spring annotations like @Autowired, XML bean-files, FactoryBeans, Aspect Oriented programming and Spring based integration testing.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Management:&lt;/strong&gt; JdbcTemplate, caching using @Cachable, in-memory embedded databases for testing, Spring managed transactions, JPA and Spring Data repositories&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Web Applications:&lt;/strong&gt; Writing Spring MVC Controllers, using Spring Boot, implementing REST using Spring MVC, Spring Security and Cloud Native applications (Spring Cloud)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The course has been updated to use Spring Framework 4.3 and covers several features introduced since Spring 4.0 such as &lt;code&gt;@Optional&lt;/code&gt; parameters, &lt;code&gt;@Sql&lt;/code&gt; for database testing and &lt;code&gt;@RestController&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note that, as this is a fundamentals course, many of the new features in 4.x are beyond its scope. The course also features expanded coverage of web applications to include Spring Boot properties and configuration and Building Microservices with Spring Cloud.&lt;/p&gt;
+&lt;p&gt;Attending our Core Spring course is the most effective way to prepare for the industry-recognized &lt;a href="https://pivotal.io/training/certification"&gt;Spring Professional Certification Exam&lt;/a&gt;. To learn more, view the course datasheet, and register, visit the &lt;a href="https://pivotal.io/training/courses/core-spring-training"&gt;Core Spring&lt;/a&gt; information page.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-web-a-name-spring-web-a" class="anchor" name="spring-web-a-name-spring-web-a"&gt;&lt;/a&gt;Spring Web &lt;a name="spring-web"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Looking for a deep-dive into Spring MVC and related technologies? Our 4-day &lt;em&gt;Spring Web&lt;/em&gt; course teaches you how to create enterprise web applications across four key areas:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Basics:&lt;/strong&gt; Spring MVC Controllers, building web-applications with Spring Boot, layout management, defining views, using multiple view technologies and form handling&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Internals:&lt;/strong&gt; Using message-sources, understanding Handler Mappers, Handler Adapters, View Resolvers, Interceptors, ControllerAdvices, Internationalization, Filters, Resource handling, CORS support, Exception handling, Mobile device support&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enterprise:&lt;/strong&gt; Implementing REST, AJAX and Browser support, Spring Security, Testing with the &lt;code&gt;MockMvc&lt;/code&gt; framework, using Web Sockets and Server-Sent Events&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Deeper dive into Spring MVC internals, configuring a Spring MVC application &lt;em&gt;without&lt;/em&gt; Spring Boot, migrating an existing application to Spring Boot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This course has also been updated to use Spring Framework 4.3 and Spring Boot 1.4. Spring 4 features such as &lt;code&gt;@RestControllers&lt;/code&gt;, &lt;code&gt;ResponseBodyAdvice&lt;/code&gt;, the resource handling pipeline, Web Sockets, server-sent events and &lt;code&gt;@CrossOrigin&lt;/code&gt; (CORS). All the practical exercises use Spring Boot since it makes writing Spring MVC applications quick and easy. However, while this is beneficial, we want students to learn how to use MVC fully and be able to override Spring Boot defaults with configurations of their own.&lt;/p&gt;
+&lt;p&gt;Pivotal Training recommends students that are new to Spring attend the &lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt; class prior to attending Spring Web. However, if you have a good working knowledge of Spring and your primary interest is building web-applications, our Spring Web course is the right fit for you.&lt;/p&gt;
+&lt;p&gt;Ready to get started? Visit the &lt;a href="https://pivotal.io/training/courses/spring-web-training"&gt;Spring Web&lt;/a&gt; page to lean more, view the course datasheet, and register in an upcoming session. After attending the class, prove your skills by successfully completing the &lt;a href="https://pivotal.io/training/certification"&gt;Spring Web Application Developer Certification Exam&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#enterprise-spring-a-name-enterprise-spring-a" class="anchor" name="enterprise-spring-a-name-enterprise-spring-a"&gt;&lt;/a&gt;Enterprise Spring &lt;a name="enterprise-spring"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Use Spring to build loosely coupled event-driven architectures composed from communicating components and processes. A microservices architecture might be one example of this approach.&lt;/p&gt;
+&lt;p&gt;Based in part on the popular &lt;a href="http://www.enterpriseintegrationpatterns.com/"&gt;Enterprise Integration Patterns&lt;/a&gt; book, the &lt;em&gt;Enterprise Spring&lt;/em&gt; course covers inter-process communications using Web Services (REST) and Messaging (JMS, AMQP) and then builds on this foundation to cover Spring Integration, Spring Batch and Spring Cloud Data Flow.&lt;/p&gt;
+&lt;p&gt;As part of the Spring Framework 4.3 update, this course will include expanded coverage of REST, cover new features such as &lt;code&gt;UriComponentsBuilder&lt;/code&gt;, &lt;code&gt;@JmsListener&lt;/code&gt;, our Java DSL for configuring Spring Integration, and an entirely new section on building data transformation and integration pipelines using &lt;a href="http://cloud.spring.io/spring-cloud-dataflow/"&gt;Spring Cloud Data Flow&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A reasonable familiarity with the Spring Framework and Spring Boot is assumed. We recommend that students that are new to Spring attend the &lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt; class prior to attending Enterprise Spring.&lt;/p&gt;
+&lt;p&gt;Visit the &lt;a href="https://pivotal.io/training/courses/enterprise-spring-training"&gt;Enterprise Spring&lt;/a&gt; page to learn more, view the course datasheet, and register for a class today. Once complete, demonstrate your skills by enrolling in the &lt;a href="https://pivotal.io/training/certification"&gt;Enterprise Integration Specialist Certification Exam&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-boot-developer-a-name-spring-boot-a" class="anchor" name="spring-boot-developer-a-name-spring-boot-a"&gt;&lt;/a&gt;Spring Boot Developer &lt;a name="spring-boot"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Spring Boot makes building and configuring Spring applications much, much easier. The 2-day &lt;em&gt;Spring Boot Developer&lt;/em&gt; course explores major features of Spring Boot, including auto-configuration, data access, actuators, and more. &lt;/p&gt;
+&lt;p&gt;Key features are divided into two main areas:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Basics:&lt;/strong&gt; Spring Boot principles, auto-configuration, profiles, overriding defaults using properties and/or your own configuration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Topics:&lt;/strong&gt; Spring Boot applied to web-applications (Spring MVC, GSP, REST), data-access (JDBC, JPA, Spring Data, NoSQL), Security and OAuth, Messaging (AMQP, RabbitMQ), Monitoring (actuators)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A reasonable familiarity with the Spring Framework is useful for this course. We recommend that students that are new to Spring attend the &lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt; class first.&lt;/p&gt;
+&lt;p&gt;Visit the &lt;a href="https://pivotal.io/training/courses/spring-boot-developer-training"&gt;Spring Boot Developer&lt;/a&gt; page to learn more, view the course datasheet, and enroll today. &lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-cloud-services-a-name-spring-cloud-services-a" class="anchor" name="spring-cloud-services-a-name-spring-cloud-services-a"&gt;&lt;/a&gt;Spring Cloud Services &lt;a name="spring-cloud-services"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Microservices and Cloud Native Applications are a popular pattern for delivering applications more quickly. Spring Cloud Services is a 2-day course that explores using Spring Boot and Spring Cloud to support this style of application. Course topics are organized into four functional areas: &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Basics:&lt;/strong&gt; Why Cloud Native? How cloud-native changes development&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Infrastructure:&lt;/strong&gt; Building Spring Boot applications, deploying to a PaaS (PCF)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Microservices:&lt;/strong&gt; Overview, Cloud Native design, 12 Factors.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Spring Cloud:&lt;/strong&gt; Shared configuration, service discovery, client-side load-balancing, handling and monitoring failed services using a circuit-breaker&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Microservice applications involve many collaborating processes making them harder to deploy without a smart underlying infrastructure. The course deploys applications to Pivotal’s Cloud Foundry PaaS to show the benefits of one-step deployment, automated recovery, and scalability.&lt;/p&gt;
+&lt;p&gt;A reasonable familiarity with Spring is useful for this course. We recommend that students that are new to Spring attend either the &lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt; or &lt;a href="#spring-boot"&gt;Spring Boot&lt;/a&gt; class first.&lt;/p&gt;
+&lt;p&gt;To learn more, view the course datasheet, and register in an upcoming class, visit our &lt;a href="https://pivotal.io/training/courses/spring-cloud-services-training"&gt;Spring Cloud Services&lt;/a&gt; page.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Data Release Train Kay M3 Released</title>
     <link rel="alternate" href="https://spring.io/blog/2017/05/09/spring-data-release-train-kay-m3-released" />
@@ -625,44 +697,5 @@ The graphical representation of this topology looks like the following.&lt;/p&gt
     <content type="html">&lt;p&gt;It is my pleasure to announce that Spring Framework &lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10000&amp;version=15892"&gt;4.3.8&lt;/a&gt; &lt;a href="http://projects.spring.io/spring-framework"&gt;is available now&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;This maintenance release is the base for the upcoming Spring Boot 1.4.6 and 1.5.3 maintenance releases and includes 40 fixes and selected improvements.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - April 18th, 2017</title>
-    <link rel="alternate" href="https://spring.io/blog/2017/04/18/this-week-in-spring-april-18th-2017" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2017-04-18:2901</id>
-    <updated>2017-04-18T15:08:00Z</updated>
-    <content type="html">&lt;p&gt;Hi Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;m in Atlanta, GA, at &lt;a href="https://www.devopsdays.org/events/2017-atlanta/speakers/josh-long/"&gt;DevOps Days Atlanta&lt;/a&gt;, and Boston for the &lt;a href="https://www.agilealliance.org/agile-alliance-technical-conference-2017/"&gt;Agile Tech Alliance conference&lt;/a&gt;. If you&amp;rsquo;re around for either I&amp;rsquo;d love to see you - &lt;a href="http://twitter.com/starbuxman"&gt;say hi&lt;/a&gt;! &lt;/p&gt;
-&lt;p&gt;Don&amp;rsquo;t miss me, Spring Team members, and community speakers at the upcoming Spring Days &lt;a href="https://www.springdays.io/ehome/spring-days/chicago"&gt;Chicago&lt;/a&gt;, &lt;a href="https://www.springdays.io/ehome/spring-days/new-york"&gt;New York&lt;/a&gt; and &lt;a href="https://www.springdays.io/ehome/spring-days/atlanta"&gt;Atlanta&lt;/a&gt; events!&lt;/p&gt;
-&lt;p&gt;As usual, we&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it!&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;The WebFlux functional reactive support in Spring Framework 5.0 is really catching on! I particularly enjoyed this post called &lt;a href="http://blog.alexnesterov.com/post/spring-your-next-microframework/"&gt;&lt;em&gt;Spring: Your Next Microframework&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Baeldung has a great post introducing &lt;a href="http://www.baeldung.com/spring-5-functional-web"&gt;WebFlux Functional Reactive Endpoints&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Jonathan Borenstein put together a simple demonstration &lt;a href="https://github.com/jonathanborenstein/reactive-demo"&gt;looking at building functional REST services with Spring Framework 5.0&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Hurray! &lt;a href="https://spring.io/blog/2017/04/12/spring-cloud-dalston-released"&gt;The Spring Cloud Dalston release is now GA!&lt;/a&gt; Get the bits and try it out! This release is &lt;em&gt;packed&lt;/em&gt; with great new stuff!&lt;/li&gt;
-  &lt;li&gt;Spring Cloud Task ninja Glenn Renfro &lt;a href="https://spring.io/blog/2017/04/14/spring-cloud-task-1-2-0-rc1-is-now-available"&gt;just announced Spring Cloud Task 1.2.0.RC1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Cloud Stream lead Marius Bogoevici &lt;a href="https://spring.io/blog/2017/04/13/spring-cloud-stream-chelsea-goes-ga"&gt;just announced Spring Cloud Stream Chelsea GA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data lead &lt;a href="https://spring.io/blog/2017/04/13/spring-data-kay-m2-released"&gt;Oliver Gierke just announced Spring Data Kay M2&lt;/a&gt; with &lt;em&gt;lots&lt;/em&gt; of improvements and bugfixes! Get it while it&amp;rsquo;s hot!&lt;/li&gt;
-  &lt;li&gt;last week I concluded &lt;a href="https://spring.io/blog/2017/04/12/spring-tips-season-2-recap"&gt;season 2 of the Spring Tips series&lt;/a&gt;. Read on for a review of the installments from the last 11 episodes and more!&lt;/li&gt;
-  &lt;li&gt;Spring Cloud Vault lead &lt;a href="https://spring.io/blog/2017/04/12/spring-vault-1-0-goes-ga"&gt;Mark Paluch just announced Spring Cloud Vault 1.0&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;I did a podcast with my buddy and colleague &lt;a href="http://www.cote.show/23"&gt;Michael Coté&lt;/a&gt; on &lt;a href="http://www.cote.show/23"&gt;enabling microservices with devops&lt;/a&gt;. Or something.&lt;/li&gt;
-  &lt;li&gt;periodic reminder that &lt;a href="http://sdkman.io/sdks.html"&gt;SDKMAN!&lt;/a&gt; is awesome and you can use it to install Spring Boot: &lt;code&gt;sdk install springboot&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Using the JVM? (I sure hope so!) You might care about &lt;a href="https://stuartmarks.wordpress.com/2017/04/17/deprecation-of-object-finalize/"&gt;the discussion of the deprecation of &lt;code&gt;java.lang.Object#finalize&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Tangent: ZeroTurnaround put out a great &lt;a href="https://zeroturnaround.com/rebellabs/git-commands-and-best-practices-cheat-sheet/"&gt;&lt;em&gt;cheat sheet&lt;/em&gt; covering some tips-and-tricks with &lt;code&gt;git&lt;/code&gt; last year&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;the Java Pub House podcast has a nice interview &lt;a href="http://www.javapubhouse.com/2017/04/episode-64-oh-its-time-to-re-boot.html"&gt;with Spring Batch and Spring Cloud Task lead Michael Minella&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;?ukasz Monkiewicz put together a nice post &lt;a href="https://lmonkiewicz.com/programming/get-noticed-2017/spring-boot-rest-request-validation/"&gt;on request validation with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Friendly remminder: the goal behind microservices, cloud-computing, agile and everything else you&amp;rsquo;ll hear Pivotal talking about is, ultimately, to get &lt;a href="https://technologyconversations.com/2017/03/06/the-ten-commandments-of-continuous-delivery/"&gt;to continuous delivery, some of the tenants of which are nicely explained here&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Lars Trieloff, from Adobe, put together a very cool post discussing the paradigm shift in REST vs technologies like webhooks, where you&amp;rsquo;re still doing REST but they become more &lt;a href="https://medium.com/adobe-io/what-event-based-architectures-mean-for-application-integration-662932169d28"&gt;like topics in a messaging architecture&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;I love this post, &lt;a href="https://www.robfox.io/2017/04/17/rabbitmq-alternative-service-bus-windows-server/"&gt;&lt;em&gt;RabbitMQ: My Alternative ServiceBus for Windows Server&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Speaking of RabbitMQ: have you seen &lt;a href="http://www.rabbitmq.com/"&gt;the new RabbitMQ website? It&amp;rsquo;s dynamite!&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Pivotal Cloud Foundry now &lt;a href="https://content.pivotal.io/blog/apps-that-depend-on-file-storage-bring-em-over-to-pivotal-cloud-foundry"&gt;has built-in support for durable persistence&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;I liked this writeup of Neoj chief scientist Jim Webber&amp;rsquo;s introduction &lt;a href="https://www.infoq.com/news/2017/04/causal-consistency-neo4j"&gt;to how Neo4j achieves cluster consensus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The Cloud Technology Partners podcast had a great interview with Pivotal&amp;rsquo;s &lt;a href="https://www.cloudtp.com/doppler/best-practices/whats-new-cloud-foundry-pivotal/"&gt;Richard Seroter looking at the future of Cloud Foundry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;JaxEnter has a great German-language survey on microservices trend](&lt;a href="https://jaxenter.de/microservices-trends-55937"&gt;https://jaxenter.de/microservices-trends-55937&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Baeldung also has a great post on using &lt;a href="http://www.baeldung.com/spring-boot-jsoncomponent"&gt;the &lt;code&gt;@JsonComponent&lt;/code&gt; annotation with Spring Boot&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
