@@ -190,14 +190,14 @@ public class CourseController {
 		
 		List<Course> courses = courseRepoService.getCoursesByTeacher(user_id);
 		List<Game> games = gameRepoService.getGameByCourseId(id);
-
-		for(int i = 0 ; i < games.size() ; i++)
-		{
-			if(games.get(i).isDeleted() == true)
-				games.remove(i);
-		}
+		List<Game> undeletedGames = new ArrayList<Game>();
+		
+		for(int i =0;i < games.size();i++)
+			if(!games.get(i).isDeleted())
+				undeletedGames.add(games.get(i));
+		
 		Collections.sort(games);
-		model.addAttribute("Games", games);
+		model.addAttribute("Games", undeletedGames);
 		boolean myCourse = false;
 
 		for (int i = 0; i < courses.size(); i++)

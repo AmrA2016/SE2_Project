@@ -53,11 +53,11 @@
 				<ul class="nav navbar-nav">
 				</ul>
 
-				<form class="navbar-form navbar-left">
+				<form class="navbar-form navbar-left" th:action="@{'/' + ${Teacher.username} + '/SearchGames/'}">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search" />
+						<input type="text" name="query" class="form-control" placeholder="Search" />
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-success">Submit</button>
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -71,63 +71,50 @@
 								th:href="@{'/' + ${Teacher.username} + '/ShowMyCourses'}">Courses</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="/logout">Log out</a></li>
-						</ul>
-						
-						
-						</li>
+						</ul></li>
 				</ul>
-				
-								<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false"><i class="fa fa-bell"></i> <span class="badge"> 5</span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Profile</a></li>
-					
-						</ul>
-						
-						
-						</li>
-				</ul>
-				
+
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false"><i class="fa fa-users"></i> <span class="badge">2</span></a>
-						<ul class="dropdown-menu" style="min-width:348px;">
-							<li style="padding:16px;">
-							<div class="row">
-							<div class="col-md-6">
-							<p style="font-size:15px;">Amr Send you A request to be admin on his game</p>
-							</div>
-							<div class="col-md-6">
-							<a class="btn btn-primary btn-sm" style="color:#fff;">Accept</a>
-								<a class="btn btn-danger btn-sm" style="color:#fff">Refuse</a>
-							
-							</div>
-						
-							</div>
-							 </li>
-							<hr/>
-							<li style="padding:16px; ">
-							<div class="row">
-							<div class="col-md-6">
-							<p style="font-size:15px;">Amr Send you A request to be admin on his game</p>
-							</div>
-							<div class="col-md-6">
-							<a class="btn btn-primary btn-sm" style="color:#fff; ">Accept</a>
-														<a class="btn btn-danger btn-sm" style="color:#fff">Refuse</a>
-							
-							</div>
-						
-							</div>
-							 </li>
-						</ul>
-						
-						
-						</li>
+						aria-expanded="false"><i class="fa fa-bell"></i> <span
+							class="badge"> 5</span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Profile</a></li>
+
+						</ul></li>
 				</ul>
-				
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"><i class="fa fa-users"></i> 
+						<span class="badge" th:text="${invitationNum}"></span></a>
+						<ul class="dropdown-menu" style="min-width: 348px;">
+							<li style="padding: 10px;" th:each="invitation : ${Invitations}">
+								<div class="row">
+									<div class="col-md-6">
+										<p style="font-size: 15px;">
+											You are invited to be collaborator in <b
+												th:text="${invitation.game.name}"></b>
+										</p>
+									</div>
+									<div class="col-md-6">
+										<a
+											th:href="@{'/' + ${Teacher.username} + '/Accept/' + ${invitation.id}}"
+											class="btn btn-primary btn-sm" style="color: #fff;">Accept</a>
+										<a
+											th:href="@{'/' + ${Teacher.username} + '/Refuse/' + ${invitation.id}}"
+											class="btn btn-danger btn-sm" style="color: #fff">Refuse</a>
+									</div>
+
+								</div>
+								<hr />
+							</li>
+						</ul>
+					</li>
+				</ul>
+
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -141,10 +128,16 @@
 						<div class="panel-heading">Courses Control</div>
 						<div class="panel-body">
 							<a th:href="@{'/' + ${Teacher.username} + '/create_course_form'}"
-								class="btn btn-default">Create new Course</a>
+								style="width: 80%" class="btn btn-default">Create new Course</a>
 							<hr />
 							<a th:href="@{'/' + ${Teacher.username} + '/ShowMyCourses'}"
-								class="btn btn-default">Show Your Courses</a>
+								style="width: 80%" class="btn btn-default">Show Your Courses</a>
+							<hr />
+							<a th:href="@{'/' + ${Teacher.username} + '/ShowMyGames'}"
+								style="width: 80%" class="btn btn-default">My Games</a>
+							<hr />
+							<a th:href="@{'/' + ${Teacher.username} + '/ShowGamesArchive'}"
+								style="width: 80%" class="btn btn-default">Games Archive</a>
 						</div>
 					</div>
 				</div>
@@ -156,7 +149,8 @@
 					<h3 class="text-center">Home</h3>
 					<div class="container" style="max-width: 90%">
 						<div class="row">
-							<div class="col-sm-3 col-md-6 " th:each="course: ${courses}" style="height:400px">
+							<div class="col-sm-3 col-md-6 " th:each="course: ${courses}"
+								style="height: 400px">
 								<div class="thumbnail">
 									<img th:src="@{'/uploaded-images/' + ${course.image} }"
 										alt="..." class="img-thumbnail"

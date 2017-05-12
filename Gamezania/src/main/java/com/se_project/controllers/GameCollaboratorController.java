@@ -24,6 +24,22 @@ public class GameCollaboratorController {
 		return "redirect:/" + teacher_id + "/Course/" + cid + "/ViewGame/" + gameId;
 	}
 	
+	@RequestMapping(value = "/{teacher_id}/Accept/{collaboratorID}")
+	public String accept(@PathVariable long collaboratorID, @PathVariable String teacher_id)
+	{
+		gameCollaboratorService.accept(collaboratorID);
+		return "redirect:/user/" + teacher_id; 
+	}
+	
+	@RequestMapping(value = "/{teacher_id}/Refuse/{collaboratorID}")
+	public String refuse(@PathVariable long collaboratorID, @PathVariable String teacher_id)
+	{
+		gameCollaboratorService.refuse(collaboratorID);
+		return "redirect:/user/" + teacher_id; 
+	}
+	
+	
+	
 	
 	
 

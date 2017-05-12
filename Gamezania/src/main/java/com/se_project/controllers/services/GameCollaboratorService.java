@@ -1,5 +1,8 @@
 package com.se_project.controllers.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +52,32 @@ public class GameCollaboratorService {
 		}
 		
 		return found;
+	}
+	
+	public List<GameCollaborator> getTeacherCollaborations(String username){
+		List<GameCollaborator> gameCollaborators = gameCollaboratorRepo.findByTeacherUsername(username);
+		return gameCollaborators;
+	}
+	
+	public List<Game> getGamesByTeacherID(String username){
+		List<GameCollaborator> gameCollaborators = gameCollaboratorRepo.findByTeacherUsername(username);
+		List<Game> games = new ArrayList<Game>();
+		
+		for(int i =0;i < gameCollaborators.size();i++)
+			games.add(gameCollaborators.get(i).getGame());
+		
+		return games;
+	}
+	
+	public void accept(long collaboratorId){
+		GameCollaborator gameCollaborator =  gameCollaboratorRepo.findOne(collaboratorId);
+		gameCollaborator.setAccepted(true);
+		gameCollaboratorRepo.save(gameCollaborator);
+		
+	}
+	
+	public void refuse(long collaboratorId){
+		gameCollaboratorRepo.delete(collaboratorId);
 	}
 	
 	

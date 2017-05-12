@@ -5,20 +5,116 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2017-05-10T15:20:41Z</updated>
+  <updated>2017-05-11T15:48:30Z</updated>
   <entry>
-    <title>Spring Training and Certification</title>
-    <link rel="alternate" href="https://spring.io/blog/2017/05/10/spring-training-and-certification" />
+    <title>Spring Security 5.0.0 M1</title>
+    <link rel="alternate" href="https://spring.io/blog/2017/05/11/spring-security-5-0-0-m1" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2017-05-10:2921</id>
+    <updated>2017-05-11T15:48:30Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the community, I&amp;rsquo;m pleased to announce the release of Spring Security 5.0.0 M1. This release includes bug fixes, new features, and is based off of Spring Framework 5.0.0 RC1. The highlights of the release include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#initial-support-for-reactive-web-applications"&gt;Initial Support for Reactive Web Applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#new-support-for-oauth-2-0-and-openid-connect-1-0"&gt;New Support for OAuth 2.0 and OpenID Connect 1.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;h1&gt;&lt;a href="#initial-support-for-reactive-web-applications" class="anchor" name="initial-support-for-reactive-web-applications"&gt;&lt;/a&gt;Initial Support for Reactive Web Applications&lt;/h1&gt;
+&lt;p&gt;Following one of the primary themes of Spring Framework 5.0, Spring Security 5.0 will add support for Reactive applications by building on top of Spring&amp;rsquo;s reactive support. The first milestone focused on getting primary infrastructure in place.&lt;/p&gt;
+&lt;p&gt;A complete example of using Spring Security to secure a Spring WebFlux application can be found in the Spring Security samples at &lt;a href="https://github.com/spring-projects/spring-security/blob/5.0.0.M1/samples/javaconfig/hellowebflux"&gt;hellowebflux&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A quick highlight of the code can be found below:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Bean&#xD;
+WebFilter springSecurityFilterChain(ReactiveAuthenticationManager manager) {&#xD;
+  HttpSecurity http = http();&#xD;
+  http.authenticationManager(manager);&#xD;
+  http.httpBasic();&#xD;
+&#xD;
+  AuthorizeExchangeBuilder authorize = http.authorizeExchange();&#xD;
+  authorize.antMatchers(&amp;quot;/admin/**&amp;quot;).hasRole(&amp;quot;ADMIN&amp;quot;);&#xD;
+  authorize.antMatchers(&amp;quot;/users/{user}/**&amp;quot;).access(this::currentUserMatchesPath);&#xD;
+  authorize.anyExchange().authenticated();&#xD;
+  return http.build();&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code should look familiar if you have used Spring Security&amp;rsquo;s web based authorization support.&lt;/p&gt;
+&lt;p&gt;One important thing to notice is that in reactive applications &lt;code&gt;access&lt;/code&gt; allows for an interface to be injected rather than a &lt;code&gt;String&lt;/code&gt;. This allows for lambda&amp;rsquo;s or method references to be used for custom authorization logic. For example, &lt;code&gt;currentUserMatchesPath&lt;/code&gt; looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;Mono&amp;lt;AuthorizationDecision&amp;gt; currentUserMatchesPath(&#xD;
+    Mono&amp;lt;Authentication&amp;gt; authentication, AuthorizationContext context) {&#xD;
+  return authentication&#xD;
+    .map( a -&amp;gt; context.getVariables().get(&amp;quot;user&amp;quot;).equals(a.getName()))&#xD;
+    .map( granted -&amp;gt; new AuthorizationDecision(granted));&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviously we could have just used a lambda rather than a method reference, but this is a little easier to read (especially when there might be more rules).&lt;/p&gt;&lt;h1&gt;&lt;a href="#new-support-for-oauth-2-0-and-openid-connect-1-0" class="anchor" name="new-support-for-oauth-2-0-and-openid-connect-1-0"&gt;&lt;/a&gt;New Support for OAuth 2.0 and OpenID Connect 1.0&lt;/h1&gt;
+&lt;p&gt;We are very excited to introduce new support for &lt;a href="https://tools.ietf.org/html/rfc6749"&gt;OAuth 2.0 Authorization Framework&lt;/a&gt; and &lt;a href="http://openid.net/connect/"&gt;OpenID Connect 1.0&lt;/a&gt; in Spring Security 5. The initial support in M1 is primarily focused on the &lt;strong&gt;OAuth Client&lt;/strong&gt; role, providing the capability for authenticating the end-user against an OAuth 2.0 Provider (for example, Facebook) or an OpenID Connect 1.0 Provider (for example, Google).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;OAuth 2.0 Login&lt;/strong&gt; feature essentially realizes the use case &lt;em&gt;&amp;ldquo;Login with Google&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;Login with Facebook&amp;rdquo;&lt;/em&gt; and is implemented by leveraging the &lt;a href="https://tools.ietf.org/html/rfc6749#section-4.1"&gt;Authorization Code Grant&lt;/a&gt; flow, as specified in the &lt;a href="https://tools.ietf.org/html/rfc6749"&gt;OAuth 2.0 Authorization Framework&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The best place to start learning on how to use &lt;em&gt;OAuth 2.0 Login&lt;/em&gt; is to follow the &lt;a href="https://github.com/spring-projects/spring-security/blob/5.0.0.M1/samples/boot/oauth2login/README.adoc"&gt;guide&lt;/a&gt; and associated &lt;a href="https://github.com/spring-projects/spring-security/tree/5.0.0.M1/samples/boot/oauth2login"&gt;sample&lt;/a&gt;. The guide will walk you through setting up &lt;em&gt;OAuth 2.0 Login&lt;/em&gt; with Google, GitHub, Facebook and Okta.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-future-of-oauth-in-spring-security" class="anchor" name="the-future-of-oauth-in-spring-security"&gt;&lt;/a&gt;The Future of OAuth in Spring Security&lt;/h2&gt;
+&lt;p&gt;Support for OAuth is currently spread out in the following Spring projects:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://projects.spring.io/spring-security-oauth/"&gt;Spring Security OAuth&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://projects.spring.io/spring-social/"&gt;Spring Social&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://cloud.spring.io/spring-cloud-security/"&gt;Spring Cloud Security&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-single-sign-on"&gt;Spring Boot&amp;rsquo;s OAuth2 SSO Support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With Spring Security 5, the main direction going forward is to build first-class support for&lt;br/&gt;&lt;a href="https://tools.ietf.org/html/rfc6749"&gt;OAuth 2.0 Authorization Framework&lt;/a&gt;, &lt;a href="http://openid.net/connect/"&gt;OpenID Connect 1.0&lt;/a&gt;, &lt;a href="https://tools.ietf.org/search/rfc7519"&gt;JWT&lt;/a&gt;, and JOSE (&lt;a href="https://tools.ietf.org/html/rfc7515"&gt;JWS&lt;/a&gt;/&lt;a href="https://tools.ietf.org/html/rfc7516"&gt;JWE&lt;/a&gt;/&lt;a href="https://tools.ietf.org/html/rfc7517"&gt;JWK&lt;/a&gt;) into Spring Security proper. The goal is to have Spring Security &lt;em&gt;&amp;ldquo;house&amp;rdquo;&lt;/em&gt; the core logic for the lower-level protocol flows, for example, the &lt;em&gt;&amp;ldquo;authorization code grant&amp;rdquo;&lt;/em&gt; flow, which would then be reused by the various Spring projects requiring it, such as, Spring Social. A lot of the protocol flow logic has already been implemented in Spring Security OAuth, however, the decision was made to do a re-write as we incorporate it into Spring Security proper. That being said, the Spring Security OAuth project is in maintenance mode as we are limiting new features and focusing on bug fixes and minor enhancements only. Our efforts going forward will be focused on building out the support within Spring Security.&lt;/p&gt;
+&lt;p&gt;The ultimate goal with the new support for OAuth 2.0 and OpenID Connect 1.0 is to provide an easy-to-use abstraction on top of the lower-level protocol flows that are inherently complex. In order to move quickly and stay current, we are leveraging &lt;a href="https://connect2id.com/products/nimbus-oauth-openid-connect-sdk"&gt;Nimbus OAuth 2.0 and OIDC SDK&lt;/a&gt; for our internal implementation. As a key preliminary step before we proceeded with the re-write, we researched and evaluated existing OAuth 2.0 and OpenID Connect 1.0 Java libraries available in the open source community and documented our findings &lt;a href="https://github.com/spring-projects/spring-security/issues/3907#issuecomment-257600002"&gt;here&lt;/a&gt;. As a result of this evaluation phase, we found Nimbus OAuth 2.0 and OIDC SDK to be the most mature and comprehensive Java library available today as it provides extensive support for all the relevant &lt;a href="https://connect2id.com/products/nimbus-oauth-openid-connect-sdk#related-specifications"&gt;specifications&lt;/a&gt;.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;p&gt;In the upcoming 5.0.0 M2 release we plan to build further support for reactive based security and OAuth 2.0 and OpenID Connect 1.0. We would greatly appreciate any feedback on these new features and if you have anything that you would like prioritized, please create an &lt;a href="https://github.com/spring-projects/spring-security/issues"&gt;issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/5.0.0.M1/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/current/guides/html5/"&gt;Guides&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-security"&gt;Help&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Session 2.0.0 M1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2017/05/11/spring-session-2-0-0-m1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2017-05-10:2922</id>
+    <updated>2017-05-11T13:51:41Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;On behalf of the community I&amp;#8217;m pleased to announce the release of &lt;a href="http://docs.spring.io/spring-session/docs/2.0.0.M1/reference/html5/"&gt;Spring Session 2.0.0.M1&lt;/a&gt;. This release is focused primarily on ensuring compatability with Spring Framework 5 which is the minimum Spring version required.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="supported-data-stores" class="sect0"&gt;&lt;a class="anchor" href="#supported-data-stores"&gt;&lt;/a&gt;Supported Data Stores&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;We have also removed some of the Spring Session implementations from the main repository. The goal is to allow the core Spring Session team to focus on delivering new features rather than needing to know the ins and outs of every data store. This will allow development of other modules to be done without the overhead of reviews from the Spring Session team.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Going forward,the Spring team will officially maintain Redis, JDBC, Hazelcast, &amp;amp; Geode / GemFire implementations of Spring Session. These choices were made based upon the Spring Session teams expertise and popularity within Spring Session.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;We will provide links to additional implementations that are maintained by the community. If you are interested in picking up support for another data store please get in touch in an &lt;a href="https://github.com/spring-projects/spring-session/issues"&gt;issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id="feedback-please" class="sect0"&gt;&lt;a class="anchor" href="#feedback-please"&gt;&lt;/a&gt;Feedback Please&lt;/h1&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;If you have feedback on this release, I encourage you to reach out via &lt;a href="http://stackoverflow.com/questions/tagged/spring-session"&gt;StackOverflow&lt;/a&gt;, &lt;a href="https://github.com/spring-projects/spring-session/issues"&gt;GitHub Issues&lt;/a&gt;, or via the comments section. You can also ping me &lt;a href="https://twitter.com/rob_winch"&gt;@rob_winch&lt;/a&gt;, Joe &lt;a href="https://twitter.com/joe_grandja"&gt;@joe_grandja&lt;/a&gt;, or &lt;a href="https://twitter.com/vedran_pavic"&gt;@vedran_pavic&lt;/a&gt;  on Twitter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Of course the best feedback comes in the form of &lt;a href="https://github.com/spring-projects/spring-session/blob/2.0.0.M1/CONTRIBUTING.adoc"&gt;contributions&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-session/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-session/docs/2.0.0.M1/reference/html5/"&gt;Reference&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-session"&gt;Help&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</content>
+  </entry>
+  <entry>
+    <title>Pivotal Announces Spring Curriculum &amp; Certification Changes</title>
+    <link rel="alternate" href="https://spring.io/blog/2017/05/10/pivotal-announces-spring-curriculum-certification-changes" />
     <category term="engineering" label="Engineering" />
     <author>
       <name>Paul Chapman</name>
     </author>
     <id>tag:spring.io,2017-04-19:2902</id>
-    <updated>2017-05-10T15:20:41Z</updated>
-    <content type="html">&lt;h1&gt;&lt;a href="#introduction" class="anchor" name="introduction"&gt;&lt;/a&gt;Introduction&lt;/h1&gt;
+    <updated>2017-05-10T15:20:00Z</updated>
+    <content type="html">&lt;style&gt;&#xD;
+.blog--container .blog--post ul {&#xD;
+    margin: 15px 0 0px 25px;&#xD;
+}&#xD;
+.blog--container .blog--post ul li {&#xD;
+    padding-bottom: 8px;&#xD;
+}&#xD;
+&lt;/style&gt;&lt;h1&gt;&lt;a href="#introduction" class="anchor" name="introduction"&gt;&lt;/a&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;It has been almost 10 years now since I taught my first Core Spring class. At that time almost everything was XML and configuring JPA or Spring Security, for example, could be a lot of hard work. Spring has matured a great deal in the meantime with component-scanning, Java Configuration and Spring Boot making it much more fun to use. And the number of &lt;a href="https://spring.io/projects"&gt;Spring Projects&lt;/a&gt; has increased considerably. &lt;/p&gt;
-&lt;p&gt;Pivotal Training continues to enhance our Spring curriculum and introduce new courses - including Spring Boot Developer and Spring Cloud Services. I have provided an overview of these courses and some of the newest features below.&lt;/p&gt;
-&lt;p&gt;We also recently announced an exciting change to our Spring Certification Program. &lt;strong&gt;Spring Certification Exams are now available for &lt;em&gt;individual&lt;/em&gt; purchase, without the enrolling in the course&lt;/strong&gt;. Yes, you read that right!. Experienced Java developers - with extensive Spring knowledge already - can purchase a Spring Certification Exam &lt;em&gt;directly&lt;/em&gt; from Pivotal.&lt;/p&gt;
+&lt;p&gt;Pivotal Training continues to enhance our Spring curriculum and introduce new courses - including Spring Boot Developer and Spring Cloud Services. I have provided an overview of these courses and some of the newest features below. Most importantly, how you obtain Certification has changed.&lt;/p&gt;
+&lt;p&gt;We recently announced this exciting change to our Spring Certification Program. &lt;strong&gt;Spring Certification Exams are now available for &lt;em&gt;individual&lt;/em&gt; purchase, without the enrolling in the course&lt;/strong&gt;. Yes, you read that right!. Experienced Java developers - with extensive Spring knowledge already - can purchase a Spring Certification Exam &lt;em&gt;directly&lt;/em&gt; from Pivotal.&lt;/p&gt;
 &lt;p&gt;That said, the best way to prepare for a Spring Certification Exam is to attend the corresponding Spring course. However, this change to our &lt;a href="https://pivotal.io/training/certification"&gt;Certification Program&lt;/a&gt; makes proving your Spring expertise even more accessible. &lt;/p&gt;
 &lt;img src="https://raw.githubusercontent.com/paulc4/spring-blog/master/images/badge.png" title="Click to enlarge" alt="Sample Certification Badge" style="width: 100px; float: right; margin: 0px 5px 5px 10px"/&gt;
 &lt;p&gt;In addition to your actual certificate, we have partnered with &lt;a href="https://bcert.me"&gt;Badge Cert&lt;/a&gt; so that you can add a validated certification badge to your LinkedIn or other profile, proving you have the certification for real. This is what a badge looks like.&lt;/p&gt;
@@ -76,7 +172,9 @@
 &lt;/ul&gt;
 &lt;p&gt;Microservice applications involve many collaborating processes making them harder to deploy without a smart underlying infrastructure. The course deploys applications to Pivotal’s Cloud Foundry PaaS to show the benefits of one-step deployment, automated recovery, and scalability.&lt;/p&gt;
 &lt;p&gt;A reasonable familiarity with Spring is useful for this course. We recommend that students that are new to Spring attend either the &lt;a href="#core-spring"&gt;Core Spring&lt;/a&gt; or &lt;a href="#spring-boot"&gt;Spring Boot&lt;/a&gt; class first.&lt;/p&gt;
-&lt;p&gt;To learn more, view the course datasheet, and register in an upcoming class, visit our &lt;a href="https://pivotal.io/training/courses/spring-cloud-services-training"&gt;Spring Cloud Services&lt;/a&gt; page.&lt;/p&gt;</content>
+&lt;p&gt;To learn more, view the course datasheet, and register in an upcoming class, visit our &lt;a href="https://pivotal.io/training/courses/spring-cloud-services-training"&gt;Spring Cloud Services&lt;/a&gt; page.&lt;/p&gt;&lt;h1&gt;&lt;a href="#more-information" class="anchor" name="more-information"&gt;&lt;/a&gt;More Information&lt;/h1&gt;
+&lt;p&gt;Pivotal Training has made an array of exciting changes to align our curriculum with the latest Spring features. We have also made it easier to earn an industry-recognize Spring Certification by making Spring Exams available for individual purchase. &lt;/p&gt;
+&lt;p&gt;Learn more about our Spring offerings by visiting &lt;a href="http://pivotal.io/training"&gt;http://pivotal.io/training&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Spring Data Release Train Kay M3 Released</title>
@@ -625,77 +723,5 @@ The graphical representation of this topology looks like the following.&lt;/p&gt
 &lt;p&gt;Spring Boot 1.4.6 includes &lt;a href="https://github.com/spring-projects/spring-boot/milestone/84?closed=1"&gt;70 fixes and a selection of improvements and dependency upgrades&lt;/a&gt;. Thanks to all that have contributed!&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
 &lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="http://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="http://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.4.6.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Pipelines 1.0.0.M4 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2017/04/20/spring-cloud-pipelines-1-0-0-m4-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Marcin Grzejszczak</name>
-    </author>
-    <id>tag:spring.io,2017-04-20:2905</id>
-    <updated>2017-04-20T13:27:18Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;On behalf of the Spring Cloud team it is my pleasure to announce a new milestone release of Spring Cloud Pipelines - &lt;code&gt;1.0.0.M4&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="sect1"&gt;
-&lt;h2 id="what-s-new"&gt;&lt;a class="anchor" href="#what-s-new"&gt;&lt;/a&gt;What&amp;#8217;s new?&lt;/h2&gt;
-&lt;div class="sectionbody"&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Apart from some &lt;a href="https://github.com/spring-cloud/spring-cloud-pipelines/milestone/3?closed=1"&gt;bug and documentation fixes&lt;/a&gt; it contains a community feature done by &lt;a href="https://twitter.com/wybczu"&gt;?ukasz Szcz?sny&lt;/a&gt; with support for Jenkins Declarative Pipeline with Blue Ocean. This is how it looks like&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="imageblock"&gt;
-&lt;div class="content"&gt;
-&lt;img src="http://cloud.spring.io/spring-cloud-pipelines/img/jenkins/blue_7.png" alt="Production deployment"&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;You can read more about this feature in &lt;a href="http://cloud.spring.io/spring-cloud-pipelines/spring-cloud-pipelines.html#_declarative_pipeline_blue_ocean"&gt;Spring Cloud Pipelines Docs&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="sect1"&gt;
-&lt;h2 id="links"&gt;&lt;a class="anchor" href="#links"&gt;&lt;/a&gt;Links&lt;/h2&gt;
-&lt;div class="sectionbody"&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Please check out any of these links for more information or to contact us:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="ulist"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://cloud.spring.io/spring-cloud-pipelines/"&gt;Project page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://cloud.spring.io/spring-cloud-pipelines/spring-cloud-pipelines.html"&gt;Project documentation&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://cloud.spring.io/spring-cloud-pipelines/spring-cloud-pipelines.html#concourse"&gt;Concourse opinionated pipeline setup&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://concourse.ci"&gt;Concourse Website&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://cloud.spring.io/spring-cloud-pipelines/spring-cloud-pipelines.html#jenkins"&gt;Jenkins opinionated pipeline setup&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://gitter.im/spring-cloud/spring-cloud-pipelines"&gt;Spring Cloud Pipelines Gitter&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Framework 4.3.8 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2017/04/18/spring-framework-4-3-8-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Stéphane Nicoll</name>
-    </author>
-    <id>tag:spring.io,2017-04-18:2900</id>
-    <updated>2017-04-18T15:58:48Z</updated>
-    <content type="html">&lt;p&gt;It is my pleasure to announce that Spring Framework &lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10000&amp;version=15892"&gt;4.3.8&lt;/a&gt; &lt;a href="http://projects.spring.io/spring-framework"&gt;is available now&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;This maintenance release is the base for the upcoming Spring Boot 1.4.6 and 1.5.3 maintenance releases and includes 40 fixes and selected improvements.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>

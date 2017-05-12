@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.se_project.controllers.services.CourseRepositoryService;
+import com.se_project.controllers.services.GameCollaboratorService;
 import com.se_project.controllers.services.NotificationsService;
 import com.se_project.controllers.services.StudentRepositoryService;
 import com.se_project.controllers.services.TeacherRepositoryService;
 import com.se_project.models.Course;
+import com.se_project.models.GameCollaborator;
 import com.se_project.models.Student;
 import com.se_project.models.StudentNotification;
 import com.se_project.models.Teacher;
@@ -36,6 +38,9 @@ public class UserController {
 
 	@Autowired
 	CourseRepositoryService courseRepoService;
+	
+	@Autowired
+	GameCollaboratorService gameCollaboratorService;
 	
 	@Autowired
 	NotificationsService notificationService;
@@ -65,6 +70,15 @@ public class UserController {
 		Teacher teacher = isTeacher(user_id);
 
 		if (teacher != null) {
+			List<GameCollaborator> teacherCollaborations = gameCollaboratorService.getTeacherCollaborations(user_id);
+			List<GameCollaborator> invitations = new ArrayList<GameCollaborator>();
+			
+			for(int i =0;i < teacherCollaborations.size();i++)
+				if(!teacherCollaborations.get(i).isAccepted())
+					invitations.add(teacherCollaborations.get(i));
+			model.addAttribute("Invitations",invitations);
+			model.addAttribute("invitationNum",invitations.size());
+			
 			model.addAttribute("Teacher", teacher);
 			model.addAttribute("courses", courses);
 			return "Teacher/T_Homepage";

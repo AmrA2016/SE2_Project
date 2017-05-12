@@ -3,11 +3,13 @@
  */
 package com.se_project.controllers.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.se_project.models.Course;
 import com.se_project.models.Game;
 import com.se_project.models.TFGame;
 import com.se_project.repositories.GameRepository;
@@ -80,6 +82,24 @@ public class GameRepositoryService {
 			if(games.get(i).getName().equals(name))
 				return games.get(i);
 		return null;
+	}
+	
+	public List<Game> getAllGames(){
+		List<Game> games =new ArrayList<>();
+		GameRepo.findAll().forEach(games::add);
+		return games;
+	}
+	
+	public List<Game> getAllDeletedGames(){
+		List<Game> games =new ArrayList<>();
+		GameRepo.findByDeleted(true).forEach(games::add);
+		return games;
+	}
+	
+	public List<Game> searchForGames(String name){
+		List<Game> games =new ArrayList<>();
+		GameRepo.findByNameStartingWith(name).forEach(games::add);
+		return games;
 	}
 	
 	/**

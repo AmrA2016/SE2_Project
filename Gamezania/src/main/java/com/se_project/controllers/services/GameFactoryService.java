@@ -62,8 +62,17 @@ public class GameFactoryService {
 			List<MCQQuestion> mcqQuestionsList = mcqQuestionRepoService.getQuestionsOfGame(gameId);
 			MCQQuestion[] mcqquestions = new MCQQuestion[5];
 			for(int i =0;i < 5;i++){
-				if(i < mcqQuestionsList.size())
+				if(i < mcqQuestionsList.size()){
 					mcqquestions[i] = mcqQuestionsList.get(i);
+					if(mcqquestions[i].getCorrect_answer().equals(mcqquestions[i].getChoice1()))
+						mcqquestions[i].setCorrectAnswer("0");
+					else if(mcqquestions[i].getCorrect_answer().equals(mcqquestions[i].getChoice2()))
+						mcqquestions[i].setCorrectAnswer("1");
+					else if(mcqquestions[i].getCorrect_answer().equals(mcqquestions[i].getChoice3()))
+						mcqquestions[i].setCorrectAnswer("2");
+					else
+						mcqquestions[i].setCorrectAnswer("3");
+				}
 				else
 					mcqquestions[i] = new MCQQuestion();
 			}

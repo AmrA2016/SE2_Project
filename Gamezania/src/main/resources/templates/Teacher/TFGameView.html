@@ -62,11 +62,11 @@
 				<ul class="nav navbar-nav">
 				</ul>
 
-				<form class="navbar-form navbar-left">
+				<form class="navbar-form navbar-left" th:action="@{'/' + ${teacher_id} + '/SearchGames/'}">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search" />
+						<input type="text" name="query" class="form-control" placeholder="Search" />
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-success">Submit</button>
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -121,7 +121,7 @@
 								<div class="clearfix"></div>
 								<div>
 									<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${cid} + '/editGame/TF/' + ${game.gid}}" style="margin-top:5px;" class="btn btn-primary btn-sm " >Edit</a>
-									<a style="margin-top:5px;" class="btn btn-danger btn-sm " >Delete</a>
+									<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${cid} + '/DeleteGame/' + ${game.gid}}" style="margin-top:5px;" class="btn btn-danger btn-sm " >Cancel</a>
 									<a th:href="@{'/' + ${teacher_id} + '/Course/' + ${cid} + '/CopyGame/' + ${game.gid}}"  style="margin-top:5px;" class="btn btn-info btn-sm " >Copy</a>
 								
 								</div>

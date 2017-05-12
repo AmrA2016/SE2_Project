@@ -86,7 +86,7 @@ public class Game implements Comparable<Game>{
 	
 
 	public Game() {
-	
+		
 	}
 	
 	public Game(long gid){

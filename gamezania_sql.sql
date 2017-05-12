@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `arenadb` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `arenadb`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: arenadb
 -- ------------------------------------------------------
@@ -61,7 +61,7 @@ CREATE TABLE `course_subscriber` (
   KEY `student_id_idx` (`student_username`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_cid`) REFERENCES `courses` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `student_username` FOREIGN KEY (`student_username`) REFERENCES `students` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `courses` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `teacher_id_idx` (`teacher_username`),
   CONSTRAINT `teacher_id` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,12 +118,13 @@ CREATE TABLE `game_collaborator` (
   `teacher_username` varchar(25) DEFAULT NULL,
   `game_gid` int(11) DEFAULT NULL,
   `owner` tinyint(4) DEFAULT NULL,
+  `accepted` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `teacher_idx2` (`teacher_username`),
   KEY `game_gid_idx2` (`game_gid`),
   CONSTRAINT `game_id2` FOREIGN KEY (`game_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `teacher_id2` FOREIGN KEY (`teacher_username`) REFERENCES `teachers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,6 +133,7 @@ CREATE TABLE `game_collaborator` (
 
 LOCK TABLES `game_collaborator` WRITE;
 /*!40000 ALTER TABLE `game_collaborator` DISABLE KEYS */;
+INSERT INTO `game_collaborator` VALUES (2,'teacher2',14,0,1),(3,'teacher',8,1,1),(4,'teacher',13,1,1),(5,'teacher',14,1,1);
 /*!40000 ALTER TABLE `game_collaborator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +155,7 @@ CREATE TABLE `games` (
   PRIMARY KEY (`gid`),
   KEY `course_cid_idx` (`course_cid`),
   CONSTRAINT `course_cid` FOREIGN KEY (`course_cid`) REFERENCES `courses` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +164,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
-INSERT INTO `games` VALUES (8,'MyFirstGame','Ay klam','53151079724f1_1493682405145.jpg',1,'TF',NULL),(13,'MyGame','Testing','edward-kenway-assassin-s-creed-iv-black-flag-20896-1366x768_1494268747554.jpg',1,'TF',NULL),(14,'testGame','Description','10390574_234516736738930_2077143325112731927_n1_1494325672634.jpg',1,'MCQ',NULL),(15,'Manar','dacnakischfhuegfukbsvjkb','jkn_1494405458406.png',1,'TF',NULL),(16,'Nourhan','mkasclnalcnlainvlianvinaslv','n_1494406402147.png',1,'TF',NULL),(17,'Atef','Childhood','jsx_1494406669740.png',1,'TF',NULL),(18,'Mamdouh','Nayem','clipping_1494408119578.png',1,'TF',NULL),(23,'jwsjkkaaj','davvaaff','jgjh_1494416313324.png',1,'TF',NULL);
+INSERT INTO `games` VALUES (8,'MyFirstGame','Ay klam','53151079724f1_1493682405145.jpg',1,'TF',0),(13,'MyGame','Testing','edward-kenway-assassin-s-creed-iv-black-flag-20896-1366x768_1494268747554.jpg',1,'TF',0),(14,'testGame','Description','10390574_234516736738930_2077143325112731927_n1_1494325672634.jpg',1,'MCQ',0);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +187,7 @@ CREATE TABLE `mcqquestions` (
   PRIMARY KEY (`id`),
   KEY `mcqgame_id_idx` (`mcqgame_gid`),
   CONSTRAINT `mcqgame_id` FOREIGN KEY (`mcqgame_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +196,7 @@ CREATE TABLE `mcqquestions` (
 
 LOCK TABLES `mcqquestions` WRITE;
 /*!40000 ALTER TABLE `mcqquestions` DISABLE KEYS */;
-INSERT INTO `mcqquestions` VALUES (3,'Question11','c','c','a ','e','z',14);
+INSERT INTO `mcqquestions` VALUES (4,'Question11','a ','c','a ','e','z',14);
 /*!40000 ALTER TABLE `mcqquestions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +330,7 @@ CREATE TABLE `tfquestions` (
   PRIMARY KEY (`id`),
   KEY `tfgame_id_idx` (`tfgame_gid`),
   CONSTRAINT `tfgame_id` FOREIGN KEY (`tfgame_gid`) REFERENCES `games` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +339,7 @@ CREATE TABLE `tfquestions` (
 
 LOCK TABLES `tfquestions` WRITE;
 /*!40000 ALTER TABLE `tfquestions` DISABLE KEYS */;
-INSERT INTO `tfquestions` VALUES (8,'Question1','true',8),(9,'Question2','false',8),(21,'Test1','true',13),(22,'Test2','false',13),(23,'nxnascaksck','true',15),(24,'nsclNKl nladkvlkdsnvks','false',15),(25,'hello','true',16),(26,'Its me','false',16),(27,'jnkjnjkvnavnslk','false',17),(28,',nkndfknlknfblknr','true',17),(29,'kajckjabcbaca','false',18),(30,'ncjkajcajkscjkQWVD','true',18),(35,'fasfaff','true',23);
+INSERT INTO `tfquestions` VALUES (8,'Question1','true',8),(9,'Question2','false',8),(21,'Test1','true',13),(22,'Test2','false',13);
 /*!40000 ALTER TABLE `tfquestions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -350,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-10 16:17:45
+-- Dump completed on 2017-05-12  7:34:01

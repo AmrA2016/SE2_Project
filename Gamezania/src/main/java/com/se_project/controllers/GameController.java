@@ -422,6 +422,9 @@ public class GameController {
 	public String editGame(Model model, @PathVariable String teacher_id,
 			@PathVariable long cid,@PathVariable String type, @PathVariable long gameId){
 		
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
 		model.addAttribute("teacher_id",teacher_id);
 		model.addAttribute("cid",cid);
 		
@@ -541,6 +544,10 @@ public class GameController {
 	
 	@RequestMapping("/{teacher_id}/Course/{cid}/CopyGame/{gameId}")
 	public String copyGame(Model model,@PathVariable String teacher_id, @PathVariable long cid, @PathVariable long gameId){
+		
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
 		List<Course> courses = courseRepoService.getCoursesByTeacher(teacher_id);
 		
 		for(int i = 0;i < courses.size();i++){
@@ -560,6 +567,8 @@ public class GameController {
 	
 	@RequestMapping("/{teacher_id}/Course/{cid}/PasteGame/{gameId}")
 	public String pasteGame(Model model,@PathVariable String teacher_id, @PathVariable long cid, @PathVariable long gameId){
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
 		
 		gameFactoryService.saveCopyOfGame(gameId, cid);
 		
@@ -589,6 +598,73 @@ public class GameController {
 		gameRepoService.saveGame(game);
 
 		return "redirect:/" + teacher_id + "/Course/" + cid;
+	}
+	
+	@RequestMapping("/{teacher_id}/ShowGamesArchive")
+	public String getDeletedGames(Model model , @PathVariable String teacher_id){
+		
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
+		model.addAttribute("teacher_id",teacher_id);
+		
+		List<Game> teacherGames = gameCollaboratorService.getGamesByTeacherID(teacher_id);
+		List<Game> deletedGames = new ArrayList<Game>();
+		
+		for(int i =0;i < teacherGames.size();i++){
+			if(teacherGames.get(i).isDeleted())
+				deletedGames.add(teacherGames.get(i));
+		}
+		
+		model.addAttribute("Games",deletedGames);
+		
+		return "Teacher/GamesArchive";
+	}
+	
+	@RequestMapping("/{teacher_id}/RestoreGame/{gameId}")
+	public String restoreGame(Model model, @PathVariable String teacher_id, @PathVariable long gameId){
+		
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
+		Game game = gameRepoService.getGame(gameId);
+		game.setDeleted(false);
+		gameRepoService.saveGame(game);
+		
+		return "redirect:/" + teacher_id + "/ShowGamesArchive";
+	}
+	
+	@RequestMapping("/{teacher_id}/ShowMyGames")
+	public String showMyGames(Model model, @PathVariable String teacher_id){
+		
+		if (!UserController.current_user.equals(teacher_id))
+			return "redirect:/";
+		
+		List<Game> myGames = gameCollaboratorService.getGamesByTeacherID(teacher_id);
+		List<Game> undeletedGames = new ArrayList<Game>();
+		
+		for(int i =0;i < myGames.size();i++)
+			if(!myGames.get(i).isDeleted())
+				undeletedGames.add(myGames.get(i));
+		
+		model.addAttribute("Games", undeletedGames);
+		model.addAttribute("teacher_id",teacher_id);
+		
+		
+		
+		return "Teacher/MyGames";
+	}
+	
+	@RequestMapping("/{user_id}/SearchGames/")
+	public String search(Model model,@PathVariable String user_id, @RequestParam String query){
+
+		List<Game> games = gameRepoService.searchForGames(query);
+		model.addAttribute("Games", games);
+		model.addAttribute("user_id",user_id);
+		
+		if(teacherRepoService.getTeacher(user_id) != null)
+			model.addAttribute("t_user",true);
+		return "GlobalItems/SearchResult";
 	}
 
 	/**
