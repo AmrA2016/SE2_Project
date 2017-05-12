@@ -22352,3 +22352,8 @@ Caused by: java.io.FileNotFoundException: C:\Users\Amr\Documents\SE2_Repo\.metad
 2017-05-12 07:46:58,961 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 208 resources
 2017-05-12 07:46:58,981 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2017-05-12 07:46:58,981 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Amr\Documents\SE2_Repo\Gamezania\src\test\resources
+2017-05-12 07:48:51,175 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-12 07:48:51,193 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-05-12 07:48:51,213 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 208 resources
+2017-05-12 07:48:51,239 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-12 07:48:51,239 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Amr\Documents\SE2_Repo\Gamezania\src\test\resources

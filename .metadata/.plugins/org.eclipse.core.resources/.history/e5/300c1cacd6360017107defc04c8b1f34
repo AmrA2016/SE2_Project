@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.se_project.controllers.services.CommentRepoService;
 import com.se_project.controllers.services.CourseRepositoryService;
 import com.se_project.controllers.services.GameCollaboratorService;
-import com.se_project.controllers.services.CourseSubscriberService;
+import com.se_project.controllers.services.CourseSubscriberRepositoryService;
 import com.se_project.controllers.services.GameFactoryService;
 import com.se_project.controllers.services.ImageService;
 import com.se_project.controllers.services.GameRepositoryService;
@@ -75,7 +75,7 @@ public class GameController {
 	StudentRepositoryService studentRepoService;
 
 	@Autowired
-	CourseSubscriberService courseSubRepService;
+	CourseSubscriberRepositoryService courseSubRepService;
 
 	@Autowired
 	GameCollaboratorService gameCollaboratorService;
