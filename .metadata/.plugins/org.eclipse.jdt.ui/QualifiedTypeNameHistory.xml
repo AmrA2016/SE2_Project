@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="com.se_project.models.Teacher"/>
 <fullyQualifiedTypeName name="com.se_project.models.Game"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.services.GameCollaboratorService"/>
@@ -16,4 +15,5 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.se_project.models.GameCollaborator"/>
 <fullyQualifiedTypeName name="com.se_project.controllers.GameController"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 </qualifiedTypeNameHistroy>

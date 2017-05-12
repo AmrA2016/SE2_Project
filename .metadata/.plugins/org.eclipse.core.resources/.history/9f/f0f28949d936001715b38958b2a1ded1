@@ -59,11 +59,6 @@ public class GameCollaboratorService {
 		return gameCollaborators;
 	}
 	
-	public List<GameCollaborator> getGameCollaborators(long gid){
-		List<GameCollaborator> gameCollaborators = gameCollaboratorRepo.findByGameGid(gid);
-		return gameCollaborators;
-	}
-	
 	public List<Game> getGamesByTeacherID(String username){
 		List<GameCollaborator> gameCollaborators = gameCollaboratorRepo.findByTeacherUsername(username);
 		List<Game> games = new ArrayList<Game>();
@@ -73,7 +68,6 @@ public class GameCollaboratorService {
 		
 		return games;
 	}
-	
 	
 	public void accept(long collaboratorId){
 		GameCollaborator gameCollaborator =  gameCollaboratorRepo.findOne(collaboratorId);

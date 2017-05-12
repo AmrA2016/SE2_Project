@@ -8,5 +8,4 @@ import com.se_project.models.GameCollaborator;
 
 public interface GameCollaboratorRepository extends CrudRepository<GameCollaborator,Long> {
 	public List<GameCollaborator> findByTeacherUsername(String username);
-	public List<GameCollaborator> findByGameGid(long gid);
 }
