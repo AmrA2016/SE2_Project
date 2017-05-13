@@ -1,0 +1,10 @@
+package com.se_project.controllers.repos;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.se_project.controllers.StorageService;
+import com.se_project.models.Course;
+
+public interface CourseRepoSql extends CrudRepository<Course,String> {
+	
+}

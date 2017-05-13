@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#"  method="post">
+    <fieldset>
+    	<legend>Student sign up</legend>
+    	
+    	<p><b>Username:</b> <input type="text" id="username" /></p>
+        <p><b>First Name:</b> <input type="text" id="fname" /></p>
+        <p><b>Last Name:</b> <input type="text" id="lname" /></p>
+        <p><b>Email:</b> <input type="text" id="mail" /></p>
+        <p><b>Password:</b> <input type="password" id="passsword" /></p>
+        
+        <p><b>Birthdate:</b> <input type="date" id="birthdate" min="1980-01-01" max="2015-12-31" /></p>
+    	
+        <p><b>Male:</b><input type="radio" value="m" name="gender" checked>
+        <b>&nbsp;&nbsp;Female:</b><input type="radio" value="f" name="gender"></p>
+        
+        <p><input type="submit" value="Submit" />
+         <input type="reset" value="Reset" /></p>
+    </fieldset>
+    </form>
+</body>
+</html>

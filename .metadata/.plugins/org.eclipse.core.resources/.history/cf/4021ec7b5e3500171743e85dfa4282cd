@@ -1,0 +1,31 @@
+package com.se_project.controllers.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
+
+import com.se_project.models.CourseSubscriber;
+import com.se_project.repositories.CourseSubscriberRepository;
+
+
+@Service
+public class CourseSubscriberRepositoryService {
+	@Autowired
+	private CourseSubscriberRepository courseSubRepo;
+
+
+	public void Subscribe(CourseSubscriber subscriber){
+		if(courseSubRepo.findOne(subscriber.getSubscriberID()) == null)
+			courseSubRepo.save(subscriber);
+	}
+
+
+	public List<CourseSubscriber> getSubscribers(long courseID) {
+		List<CourseSubscriber> subscribers =new ArrayList<CourseSubscriber>();
+		courseSubRepo.findAll().forEach(subscribers::add);
+		return subscribers;
+}
+	}

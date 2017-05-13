@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+<fullyQualifiedTypeName name="org.springframework.data.repository.CrudRepository"/>
+<fullyQualifiedTypeName name="com.se_project.repositories.GameCollaboratorRepository"/>
+<fullyQualifiedTypeName name="com.se_project.models.Teacher"/>
+<fullyQualifiedTypeName name="com.se_project.models.Game"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.se_project.controllers.services.GameCollaboratorService"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.se_project.models.GameCollaborator"/>
+<fullyQualifiedTypeName name="com.se_project.controllers.GameController"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,57 @@
+package com.se_project.models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity(name="course_subscriber")
+public class CourseSubscriber {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long subscriberID;
+
+	private Student student;
+
+	private Course course;
+	
+	
+	public CourseSubscriber() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CourseSubscriber(long subscriberID, Student student, Course course) {
+		super();
+		this.subscriberID = subscriberID;
+		this.student = student;
+		this.course = course;
+	}
+
+	public long getSubscriberID() {
+		return subscriberID;
+	}
+
+	public void setSubscriberID(long subscriberID) {
+		this.subscriberID = subscriberID;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+}
+

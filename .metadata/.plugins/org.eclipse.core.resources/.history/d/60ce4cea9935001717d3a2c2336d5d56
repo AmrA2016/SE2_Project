@@ -1,0 +1,17 @@
+package com.se_project.controllers.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.se_project.models.GameCollaborator;
+import com.se_project.repositories.GameCollaboratorRepository;
+
+public class GameCollaboratorService {
+	
+	@Autowired
+	GameCollaboratorRepository gameCollaboratorRepo;
+	
+	public void add_owner(long gid,String teacher_id){
+		GameCollaborator gameCollaborator = new GameCollaborator();
+	}
+	
+}

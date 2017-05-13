@@ -1,0 +1,19 @@
+package com.se_project.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity(name="game_collaborator")
+public class GameCollaborator {
+	@Id
+	long id;
+	
+	@ManyToOne
+	Game game;
+	@ManyToOne
+	Teacher teacher;
+	
+	boolean owner;
+	boolean accepted;
+}

@@ -1,0 +1,56 @@
+package com.se_project.models;
+
+import javax.persistence.Entity;
+
+import org.springframework.data.annotation.Id;
+
+@Entity(name="student_notification")
+public class StudentNotification {
+
+	@Id
+	long id;
+	/**
+	 * 
+	 */
+	public StudentNotification() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	private Student student;
+	/**
+	 * @param student
+	 * @param msg
+	 */
+	public StudentNotification(Student student, String msg) {
+		super();
+		this.student = student;
+		this.msg = msg;
+	}
+	/**
+	 * @return the student
+	 */
+	public Student getStudent() {
+		return student;
+	}
+	/**
+	 * @param student the student to set
+	 */
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	/**
+	 * @return the msg
+	 */
+	public String getMsg() {
+		return msg;
+	}
+	/**
+	 * @param msg the msg to set
+	 */
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	private String msg;
+
+
+}
